@@ -11,5 +11,3 @@ root.render(
         <App />
     </Provider>
 );
-
-'imgs optimizated 11,4MB -> 640KB'
