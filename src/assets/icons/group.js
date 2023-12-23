@@ -13,7 +13,6 @@ import drill from './drill.png'
 import dynamite from './dynamite.png'
 import electronyte_lantern from './electronyte-lantern.png'
 import electronyte from './electronyte.png'
-import group from './group.js'
 import house from './house.png'
 import info from './info.png'
 import iron_ore from './iron-ore.png'
@@ -51,7 +50,6 @@ export {
     dynamite,
     electronyte_lantern,
     electronyte,
-    group,
     house,
     info,
     iron_ore,

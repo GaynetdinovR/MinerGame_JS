@@ -1,0 +1,35 @@
+.right-side
+    height: calc(100% - 50px)
+    position: absolute
+    right: 25px
+    top: 25px
+
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: flex-end
+
+    &__buttons
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+
+    &__button
+        border: none
+        background: none
+
+        margin-bottom: 30px 
+
+        cursor: pointer
+        transition: 200ms
+
+        &:hover
+            filter: brightness(0.8)
+
+        & img
+            @include img(90px, cover)
+
+    &__level
+        font-size: 30px
+        font-weight: 700

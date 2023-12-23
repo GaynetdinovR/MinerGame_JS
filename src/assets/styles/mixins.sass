@@ -2,5 +2,11 @@
     line-height: $lh
     font-size: $fz
     font-weight: $fw
-    font-family: $font
+    font-family: $montserrat
     color: $fc
+
+@mixin img($size, $o-f)
+    max-width: $size
+    height: auto
+    object-fit: $o-f
+    pointer-events: none

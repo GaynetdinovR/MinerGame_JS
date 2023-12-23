@@ -1,0 +1,63 @@
+.map
+    position: absolute
+    top: 0
+    left: 50%
+    transform: translateX(-50%)
+
+    height: 100%
+
+    border-right: 2px solid $white
+    border-left: 2px solid $white
+
+    &__blocks
+
+        position: relative
+        z-index: 2
+
+        display: grid
+        grid-template-columns: repeat(10, 1fr)
+        grid-template-rows: repeat(10, 1fr)
+
+    &__block
+        padding: 0
+        margin: 0
+        background: none
+        border: none
+
+        max-height: 92px
+
+        cursor: pointer
+        transition: 200ms
+
+        &:hover
+            filter: brightness(0.8)
+
+        & img
+            @include img(92px, cover)
+
+    &__line-wrap
+        position: absolute
+        bottom: 90px
+        z-index: 3
+
+        display: flex
+        justify-content: flex-end
+        align-items: flex-end
+
+    &__line
+        width: 980px //10 * block_width(90) + text_width(80) = 989
+        height: 3px 
+        background: $red
+
+    &__depth
+        position: absolute
+        @include font($fz: 35px, $fc: $red, $fw: 700)
+
+    &__bg
+        position: absolute
+        z-index: 1
+
+        & img 
+            width: 900px
+            height: 950px
+            pointer-events: none
