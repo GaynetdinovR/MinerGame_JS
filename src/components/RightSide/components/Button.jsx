@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Button = (button) => {
-    console.log(button)
+const Button = ({img, name, setModal}) => {
     return (
-        <button className={`right-side__button right-side__${button.name}`}>
-            <img src={button.img} alt={button.name} />
+        <button onClick={() => setModal(true)} className={`right-side__button right-side__${name}`}>
+            <img src={img} alt={name} />
         </button>
     );
 };

@@ -9,4 +9,56 @@ body
 
 main
     display: flex
+
+
+.modal
+    padding: 30px
+    border-radius: 15px
     
+    border: 2px solid $light-grey
+    background: $dark-grey
+
+    transform: translate(-50%, -50%)
+    position: absolute
+    left: 50%
+    top: 50% 
+     
+    &__wrap
+        position: absolute
+        top: 0
+        left: 0
+
+        width: 100vw
+        height: 100vh
+
+        background: rgba($black, 0.2)
+
+        display: none
+
+    &__wrap.active
+        display: block
+
+    &__close
+        position: absolute
+        right: 30px 
+        top: 30px
+        border: none
+        background: none
+
+        & img
+            @include img(40px, cover)
+
+::-webkit-scrollbar 
+    width: 15px
+    border-radius: 15px
+
+
+::-webkit-scrollbar-track 
+    background: $light-grey
+    border-radius: 15px
+
+
+::-webkit-scrollbar-thumb 
+    background: $white
+    border-radius: 10px
+

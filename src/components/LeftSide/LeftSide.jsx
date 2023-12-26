@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { coins, drill, muscle, magnet, clover, dynamite } from '../../assets/icons/group.js';
 import Skill from './components/Skill.jsx';
 

@@ -1,22 +1,9 @@
 import React from 'react';
-import { close } from '../../assets/icons/group.js';
-import { useSelector } from 'react-redux';
+import Modal from '../Modal/Modal.jsx';
 
-const StoreModal = ({ setModal, isOpen }) => {
-    const closeModal = () => {
-        setModal(false);
-    };
-
+const StoreModal = ({ isOpen, setModal }) => {
     return (
-        <aside
-            className={isOpen ? 'modal active' : 'modal'}
-            onClick={() => closeModal()}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <div className="modal__close" onClick={() => closeModal()}>
-                    <img src={close} alt="close" />
-                </div>
-            </div>
-        </aside>
+        <Modal isOpen={isOpen} setModal={setModal} class='store-modal'></Modal>
     );
 };
 

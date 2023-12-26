@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import Block from './components/Block';
 import {cave_1_block, cave_bg} from '../../assets/content/group.js';
 

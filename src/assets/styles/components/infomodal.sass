@@ -1,0 +1,99 @@
+.info-modal
+    width: 1280px
+    height: 600px
+    overflow-y: scroll
+
+    &__title
+        margin-top: 10px
+        @include font($fz: 35px, $fw: 700)
+
+    &__title-h3
+        margin-top: 50px
+        @include font($fz: 27px, $fw: 700)
+
+    &__blocks-table
+        grid-template-columns: repeat(3, 1fr)
+        grid-template-rows: 40px repeat(13, 1fr)
+
+    &__levels-table
+        grid-template-columns: 0.8fr 0.6fr 0.9fr 1fr
+        grid-template-rows: 40px repeat(5, 1fr)
+
+    &__skills-table
+        grid-template-columns: 0.5fr 1fr 0.8fr 0.4fr 0.6fr
+        grid-template-rows: 40px repeat(5, 1fr)
+
+    &__tools-table
+        grid-template-columns: 0.7fr 0.3fr 0.7fr 0.7fr
+        grid-template-rows: 40px repeat(10, 1fr)
+
+    &__blocks-table,
+    &__levels-table,
+    &__skills-table,
+    &__tools-table
+        display: grid
+        grid-gap: 10px
+
+        padding: 20px
+        border: 2px solid $white
+        border-radius: 10px
+
+
+
+.blocks-table,
+.levels-table,
+.skills-table,
+.tools-table
+    &__cell
+        display: flex
+        align-items: center
+        @include font(18px, 700)
+        & span  
+            margin-right: 5px 
+
+    & img
+        margin: 0 5px
+        @include img(48px, cover)
+
+    &__header
+        margin: 5px 0
+        @include font(28px, 700)
+
+.tools-table
+    &__cell.damage,
+    &__cell.possiblity
+        & img 
+            max-width: 32px
+
+    &__cell.possiblity
+        font-size: 18px
+
+.blocks-table
+    &__cell.durability
+        & img 
+            max-width: 32px
+
+.levels-table
+    &__cell.depth
+        & img 
+            max-width: 32px
+.skills-table
+    &__cell.time,
+    &__cell.text,
+    &__cell.possiblity
+        & img 
+            max-width: 32px
+
+
+.tools-table,
+.skills-table
+    &__cell.craft
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: flex-start
+
+        & div   
+            display: flex
+            justify-content: center
+            align-items: center
