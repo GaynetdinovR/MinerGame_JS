@@ -1,35 +1,39 @@
-import cave_bg from './cave-bg.jpg'
-import dark_cave_bg from './dark-cave-bg.jpg'
-import black_cave_bg from './black-cave-bg.jpg'
-import lava_cave_bg from './lava-cave-bg.jpg'
-import magma_cave_bg from './magma-cave-bg.jpg'
+import cave_1_bg from './cave_1_bg.jpg'
+import cave_2_bg from './cave_2_bg.jpg'
+import cave_3_bg from './cave_3_bg.jpg'
+import cave_4_bg from './cave_4_bg.jpg'
+import cave_5_bg from './cave_5_bg.jpg'
 
-import cave_1_block from './cave_1-block.jpg'
-import cave_2_block from './cave_2-block.jpg'
-import cave_3_block from './cave_3-block.jpg'
-import cave_4_block from './cave_4-block.jpg'
-import cave_5_block from './cave_5-block.jpg'
+import cave_1_block from './cave_1_block.jpg'
+import cave_2_block from './cave_2_block.jpg'
+import cave_3_block from './cave_3_block.jpg'
+import cave_4_block from './cave_4_block.jpg'
+import cave_5_block from './cave_5_block.jpg'
 
-import cave_1_chest from './cave_1-chest.jpg'
-import cave_2_chest from './cave_2-chest.jpg'
-import cave_3_chest from './cave_3-chest.jpg'
-import cave_4_chest from './cave_4-chest.jpg'
-import cave_5_chest from './cave_5-chest.jpg'
+import cave_1_chest from './cave_1_chest.jpg'
+import cave_2_chest from './cave_2_chest.jpg'
+import cave_3_chest from './cave_3_chest.jpg'
+import cave_4_chest from './cave_4_chest.jpg'
+import cave_5_chest from './cave_5_chest.jpg'
 
-import chromatite_block from './chromatite-block.jpg'
-import coal_block from './coal-block.jpg'
-import copper_block from './copper-block.jpg'
-import electronyte_block from './electronyte-block.jpg'
-import iron_block from './iron-block.jpg'
-import magnetite_block from './magnetite-block.jpg'
-import mithril_block from './mithril-block.jpg'
-import neutronium_block from './neutronium-block.jpg'
-import silver_block from './silver-block.jpg'
-import sulfur_block from './sulfur-block.jpg'
-import titan_block from './titan-block.jpg'
+import chromatite_block from './chromatite_block.jpg'
+import coal_block from './coal_block.jpg'
+import copper_block from './copper_block.jpg'
+import electronyte_block from './electronyte_block.jpg'
+import iron_block from './iron_block.jpg'
+import magnetite_block from './magnetite_block.jpg'
+import mithril_block from './mithril_block.jpg'
+import neutronium_block from './neutronium_block.jpg'
+import silver_block from './silver_block.jpg'
+import sulfur_block from './sulfur_block.jpg'
+import titan_block from './titan_block.jpg'
 
 export { 
-    cave_bg,
+    cave_1_bg,
+    cave_2_bg,
+    cave_3_bg,
+    cave_4_bg,
+    cave_5_bg,
     cave_1_block,
     cave_2_block,
     cave_4_block,
@@ -40,10 +44,6 @@ export {
     cave_3_chest,
     cave_4_chest,
     cave_5_chest,
-    dark_cave_bg,
-    black_cave_bg,
-    lava_cave_bg,
-    magma_cave_bg,
     iron_block,
     coal_block,
     chromatite_block,
