@@ -1,17 +1,26 @@
 import React from "react";
 import { possiblity, text, time } from "../../../assets/icons/group";
+import { other } from "../../..";
 
-const SkillsTable = ({skills}) => {
-    const formatCraftMaterials = (tool) => {
-        let {craft_text, materials_img} = tool;
+const SkillsTable = ({skills, materials, tools}) => {
+    const formatCraftMaterials = (skill) => {
+        let {craft_text, craft_count} = skill;
+
         const result = []
+        const materials_img = [];
+
+        for(const material in craft_count){
+            if(material === 'silver_pot') {
+                materials_img.push(other.find(tools, material).img)
+                continue;
+            };
+            materials_img.push(other.find(materials, material).img)
+        }
 
         const temp = craft_text.split(' и ')
         craft_text = [...temp[0].split(', ')]
 
         if(temp[1]) craft_text.push(temp[1])
-
-        console.log(craft_text)
 
         for(let i = 0; i < materials_img.length; i++){
             result.push(<div>
@@ -20,7 +29,9 @@ const SkillsTable = ({skills}) => {
             </div>)
         }
 
-        return (<>{result.map(i => i)}</>);
+        return (<>
+            {result.map((itm, i) => <React.Fragment key={i}>itm</React.Fragment>)}
+        </>);
     }
 
     return (
@@ -33,9 +44,10 @@ const SkillsTable = ({skills}) => {
                 <div className='skills-table__header'>К/Д</div>
                 <div className='skills-table__header'>Способность</div>
                 {
-                    skills.map(skill => (<>
-                        <div className="skills-table__cell">
-                            {skill.text_name}
+                    skills.map((skill, i) => (<React.Fragment key={i}>
+                        <div className="skills-table__cell name">
+                            <span>{skill.text_name}</span>
+                            <img src={skill.img} alt="text" />
                         </div>
                         <div className="skills-table__cell text">
                             <img src={text} alt="text" />
@@ -52,7 +64,7 @@ const SkillsTable = ({skills}) => {
                             <img src={possiblity} alt='possiblity'/>
                             <span>{skill.buff_text}</span>
                         </div>
-                    </>))
+                    </React.Fragment>))
                 }
             </div>
         </>

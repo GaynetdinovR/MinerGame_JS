@@ -1,13 +1,15 @@
 import React from "react";
-import { durability } from "../../../assets/icons/group";
+import { durability } from "../../../assets/icons/group.js";
+import { other } from "../../../index.js";
 
-const BlocksTable = ({blocks}) => {
+const BlocksTable = ({blocks, materials}) => {
     const formatMaterialInfo = (block) => {
-        let {material_count, material_img, material_name} = block;
+        if(!block.hasOwnProperty('material')) return '-';
 
-        material_count = (material_count) ? `${material_count[0]}-${material_count[1]} ` : '-'
-        material_img = (material_img) ? <img src={material_img} alt='block'/> : ''
-        material_name = (material_name) ? material_name : ''
+        let {material_count, material_name, material} = block;
+
+        const material_img = <img src={other.find(materials, material).img} alt='block'/>;
+        material_count = `${material_count[0]}-${material_count[1]} `
         
         return (
             <>
@@ -26,12 +28,12 @@ const BlocksTable = ({blocks}) => {
                 <div className='blocks-table__header'>Прочность</div>
                 <div className='blocks-table__header'>Материалы</div>
                 {
-                    blocks.map(block => (
-                        <>
+                    blocks.map((block, i) => (
+                        <React.Fragment key={i}>
                             <div className="blocks-table__cell">
                                 <span>{block.text_name}</span>
                                 <div>
-                                    {block.img.map(img => <img src={img} alt='block'/>)}
+                                    {block.img.map((img, i) => <img key={i} src={img} alt='block'/>)}
                                 </div>
                             </div>
                             <div className="blocks-table__cell durability">
@@ -41,7 +43,7 @@ const BlocksTable = ({blocks}) => {
                             <div className="blocks-table__cell">
                                 {formatMaterialInfo(block)}
                             </div>
-                        </>
+                        </React.Fragment>
                     ))
                 }
             </div>

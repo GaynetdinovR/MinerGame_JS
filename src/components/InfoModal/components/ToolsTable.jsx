@@ -1,12 +1,19 @@
 import React from "react";
 import { damage, possiblity } from "../../../assets/icons/group";
+import { other } from "../../..";
 
-const ToolsTable = ({tools}) => {
+const ToolsTable = ({tools, materials}) => {
     const formatCraftMaterials = (tool) => {
-        let {craft_text, materials_img} = tool;
-        const result = []
+        let {craft_text, craft_count} = tool;
 
         if(!craft_text) return '-';
+
+        const result = []
+        const materials_img = [];
+
+        for(const material in craft_count){
+            materials_img.push(other.find(materials, material).img)
+        }
 
         craft_text = craft_text.split(' и ')
 
@@ -17,7 +24,9 @@ const ToolsTable = ({tools}) => {
             </div>)
         }
 
-        return (<>{result.map(i => i)}</>);
+        return (<>
+            {result.map((itm, i) => <React.Fragment key={i}>itm</React.Fragment>)}
+        </>);
     } 
 
     const formatPossiblities = (tool) => {
@@ -47,7 +56,7 @@ const ToolsTable = ({tools}) => {
                 <div className='tools-table__header'>Крафт</div>
                 <div className='tools-table__header'>Способность</div>
                 {
-                    tools.map(tool => (<>
+                    tools.map((tool, i) => (<React.Fragment key={i}>
                         <div className="tools-table__cell">
                             <span>{tool.text_name}</span>
                             <img src={tool.img} alt="tool" />
@@ -61,7 +70,7 @@ const ToolsTable = ({tools}) => {
                         <div className="tools-table__cell possiblity">
                             {formatPossiblities(tool)}
                         </div>
-                    </>))
+                    </React.Fragment>))
                 }
             </div>
         </>

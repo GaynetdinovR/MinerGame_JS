@@ -1,23 +1,30 @@
 import React from "react";
 import { depth } from "../../../assets/icons/group";
+import { other } from "../../../index.js";
 
-const LevelsTable = ({levels}) => {
-    const formatMaterials = (level) => {
-        let {new_materials, new_materials_img} = level;
-        new_materials = new_materials.split(', ')
-        let result = [];
+const LevelsTable = ({levels, materials, blocks}) => {
+    const formatMaterials = (new_materials) => {
+        const result = [];
+        const new_materials_text = new_materials.map(itm => {
+            return other.find(materials, itm).text_name
+        })
 
+        const new_materials_img = new_materials.map(itm => {
+            return other.find(materials, itm).img
+        })
+        
         for(let i = 0; i < new_materials.length; i++){
             result.push(<>
-                    <span>{new_materials[i]}</span>
-                    <img src={new_materials_img[i]} alt='block'/>
-                </>)
+                <span>{new_materials_text[i]}</span>
+                <img src={new_materials_img[i]} alt='block'/>
+            </>)
         }
 
-        console.log(level, new_materials, result)
-
-        return (<>{result.map(i => i)}</>)
+        return (<>
+            {result.map((itm, i) => <React.Fragment key={i}>itm</React.Fragment>)}
+        </>)
     }
+
 
     return (
         <>
@@ -28,24 +35,27 @@ const LevelsTable = ({levels}) => {
                 <div className='levels-table__header'>Порода</div>
                 <div className='levels-table__header'>Руды</div>
                 {
-                    levels.map(level => (
-                        <>
-                            <div className="levels-table__cell">
-                                {level.name}
-                            </div>
-                            <div className="levels-table__cell depth">
-                                <img src={depth} alt="depth"/>
-                                <span>{level.depth[0]}-{level.depth[1]}м</span>
-                            </div>
-                            <div className="levels-table__cell">
-                                {level.basement}
-                                <img src={level.basement_img} alt="block" />
-                            </div>
-                            <div className="levels-table__cell">
-                                {formatMaterials(level)}
-                            </div>
-                        </>
-                    ))
+                    levels.map((level, i) => {
+                        const block = other.find(blocks, level.basement)
+                        return(
+                            <React.Fragment key={i}>
+                                <div className="levels-table__cell">
+                                    {level.text_name}
+                                    <img src={level.img} alt="bg" />
+                                </div>
+                                <div className="levels-table__cell depth">
+                                    <img src={depth} alt="depth"/>
+                                    <span>{level.depth[0]}-{level.depth[1]}м</span>
+                                </div>
+                                <div className="levels-table__cell">
+                                    {block.text_name}
+                                    {block.img.map((img, i) => <img key={i} src={img} alt='block'/>)}
+                                </div>
+                                <div className="levels-table__cell">
+                                    {formatMaterials(level.new_materials)}
+                                </div>
+                            </React.Fragment>
+                        )})
                 }
             </div>
         </>
