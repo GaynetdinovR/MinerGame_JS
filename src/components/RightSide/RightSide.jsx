@@ -12,12 +12,12 @@ const RightSide = ({set}) => {
     ];
 
     return (
-        <aside className="right-side">
-            <div className="right-side__buttons">
+        <aside className='right-side'>
+            <div className='right-side__buttons'>
                 {buttons.map((btn, i) => (<Button key={i} name={btn.name} img={btn.img} setModal={btn.setModal}/>))}
             </div>
 
-            <span className="right-side__level">Глубины: 50м</span>
+            <span className='right-side__level'>Глубины: 50м</span>
         </aside>
     );
 };

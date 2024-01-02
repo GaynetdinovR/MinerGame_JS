@@ -1,6 +1,6 @@
-import React from "react";
-import { possiblity, text, time } from "../../../assets/icons/group";
-import { other } from "../../..";
+import React from 'react';
+import { possiblity, text, time } from '../../../assets/icons/group';
+import other from '../../../classes/Other.js';
 
 const SkillsTable = ({skills, materials, tools}) => {
     const formatCraftMaterials = (skill) => {
@@ -25,18 +25,18 @@ const SkillsTable = ({skills, materials, tools}) => {
         for(let i = 0; i < materials_img.length; i++){
             result.push(<div>
                 <span>{craft_text[i]}</span>
-                <img src={materials_img[i]} alt="block" />
+                <img src={materials_img[i]} alt='block' />
             </div>)
         }
 
         return (<>
-            {result.map((itm, i) => <React.Fragment key={i}>itm</React.Fragment>)}
+            {result.map((itm, i) => <React.Fragment key={i}>{itm}</React.Fragment>)}
         </>);
     }
 
     return (
         <>
-            <h3 className="info-modal__title-h3">Скиллы</h3>
+            <h3 className='info-modal__title-h3'>Скиллы</h3>
             <div className='info-modal__skills-table skills-table' id='skills'>
                 <div className='skills-table__header'>Название</div>
                 <div className='skills-table__header'>Описание</div>
@@ -45,22 +45,22 @@ const SkillsTable = ({skills, materials, tools}) => {
                 <div className='skills-table__header'>Способность</div>
                 {
                     skills.map((skill, i) => (<React.Fragment key={i}>
-                        <div className="skills-table__cell name">
+                        <div className='skills-table__cell name'>
                             <span>{skill.text_name}</span>
-                            <img src={skill.img} alt="text" />
+                            <img src={skill.img} alt='text' />
                         </div>
-                        <div className="skills-table__cell text">
-                            <img src={text} alt="text" />
+                        <div className='skills-table__cell text'>
+                            <img src={text} alt='text' />
                             <span>{skill.description}</span>
                         </div>
-                        <div className="skills-table__cell craft">
+                        <div className='skills-table__cell craft'>
                             {formatCraftMaterials(skill)}
                         </div>
-                        <div className="skills-table__cell time">
-                            <img src={time} alt="text" />
+                        <div className='skills-table__cell time'>
+                            <img src={time} alt='text' />
                             <span>{skill.cooldown} сек</span>
                         </div>
-                        <div className="skills-table__cell possiblity">
+                        <div className='skills-table__cell possiblity'>
                             <img src={possiblity} alt='possiblity'/>
                             <span>{skill.buff_text}</span>
                         </div>

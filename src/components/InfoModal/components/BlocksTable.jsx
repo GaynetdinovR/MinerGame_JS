@@ -1,6 +1,6 @@
-import React from "react";
-import { durability } from "../../../assets/icons/group.js";
-import { other } from "../../../index.js";
+import React from 'react';
+import { durability } from '../../../assets/icons/group.js';
+import other from '../../../classes/Other.js';
 
 const BlocksTable = ({blocks, materials}) => {
     const formatMaterialInfo = (block) => {
@@ -30,17 +30,17 @@ const BlocksTable = ({blocks, materials}) => {
                 {
                     blocks.map((block, i) => (
                         <React.Fragment key={i}>
-                            <div className="blocks-table__cell">
+                            <div className='blocks-table__cell'>
                                 <span>{block.text_name}</span>
                                 <div>
                                     {block.img.map((img, i) => <img key={i} src={img} alt='block'/>)}
                                 </div>
                             </div>
-                            <div className="blocks-table__cell durability">
+                            <div className='blocks-table__cell durability'>
                                 <img src={durability} alt='block'/>
                                 <span>{block.durability}</span>
                             </div>
-                            <div className="blocks-table__cell">
+                            <div className='blocks-table__cell'>
                                 {formatMaterialInfo(block)}
                             </div>
                         </React.Fragment>

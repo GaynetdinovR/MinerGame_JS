@@ -8,7 +8,7 @@ import StoreModal from './StoreModal/StoreModal.jsx';
 import InventoryModal from './InventoryModal/InventoryModal.jsx';
 
 const App = () => {
-    const [isInfoModalOpen, setInfoModal] = useState(true);
+    const [isInfoModalOpen, setInfoModal] = useState(false);
     const [isCraftModalOpen, setCraftModal] = useState(false);
     const [isStoreModalOpen, setStoreModal] = useState(false);
     const [isInventoryModalOpen, setInventoryModal] = useState(false);
@@ -19,7 +19,7 @@ const App = () => {
         inventoryModal: setInventoryModal,
         storeModal: setStoreModal
     } 
-    
+
     return (
         <main>
             <LeftSide/>

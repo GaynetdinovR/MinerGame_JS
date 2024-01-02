@@ -1,6 +1,6 @@
-import React from "react";
-import { damage, possiblity } from "../../../assets/icons/group";
-import { other } from "../../..";
+import React from 'react';
+import { damage, possiblity } from '../../../assets/icons/group';
+import other from '../../../classes/Other.js';
 
 const ToolsTable = ({tools, materials}) => {
     const formatCraftMaterials = (tool) => {
@@ -20,12 +20,12 @@ const ToolsTable = ({tools, materials}) => {
         for(let i = 0; i < materials_img.length; i++){
             result.push(<div>
                 <span>{craft_text[i]}</span>
-                <img src={materials_img[i]} alt="block" />
+                <img src={materials_img[i]} alt='block' />
             </div>)
         }
 
         return (<>
-            {result.map((itm, i) => <React.Fragment key={i}>itm</React.Fragment>)}
+            {result.map((itm, i) => <React.Fragment key={i}>{itm}</React.Fragment>)}
         </>);
     } 
 
@@ -49,7 +49,7 @@ const ToolsTable = ({tools, materials}) => {
 
     return (
         <>
-            <h3 className="info-modal__title-h3">Инструменты</h3>
+            <h3 className='info-modal__title-h3'>Инструменты</h3>
             <div className='info-modal__tools-table tools-table' id='tools'>
                 <div className='tools-table__header'>Название</div>
                 <div className='tools-table__header'>Урон</div>
@@ -57,17 +57,17 @@ const ToolsTable = ({tools, materials}) => {
                 <div className='tools-table__header'>Способность</div>
                 {
                     tools.map((tool, i) => (<React.Fragment key={i}>
-                        <div className="tools-table__cell">
+                        <div className='tools-table__cell'>
                             <span>{tool.text_name}</span>
-                            <img src={tool.img} alt="tool" />
+                            <img src={tool.img} alt='tool' />
                         </div>
-                        <div className="tools-table__cell damage">
+                        <div className='tools-table__cell damage'>
                             {formatDamage(tool)}
                         </div>
-                        <div className="tools-table__cell craft">
+                        <div className='tools-table__cell craft'>
                             {formatCraftMaterials(tool)}
                         </div>
-                        <div className="tools-table__cell possiblity">
+                        <div className='tools-table__cell possiblity'>
                             {formatPossiblities(tool)}
                         </div>
                     </React.Fragment>))

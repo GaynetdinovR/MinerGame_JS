@@ -1,0 +1,162 @@
+@mixin material
+    position: relative
+    margin: 5px
+
+    & span
+        @include positionAbsoluteInCenter()
+        @include font(20px, 700)
+
+    & img
+        @include img(64px, cover)
+
+@mixin materials 
+    display: flex
+    justify-content: center
+    align-items: center
+
+    min-width: 202px
+    margin-right: 10px
+
+    background: $dark-grey
+
+    padding: 5px
+    border-radius: 10px
+
+.craft-modal
+    &__content
+        display: flex
+        justify-content: center
+        align-items: flex-start
+
+    &__list
+        margin-right: 100px
+
+    &__title
+        margin-top: 10px
+        @include font($fz: 35px, $fw: 700)
+
+    &__item
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: flex-start
+
+        background: $light-grey
+        border: none
+
+        padding: 15px
+        border-radius: 10px
+        margin: 15px 0
+
+        &-top-side
+            @include font(22px, 700)
+
+        &-bottom-side
+            margin-top: 10px
+            display: flex
+
+        &-craft
+            @include materials()
+
+        &-craft-material
+            @include material()
+
+        &-arrow
+            position: relative
+            width: 84px
+            margin-right: 10px
+
+            & .arrow
+                @include positionAbsoluteInCenter()
+                @include img(84px, cover)
+
+            & .craft
+                @include positionAbsoluteInCenter()
+                @include img(32px, cover)
+
+        &-img
+            background: $dark-grey
+            padding: 10px
+            border-radius: 10px
+
+            width: 85px
+            height: 85px
+
+            position: relative
+
+            & img
+                @include positionAbsoluteInCenter()
+                @include img(64px, cover)
+
+    &__chosen
+        display: flex
+        justify-content: flex-start
+        
+        background: $light-grey
+
+        border-radius: 10px
+        padding: 25px
+        margin-top: 15px
+
+        width: 450px
+        height: 300px
+
+        &-left-side
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            align-items: flex-start
+
+        &-img
+            background: $dark-grey
+
+            display: flex
+            justify-content: center
+            align-items: center
+
+            padding: 10px
+            border-radius: 10px
+
+            width: 155px
+            height: 155px
+
+            & img
+                @include img(135px, cover)
+
+        &-craft-materials
+            @include materials()
+
+        &-craft-material
+            @include material()
+
+        &-right-side
+            text-align: left
+            @include font(18px, 700)
+
+        &-name
+            margin-top: 5px
+            @include font(24px, 700)
+
+    &__craft
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        &-btn
+            background: $light-grey
+            border: none
+
+            width: 300px
+            padding: 10px
+            border-radius: 10px
+
+            cursor: pointer
+            transition: 200ms
+
+            transform: translateY(calc(100% - 45px))
+
+            & img
+                @include img(90px, cover)
+
+            &:hover
+                filter: brightness(0.8)

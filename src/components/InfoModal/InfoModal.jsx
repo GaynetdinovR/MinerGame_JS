@@ -4,13 +4,12 @@ import BlocksTable from './components/BlocksTable.jsx';
 import ToolsTable from './components/ToolsTable.jsx';
 import SkillsTable from './components/SkillsTable.jsx';
 import LevelsTable from './components/LevelsTable.jsx';
-import img_data from '../../static/data/img_data.js';
+import other from '../../classes/Other.js';
+import game_data from '../../static/data/game_data.js';
 import text_data from '../../static/data/text_data.js';
-import game_data from '../../static/data/data.js';
-import { other } from '../../index.js';
+import img_data from '../../static/data/img_data.js';
 
 const InfoModal = ({ isOpen, setModal }) => {
-
     const data = other.mergeObjects(game_data, other.mergeObjects(img_data, text_data))
 
     return (

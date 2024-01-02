@@ -9,8 +9,8 @@ const Modal = ({ children, isOpen, setModal, className }) => {
             className={isOpen ? 'modal__wrap active' : 'modal__wrap'}
             onClick={() => closeModal()}>
             <div className={`${className} modal`} onClick={(e) => e.stopPropagation()}>
-                <button className="modal__close" onClick={() => closeModal()}>
-                    <img src={close} alt="close" />
+                <button className='modal__close' onClick={() => closeModal()}>
+                    <img src={close} alt='close' />
                 </button>
                 { children }
             </div>

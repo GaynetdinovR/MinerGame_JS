@@ -1,6 +1,6 @@
 import React from 'react';
 import { coins } from '../../assets/icons/group.js';
-import { other } from '../../index.js'
+import other from '../../classes/Other.js'
 import Skill from './components/Skill.jsx';
 import img_data from '../../static/data/img_data.js';
 
@@ -16,15 +16,15 @@ const LeftSide = () => {
     const skillsImg = img_data.skills
 
     return (
-        <aside className="left-side">
+        <aside className='left-side'>
             <div className='left-side__coins'>
-                <div className="left-side__coins-img">
-                    <img src={coins} alt="coins" />
+                <div className='left-side__coins-img'>
+                    <img src={coins} alt='coins' />
                 </div>
                 <span className='left-side__coins-count'>0</span>
             </div>
 
-            <div className="left-side__skills skills">
+            <div className='left-side__skills skills'>
                 {
                     skills.map((skill, i) => (
                         <Skill key={i} title={skill.title} name={skill.name} img={other.find(skillsImg, skill.name).img}/>

@@ -1,4 +1,4 @@
-export default class Other{
+class Other{
 
     /**
      * Возвращает объект вложенный в массиве 
@@ -68,3 +68,7 @@ export default class Other{
         return res;
     }
 } 
+
+const other = new Other()
+
+export default other;

@@ -1,12 +1,8 @@
 import './assets/styles/style.sass';
 import ReactDOM from 'react-dom/client';
-import App from './components/App.jsx';
 import { Provider } from 'react-redux';
+import App from './components/App.jsx';
 import store from './store/store.js';
-
-import Other from './classes/Other.js';
-
-const other = new Other();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -15,7 +11,3 @@ root.render(
         <App />
     </Provider>
 );
-
-export {
-    other
-}
