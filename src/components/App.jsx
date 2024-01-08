@@ -11,7 +11,7 @@ const App = () => {
     const [isInfoModalOpen, setInfoModal] = useState(false);
     const [isCraftModalOpen, setCraftModal] = useState(false);
     const [isStoreModalOpen, setStoreModal] = useState(false);
-    const [isInventoryModalOpen, setInventoryModal] = useState(false);
+    const [isInventoryModalOpen, setInventoryModal] = useState(true);
 
     const setModal = {
         infoModal: setInfoModal,
@@ -27,8 +27,8 @@ const App = () => {
             <RightSide set={setModal}/>
             <InfoModal isOpen={isInfoModalOpen} setModal={setInfoModal}/>
             <CraftModal isOpen={isCraftModalOpen} setModal={setCraftModal}/>
-            <InventoryModal isOpen={isInventoryModalOpen} setModal={setStoreModal}/>
-            <StoreModal isOpen={isStoreModalOpen} setModal={setInventoryModal}/>
+            <InventoryModal isOpen={isInventoryModalOpen} setModal={setInventoryModal}/>
+            <StoreModal isOpen={isStoreModalOpen} setModal={setStoreModal}/>
         </main>
     );
 }

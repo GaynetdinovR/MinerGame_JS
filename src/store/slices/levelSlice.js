@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import other from '../../classes/Other.js';
-import gameData from '../../static/data/game_data.js';
+import game_data from '../../static/data/game_data.js';
 
 export const levelSlice = createSlice({
     name: 'level',
@@ -13,7 +13,7 @@ export const levelSlice = createSlice({
     },
     reducers: {
         changeLevel: (state, payload) => {
-            const level = other.find(gameData.levels, payload.payload);
+            const level = other.find(game_data.levels, payload.payload);
 
             state.level = payload.payload 
             state.basement = level.basement

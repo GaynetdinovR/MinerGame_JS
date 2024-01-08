@@ -1,3 +1,7 @@
+import game_data from '../static/data/game_data.js';
+import text_data from '../static/data/text_data.js'
+import img_data from '../static/data/img_data.js'
+
 class Other{
 
     /**
@@ -66,6 +70,11 @@ class Other{
         }
     
         return res;
+    }
+
+
+    getMergedObject = () => {
+        return this.mergeObjects(game_data, this.mergeObjects(img_data, text_data))
     }
 } 
 
