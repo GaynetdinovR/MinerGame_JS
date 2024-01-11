@@ -1,6 +1,6 @@
 import React from 'react';
 import { durability } from '../../../assets/icons/group.js';
-import other from '../../../classes/Other.js';
+import data from '../../../classes/Data.js';
 
 const BlocksTable = ({blocks, materials}) => {
     const formatMaterialInfo = (block) => {
@@ -8,7 +8,7 @@ const BlocksTable = ({blocks, materials}) => {
 
         let {material_count, material_name, material} = block;
 
-        const material_img = <img src={other.find(materials, material).img} alt='block'/>;
+        const material_img = <img src={data.find(materials, material).img} alt='block'/>;
         material_count = `${material_count[0]}-${material_count[1]} `
         
         return (

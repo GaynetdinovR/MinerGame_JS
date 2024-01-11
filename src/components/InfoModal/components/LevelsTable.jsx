@@ -1,17 +1,17 @@
 import React from 'react';
 import { depth } from '../../../assets/icons/group';
-import other from '../../../classes/Other.js';
+import data from '../../../classes/Data.js';
 
 const LevelsTable = ({levels, materials, blocks}) => {
     const formatMaterials = (new_materials) => {
         const result = [];
 
         const new_materials_text = new_materials.map(itm => {
-            return other.find(materials, itm).text_name
+            return data.find(materials, itm).text_name
         })
 
         const new_materials_img = new_materials.map(itm => {
-            return other.find(materials, itm).img
+            return data.find(materials, itm).img
         })
         
         for(let i = 0; i < new_materials.length; i++){
@@ -37,7 +37,7 @@ const LevelsTable = ({levels, materials, blocks}) => {
                 <div className='levels-table__header'>Руды</div>
                 {
                     levels.map((level, i) => {
-                        const block = other.find(blocks, level.basement)
+                        const block = data.find(blocks, level.basement)
 
                         return(
                             <React.Fragment key={i}>

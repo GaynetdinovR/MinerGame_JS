@@ -1,6 +1,6 @@
 import React from 'react';
 import { damage, possiblity } from '../../../assets/icons/group';
-import other from '../../../classes/Other.js';
+import data from '../../../classes/Data.js';
 
 const ToolsTable = ({tools, materials}) => {
     const formatCraftMaterials = (tool) => {
@@ -12,7 +12,7 @@ const ToolsTable = ({tools, materials}) => {
         const materials_img = [];
 
         for(const material in craft_count){
-            materials_img.push(other.find(materials, material).img)
+            materials_img.push(data.find(materials, material).img)
         }
 
         craft_text = craft_text.split(' и ')

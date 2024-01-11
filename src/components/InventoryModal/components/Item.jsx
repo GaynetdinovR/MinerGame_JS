@@ -1,6 +1,6 @@
 import React from 'react'
 import {padlock} from '../../../assets/icons/group.js';
-import other from '../../../classes/Other.js';
+import data from '../../../classes/Data.js';
 import { useDispatch } from 'react-redux';
 import { equipTool } from '../../../store/slices/inventorySlice.js';
 
@@ -8,7 +8,7 @@ const Item = ({item, array, isBtn}) => {
     const dispatch = useDispatch()
 
     const {has, name} = item;
-    const itemData = other.find(array, name)
+    const itemData = data.find(array, name)
 
     const padlockImg = has ? '' : <img className='padlock' src={padlock} alt='padlock'/>
     let equipButton;

@@ -1,4 +1,50 @@
 const game_data = {
+    'materials': [
+		{
+			'name': 'copper_ore',
+			'price_to_10': 2,
+		},
+		{
+			'name': 'coal',
+			'price_to_10': 1,
+		},
+		{
+			'name': 'iron_ore',
+			'price_to_10': 3,
+		},
+		{
+			'name': 'magnetite_ore',
+			'price_to_10': 5,
+		},
+		{
+			'name': 'sulfur',
+			'price_to_10': 8,
+		},
+		{
+			'name': 'titan_ore',
+			'price_to_10': 10,
+		},
+		{
+			'name': 'silver',
+			'price_to_10': 15,
+		},
+		{
+			'name': 'chromatite_ore',
+			'price_to_10': 15,
+		},
+		{
+			'name': 'electronyte',
+			'price_to_10': 20,
+		},
+		{
+			'name': 'mithril_ore',
+			'price_to_10': 18,
+		},
+		{
+			'name': 'neutronium_ore',
+			'price_to_10': 35,
+		}
+	],
     'blocks': [
         {
             'name': 'stone',
@@ -109,7 +155,7 @@ const game_data = {
             'depth': [1000, 1799],
             'new_materials': ['chromatite_ore', 'electronyte'],
             'new_skills': ['lucky'],
-            'new_tools': ['chromatite_pickaxe', 'electronyte_lantern'],
+            'new_tools': ['chromatite_pickaxe', 'electronyte_lantern', 'silver_pot'],
             'basement': 'magma_stone',
         },
         {
@@ -175,31 +221,36 @@ const game_data = {
             'name': 'more_efforts',
             'craft_count': {'coal': 50, 'coins': 100},
             'buff': 'pass',
-            'cooldown': 100
+            'cooldown': 100,
+            'price': 150
         },
         {
             'name': 'dynamite',
             'craft_count': {'sulfur': 80, 'coal': 100, 'coins': 50},
             'buff': 'pass',
-            'cooldown': 150
-        },
-        {
-            'name': 'lucky',
-            'craft_count': {'silver_pot': 1},
-            'buff': 'pass',
-            'cooldown': 150
+            'cooldown': 150,
+            'price': 250
         },
         {
             'name': 'magnet_explosion',
             'craft_count': {'magnetite_ore': 100, 'electronyte': 80, 'coins': 150},
             'buff': 'pass',
-            'cooldown': 300
+            'cooldown': 300,
+            'price': 400
+        },
+        {
+            'name': 'lucky',
+            'craft_count': {'silver_pot': 1},
+            'buff': 'pass',
+            'cooldown': 150,
+            'price': 600
         },
         {
             'name': 'drill',
             'craft_count': {'neutronium_ore': 80, 'mithril_ore': 150},
             'buff': 'pass',
-            'cooldown': 300
+            'cooldown': 300,
+            'price': 750
         },
     ]
 }

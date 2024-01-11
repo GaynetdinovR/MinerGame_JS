@@ -1,0 +1,45 @@
+.modal
+    padding: 30px
+    border-radius: 15px
+    
+    border: 2px solid $light-grey
+    background: $dark-grey
+
+    transform: translate(-50%, -50%)
+    position: absolute
+    left: 50%
+    top: 50% 
+     
+    &__wrap
+        position: absolute
+        top: 0
+        left: 0
+
+        width: 100vw
+        height: 100vh
+
+        background: rgba($black, 0.2)
+
+        display: none
+
+    &__wrap.active
+        display: block
+
+    &__close
+        position: absolute
+        right: 30px 
+        top: 30px
+        border: none
+        background: none
+
+        cursor: pointer
+        transition: 200ms
+        &:hover
+            filter: brightness(0.8)
+
+        & img
+            @include img(40px, cover)
+
+    & .title
+        margin-top: 10px
+        @include font($fz: 35px, $fw: 700)

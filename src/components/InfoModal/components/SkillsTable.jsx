@@ -1,6 +1,6 @@
 import React from 'react';
 import { possiblity, text, time } from '../../../assets/icons/group';
-import other from '../../../classes/Other.js';
+import data from '../../../classes/Data.js';
 
 const SkillsTable = ({skills, materials, tools}) => {
     const formatCraftMaterials = (skill) => {
@@ -11,10 +11,10 @@ const SkillsTable = ({skills, materials, tools}) => {
 
         for(const material in craft_count){
             if(material === 'silver_pot') {
-                materials_img.push(other.find(tools, material).img)
+                materials_img.push(data.find(tools, material).img)
                 continue;
             };
-            materials_img.push(other.find(materials, material).img)
+            materials_img.push(data.find(materials, material).img)
         }
 
         const temp = craft_text.split(' и ')

@@ -1,6 +1,6 @@
 import React from 'react';
 import { craft } from '../../../assets/icons/group';
-import other from '../../../classes/Other';
+import data from '../../../classes/Data';
 
 const CraftItem = ({ tool, materials }) => {
     return (
@@ -13,7 +13,7 @@ const CraftItem = ({ tool, materials }) => {
                     <div className='craft-modal__chosen-craft-materials'>
                         {
                             Object.entries(tool.craft_count).map((item, i) => {
-                                item[0] = other.find(materials, item[0]).img
+                                item[0] = data.find(materials, item[0]).img
                                 return (
                                     <div key={i} className='craft-modal__chosen-craft-material'>
                                         <img src={item[0]} alt='material'/>

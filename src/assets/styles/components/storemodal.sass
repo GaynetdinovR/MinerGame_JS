@@ -1,0 +1,157 @@
+.store-modal
+    &__content.space
+        justify-content: space-between
+
+    &__content.notspace
+        justify-content: flex-start
+
+    &__content
+        overflow-y: scroll
+
+        display: flex
+        justify-content: space-between
+
+        max-width: 1200px
+        max-height: 670px
+        width: 1200px
+
+    &__left-side
+        display: flex
+        flex-wrap: wrap
+
+    &__right-side
+        display: flex
+        flex-wrap: wrap
+
+.to-sell,
+.to-buy
+    display: flex
+
+    &__input
+        max-width: 120px
+        padding: 1px 10px  
+        border-radius: 5px
+        margin-top: 10px
+
+        border: none
+
+        cursor: pointer
+        outline: none
+
+        @include font(16px, 700, $black)
+        
+    &__item
+        position: relative
+        margin: 10px 10px
+        max-width: 140px
+
+        &-name
+            text-align: center
+
+            padding: 5px
+            border-radius: 10px
+            max-width: 130px
+            min-height: 40px
+
+            display: flex
+            justify-content: center
+            align-items: center
+
+            background: $blue-2
+
+            @include font(16px, 700)
+        &-img
+            background: $light-grey
+
+            border-radius: 10px
+            padding: 5px
+            margin-top: 10px
+
+            display: flex
+            justify-content: center
+            align-items: center
+            
+            height: 130px
+            width: 130px
+
+            & img
+                @include img(90px, cover)
+        &-price
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+
+            & div 
+                display: flex
+                justify-content: center
+                align-items: center
+
+            & span
+                margin: 5px 0 0 5px
+                @include font(14px, 700)
+
+            & img   
+                @include img(32px, cover)
+    &__btn
+        min-width: 140px
+        padding: 10px 
+        border-radius: 10px
+        margin-top: 10px
+
+        border: none
+
+        cursor: pointer
+        transition: 200ms
+
+        @include font(18px, 700)
+        
+        &:hover
+            filter: brightness(0.8)
+
+.to-sell
+    margin-right: 30px
+    position: relative
+
+    &__btn
+        background: $red
+
+    &__sell-all
+        position: fixed
+        right: 85px
+        top: 730px
+
+        width: 300px
+        max-height: 60px
+        padding: 10px 
+        border-radius: 10px
+
+        border: none
+        background: $red
+
+        cursor: pointer
+        transition: 200ms
+
+        @include font(22px, 700)
+        
+        &:hover
+            filter: brightness(0.8)
+
+    &__sell-all.upper
+        top: 410px
+.to-buy
+    margin-left: 30px
+    max-width: 700px
+
+    &__skills
+        display: flex
+        width: 100%
+        max-width: 700px
+
+    &__materials
+        display: flex
+        flex-wrap: wrap
+        max-width: 700px
+
+    &__btn
+        background: $green

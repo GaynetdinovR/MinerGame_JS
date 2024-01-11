@@ -1,5 +1,5 @@
 import React from 'react';
-import other from '../../../classes/Other.js';
+import data from '../../../classes/Data.js';
 import { craft, right_arrow } from '../../../assets/icons/group.js';
 
 const item = ({ set, tool, materials }) => {
@@ -12,7 +12,7 @@ const item = ({ set, tool, materials }) => {
                 <div className="craft-modal__item-craft">
                     {
                         Object.entries(tool.craft_count).map((item, i) => {
-                            item[0] = other.find(materials, item[0]).img
+                            item[0] = data.find(materials, item[0]).img
                             return (
                                 <div key={i} className='craft-modal__item-craft-material'>
                                     <img src={item[0]} alt='material'/>
