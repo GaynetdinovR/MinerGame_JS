@@ -1,8 +1,9 @@
 import React from 'react'
-import {padlock} from '../../../assets/icons/group.js';
-import data from '../../../classes/Data.js';
 import { useDispatch } from 'react-redux';
 import { equipTool } from '../../../store/slices/inventorySlice.js';
+import data from '../../../classes/Data.js';
+
+import { padlock } from '../../../assets/icons/group.js';
 
 const Item = ({item, array, isBtn}) => {
     const dispatch = useDispatch()

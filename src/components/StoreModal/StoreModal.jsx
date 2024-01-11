@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import data from '../../classes/Data.js';
 
 import Modal from '../Modal/Modal.jsx';
 import ItemToSell from './components/ItemToSell.jsx';
 import ItemToBuy from './components/ItemToBuy.jsx';
 
-import data from '../../classes/Data.js';
 
 const StoreModal = ({ isOpen, setModal }) => {
     const {name} = useSelector(state => state.level);
@@ -45,22 +45,22 @@ const StoreModal = ({ isOpen, setModal }) => {
             <div className={name === 'cave_1'? 'store-modal__content notspace' :"store-modal__content space"}>
                 <div className="store-modal__left-side to-buy">
                     <div className="to-buy__skills"> 
-                        {findSkillsToBuy().map(item => {
+                        {findSkillsToBuy().map((item, i) => {
                             item = data.find(skills, item)
-                            return (<ItemToBuy item={item} isInput={false}/>)
+                            return (<ItemToBuy key={i} item={item} isInput={false}/>)
                         })}
                     </div>
                     <div className="to-buy__materials"> 
-                        {findResourcesToBuy().map(item => {
+                        {findResourcesToBuy().map((item, i) => {
                             item = data.find(materials, item)
-                            return (<ItemToBuy item={item} isInput={true}/>)
+                            return (<ItemToBuy key={i} item={item} isInput={true}/>)
                         })}
                     </div>
                 </div>
                 <div className="store-modal__right-side to-sell">
-                    {findResourcesToSell().map(item => {
+                    {findResourcesToSell().map((item, i) => {
                         item = data.find(materials, item)
-                        return (<ItemToSell item={item}/>)
+                        return (<ItemToSell key={i} item={item}/>)
                     })}
                     <button className={ name === 'cave_1'? "to-sell__sell-all upper" :"to-sell__sell-all"}>
                         Sell all

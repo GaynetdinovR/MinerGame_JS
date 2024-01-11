@@ -1,6 +1,7 @@
 import React from 'react';
-import { damage, possiblity } from '../../../assets/icons/group';
 import data from '../../../classes/Data.js';
+
+import { damage, possiblity } from '../../../assets/icons/group';
 
 const ToolsTable = ({tools, materials}) => {
     const formatCraftMaterials = (tool) => {

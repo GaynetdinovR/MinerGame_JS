@@ -1,8 +1,8 @@
 import React from 'react';
-import { coins } from '../../assets/icons/group.js';
-import data from '../../classes/Data.js'
+import data from '../../classes/Data.js';
+
 import Skill from './components/Skill.jsx';
-import img_data from '../../static/data/img_data.js';
+import { coins } from '../../assets/icons/group.js';
 
 const LeftSide = () => {
     const skills = [
@@ -13,7 +13,7 @@ const LeftSide = () => {
         {name: 'dynamite', title: 'Press X to use'},
     ]
 
-    const skillsImg = img_data.skills
+    const skillsImg = data.getMergedData().skills
 
     return (
         <aside className='left-side'>

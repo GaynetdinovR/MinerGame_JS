@@ -1,6 +1,7 @@
 import React from 'react';
-import { craft } from '../../../assets/icons/group';
 import data from '../../../classes/Data';
+
+import { craft } from '../../../assets/icons/group';
 
 const CraftItem = ({ tool, materials }) => {
     return (

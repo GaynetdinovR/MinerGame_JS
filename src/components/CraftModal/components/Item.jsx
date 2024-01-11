@@ -1,5 +1,6 @@
 import React from 'react';
 import data from '../../../classes/Data.js';
+
 import { craft, right_arrow } from '../../../assets/icons/group.js';
 
 const item = ({ set, tool, materials }) => {

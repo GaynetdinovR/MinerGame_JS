@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Modal from '../Modal/Modal.jsx';
 import { useSelector } from 'react-redux';
+import data from '../../classes/Data.js';
+
+import Modal from '../Modal/Modal.jsx';
 import Item from './components/Item.jsx';
 import ChosenItem from './components/ChosenItem.jsx';
-import data from '../../classes/Data.js';
 
 const CraftModal = ({ isOpen, setModal }) => {
     const {name}= useSelector(state => state.level);

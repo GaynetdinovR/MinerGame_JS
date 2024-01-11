@@ -1,6 +1,7 @@
 import React from 'react';
-import { backpack, craft, house, info} from '../../assets/icons/group';
+
 import Button from './components/Button.jsx';
+import { backpack, craft, house, info} from '../../assets/icons/group';
 
 const RightSide = ({set}) => {
 

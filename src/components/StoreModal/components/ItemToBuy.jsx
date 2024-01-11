@@ -1,4 +1,5 @@
-import React, {useState} from "react"
+import React from "react"
+
 import { coins } from "../../../assets/icons/group";
 
 const ItemToBuy = ({item, isInput}) => {

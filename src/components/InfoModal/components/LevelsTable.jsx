@@ -1,6 +1,7 @@
 import React from 'react';
-import { depth } from '../../../assets/icons/group';
 import data from '../../../classes/Data.js';
+
+import { depth } from '../../../assets/icons/group';
 
 const LevelsTable = ({levels, materials, blocks}) => {
     const formatMaterials = (new_materials) => {

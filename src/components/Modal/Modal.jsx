@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { close } from '../../assets/icons/group.js';
 
 const Modal = ({ children, isOpen, setModal, className }) => {

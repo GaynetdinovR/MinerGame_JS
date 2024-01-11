@@ -1,6 +1,7 @@
 import React from 'react';
-import { durability } from '../../../assets/icons/group.js';
 import data from '../../../classes/Data.js';
+
+import { durability } from '../../../assets/icons/group.js';
 
 const BlocksTable = ({blocks, materials}) => {
     const formatMaterialInfo = (block) => {

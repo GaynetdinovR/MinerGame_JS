@@ -1,6 +1,7 @@
 import React from 'react';
+
 import Block from './components/Block';
-import {cave_1_block, cave_1_bg} from '../../assets/content/group.js';
+import { cave_1_block, cave_1_bg } from '../../assets/content/group.js';
 
 const Map = () => {
     const blocks = new Array(100).fill(0);
