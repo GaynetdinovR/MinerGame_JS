@@ -10,7 +10,7 @@ import InventoryModal from './InventoryModal/InventoryModal.jsx';
 
 const App = () => {
     const [isInfoModalOpen, setInfoModal] = useState(false);
-    const [isCraftModalOpen, setCraftModal] = useState(true);
+    const [isCraftModalOpen, setCraftModal] = useState(false);
     const [isStoreModalOpen, setStoreModal] = useState(false);
     const [isInventoryModalOpen, setInventoryModal] = useState(false);
 

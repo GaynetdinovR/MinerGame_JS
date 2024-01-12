@@ -66,6 +66,10 @@ const text_data = {
             material_name: 'железа'
         },
         {
+            name: 'cave_1_chest',
+            text_name: 'Сундук'
+        },
+        {
             name: 'magnetite_block',
             text_name: 'Магнетит',
             material_name: 'магнетита'
@@ -74,6 +78,10 @@ const text_data = {
             name: 'sulfur_block',
             text_name: 'Сера',
             material_name: 'серы'
+        },
+        {
+            name: 'cave_2_chest',
+            text_name: 'Сундук'
         },
         {
             name: 'dark_stone',
@@ -90,6 +98,10 @@ const text_data = {
             material_name: 'серебра'
         },
         {
+            name: 'cave_3_chest',
+            text_name: 'Сундук'
+        },
+        {
             name: 'magma_stone',
             text_name: 'Магмовый камень'
         },
@@ -104,6 +116,10 @@ const text_data = {
             material_name: 'электронита'
         },
         {
+            name: 'cave_4_chest',
+            text_name: 'Сундук'
+        },
+        {
             name: 'mithril_block',
             text_name: 'Мифрил',
             material_name: 'мифрила'
@@ -112,6 +128,10 @@ const text_data = {
             name: 'neutronium_block',
             text_name: 'Нейтрониум',
             material_name: 'нейтрониума'
+        },
+        {
+            name: 'cave_5_chest',
+            text_name: 'Сундук'
         }
     ],
     levels: [

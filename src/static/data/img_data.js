@@ -19,7 +19,12 @@ import {
     cave_2_bg,
     cave_3_bg,
     cave_4_bg,
-    cave_5_bg
+    cave_5_bg,
+    cave_1_chest,
+    cave_2_chest,
+    cave_3_chest,
+    cave_4_chest,
+    cave_5_chest
 } from '../../assets/content/group.js';
 
 import {
@@ -121,12 +126,20 @@ const img_data = {
             img: [iron_block]
         },
         {
+            name: 'cave_1_chest',
+            img: [cave_1_chest]
+        },
+        {
             name: 'magnetite_block',
             img: [magnetite_block]
         },
         {
             name: 'sulfur_block',
             img: [sulfur_block]
+        },
+        {
+            name: 'cave_2_chest',
+            img: [cave_2_chest]
         },
         {
             name: 'dark_stone',
@@ -141,6 +154,10 @@ const img_data = {
             img: [silver_block]
         },
         {
+            name: 'cave_3_chest',
+            img: [cave_3_chest]
+        },
+        {
             name: 'magma_stone',
             img: [cave_4_block, cave_5_block]
         },
@@ -153,12 +170,20 @@ const img_data = {
             img: [electronyte_block]
         },
         {
+            name: 'cave_4_chest',
+            img: [cave_4_chest]
+        },
+        {
             name: 'mithril_block',
             img: [mithril_block]
         },
         {
             name: 'neutronium_block',
             img: [neutronium_block]
+        },
+        {
+            name: 'cave_5_chest',
+            img: [cave_5_chest]
         }
     ],
     levels: [

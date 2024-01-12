@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const levelSlice = createSlice({
     name: 'level',
     initialState: {
-        name: 'cave_5',
+        name: 'cave_1',
         depth: 9
     },
     reducers: {

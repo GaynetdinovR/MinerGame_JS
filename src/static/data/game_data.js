@@ -48,81 +48,120 @@ const game_data = {
     blocks: [
         {
             name: 'stone',
+            chance: 1.5,
             durability: 30
         },
         {
             name: 'copper_block',
+            chance: 0.25,
             durability: 150,
             material: 'copper_ore',
             material_count: [3, 7]
         },
         {
             name: 'coal_block',
+            chance: 0.35,
             durability: 120,
             material: 'coal',
             material_count: [1, 5]
         },
         {
             name: 'iron_block',
+            chance: 0.2,
             durability: 500,
             material: 'iron_ore',
             material_count: [3, 7]
         },
         {
+            name: 'cave_1_chest',
+            durability: 300,
+            chance: 0.005
+        },
+        {
             name: 'magnetite_block',
+            chance: 0.35,
             durability: 900,
             material: 'magnetite_ore',
             material_count: [3, 7]
         },
         {
             name: 'sulfur_block',
+            chance: 0.2,
             durability: 800,
             material: 'sulfur',
             material_count: [1, 5]
         },
         {
+            name: 'cave_2_chest',
+            durability: 300,
+            chance: 0.005
+        },
+        {
             name: 'dark_stone',
+            chance: 1.5,
             durability: 300
         },
         {
             name: 'titan_block',
+            chance: 0.3,
             durability: 1500,
             material: 'titan_ore',
             material_count: [3, 7]
         },
         {
             name: 'silver_block',
+            chance: 0.2,
             durability: 2500,
             material: 'silver',
             material_count: [1, 5]
         },
         {
+            name: 'cave_3_chest',
+            durability: 3000,
+            chance: 0.005
+        },
+        {
             name: 'magma_stone',
+            chance: 1.5,
             durability: 500
         },
         {
             name: 'chromatite_block',
+            chance: 0.3,
             durability: 4000,
             material: 'chromatite_ore',
             material_count: [3, 7]
         },
         {
             name: 'electronyte_block',
+            chance: 0.15,
             durability: 6000,
             material: 'electronyte',
             material_count: [1, 5]
         },
         {
+            name: 'cave_4_chest',
+            durability: 5000,
+            chance: 0.005
+        },
+        {
             name: 'mithril_block',
+            chance: 0.3,
             durability: 7500,
             material: 'mithril_ore',
             material_count: [3, 7]
         },
         {
             name: 'neutronium_block',
+            chance: 0.15,
             durability: 20000,
             material: 'neutronium_ore',
             material_count: [3, 7]
+        },
+        {
+            name: 'cave_5_chest',
+            durability: 5000,
+            chance: 0.005
         }
     ],
     levels: [
@@ -132,6 +171,7 @@ const game_data = {
             new_materials: ['iron_ore', 'copper_ore', 'coal'],
             new_skills: ['more_efforts'],
             new_tools: ['copper_pickaxe', 'iron_pickaxe'],
+            blocks: ['coal_block', 'copper_block', 'iron_block', 'cave_1_chest'],
             basement: 'stone'
         },
         {
@@ -140,6 +180,7 @@ const game_data = {
             new_materials: ['magnetite_ore', 'sulfur'],
             new_skills: ['dynamite'],
             new_tools: ['magnetite_pickaxe'],
+            blocks: ['magnetite_block', 'sulfur_block', 'cave_2_chest'],
             basement: 'stone'
         },
         {
@@ -148,6 +189,7 @@ const game_data = {
             new_materials: ['titan_ore', 'silver'],
             new_skills: ['magnet_explosion'],
             new_tools: ['titan_pickaxe', 'silver_pot'],
+            blocks: ['titan_block', 'silver_block', 'cave_3_chest'],
             basement: 'dark_stone'
         },
         {
@@ -156,6 +198,7 @@ const game_data = {
             new_materials: ['chromatite_ore', 'electronyte'],
             new_skills: ['lucky'],
             new_tools: ['chromatite_pickaxe', 'electronyte_lantern'],
+            blocks: ['chromatite_block', 'electronyte_block', 'cave_4_chest'],
             basement: 'magma_stone'
         },
         {
@@ -164,6 +207,7 @@ const game_data = {
             new_materials: ['mithril_ore', 'neutronium_ore'],
             new_skills: ['drill'],
             new_tools: ['mithril_pickaxe', 'neutronium_pickaxe'],
+            blocks: ['mithril_block', 'neutronium_block', 'cave_5_chest'],
             basement: 'magma_stone'
         }
     ],
