@@ -1,23 +1,35 @@
 import React from 'react';
+import data from '../../classes/Data.js';
+import { useSelector } from 'react-redux';
 
 import Block from './components/Block';
-import { cave_1_block, cave_1_bg } from '../../assets/content/group.js';
 
 const Map = () => {
-    const blocks = new Array(100).fill(0);
+    const { levels, blocks } = data.getMergedData();
+    const { name, depth } = useSelector((state) => state.level);
+
+    const { img, basement } = data.find(levels, name);
+
+    const blocksToGenerate = new Array(100).fill(0);
+
+    const findBasement = () => {
+        return data.find(blocks, basement).img[0];
+    };
 
     return (
-        <aside className='map'>
-            <div className='map__bg'>
-                <img src={cave_1_bg} alt='bg' />
+        <aside className="map">
+            <div className="map__bg">
+                <img src={img} alt="bg" />
             </div>
-            
-            <div className='map__blocks'>
-                {blocks.map((item, i) => (<Block key={i} name='rock' img={cave_1_block}/>))}
+
+            <div className="map__blocks">
+                {blocksToGenerate.map((item, i) => (
+                    <Block key={i} name="rock" img={findBasement()} />
+                ))}
             </div>
-            <div className='map__line-wrap'>
-                <div className='map__line'></div>
-                <span className='map__depth'>50м</span>
+            <div className="map__line-wrap">
+                <div className="map__line"></div>
+                <span className="map__depth">{depth}м</span>
             </div>
         </aside>
     );

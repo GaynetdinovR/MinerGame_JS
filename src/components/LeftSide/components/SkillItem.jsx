@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Skill = (skill) => {
+const SkillItem = (skill) => {
     return (
         <button title={skill.title} className={`skills__skill skills__${skill.name}`}>
             <img src={skill.img} alt={skill.name} />
@@ -8,4 +8,4 @@ const Skill = (skill) => {
     );
 };
 
-export default Skill;
+export default SkillItem;

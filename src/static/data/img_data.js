@@ -9,7 +9,7 @@ import {
     neutronium_block,
     silver_block,
     sulfur_block,
-    titan_block, 
+    titan_block,
     cave_1_block,
     cave_2_block,
     cave_3_block,
@@ -49,11 +49,11 @@ import {
     dynamite,
     clover,
     magnet,
-    drill,
+    drill
 } from '../../assets/icons/group.js';
 
 const img_data = {
-    'materials': [
+    materials: [
         {
             name: 'coins',
             img: coins
@@ -103,150 +103,150 @@ const img_data = {
             img: neutronium_ore
         }
     ],
-    'blocks': [
+    blocks: [
         {
-            'name': 'stone',
-            'img': [cave_1_block, cave_2_block],
+            name: 'stone',
+            img: [cave_1_block, cave_2_block]
         },
         {
-            'name': 'copper_block',
-            'img': [copper_block],
+            name: 'copper_block',
+            img: [copper_block]
         },
         {
-            'name': 'coal_block',
-            'img': [coal_block],
+            name: 'coal_block',
+            img: [coal_block]
         },
         {
-            'name': 'iron_block',
-            'img': [iron_block],
+            name: 'iron_block',
+            img: [iron_block]
         },
         {
-            'name': 'magnetite_block',
-            'img': [magnetite_block],
+            name: 'magnetite_block',
+            img: [magnetite_block]
         },
         {
-            'name': 'sulfur_block',
-            'img': [sulfur_block],
+            name: 'sulfur_block',
+            img: [sulfur_block]
         },
         {
-            'name': 'dark_stone',
-            'img': [cave_3_block]
+            name: 'dark_stone',
+            img: [cave_3_block]
         },
         {
-            'name': 'titan_block',
-            'img': [titan_block],
+            name: 'titan_block',
+            img: [titan_block]
         },
         {
-            'name': 'silver_block',
-            'img': [silver_block],
+            name: 'silver_block',
+            img: [silver_block]
         },
         {
-            'name': 'magma_stone',
-            'img': [cave_4_block, cave_5_block]
+            name: 'magma_stone',
+            img: [cave_4_block, cave_5_block]
         },
         {
-            'name': 'chromatite_block',
-            'img': [chromatite_block],
+            name: 'chromatite_block',
+            img: [chromatite_block]
         },
         {
-            'name': 'electronyte_block',
-            'img': [electronyte_block],
+            name: 'electronyte_block',
+            img: [electronyte_block]
         },
         {
-            'name': 'mithril_block',
-            'img': [mithril_block],
+            name: 'mithril_block',
+            img: [mithril_block]
         },
         {
-            'name': 'neutronium_block',
-            'img': [neutronium_block],
+            name: 'neutronium_block',
+            img: [neutronium_block]
         }
     ],
-    'levels': [
+    levels: [
         {
-            'name': 'cave_1',
-            'img': cave_1_bg
+            name: 'cave_1',
+            img: cave_1_bg
         },
         {
-            'name': 'cave_2',
-            'img': cave_2_bg
+            name: 'cave_2',
+            img: cave_2_bg
         },
         {
-            'name': 'cave_3',
-            'img': cave_3_bg
+            name: 'cave_3',
+            img: cave_3_bg
         },
         {
-            'name': 'cave_4',
-            'img': cave_4_bg
+            name: 'cave_4',
+            img: cave_4_bg
         },
         {
-            'name': 'cave_5',
-            'img': cave_5_bg
-        },
-    ],
-    'tools': [
-        {
-            'name': 'wood_pickaxe',
-            'img': wood_pickaxe,
-        },
-        {
-            'name': 'copper_pickaxe',
-            'img': copper_pickaxe,
-        },
-        {
-            'name': 'iron_pickaxe',
-            'img': iron_pickaxe,
-        },
-        {
-            'name': 'magnetite_pickaxe',
-            'img': magnetite_pickaxe,
-        },
-        {
-            'name': 'titan_pickaxe',
-            'img': titan_pickaxe,
-        },
-        {
-            'name': 'silver_pot',
-            'img': silver_pot,
-        },
-        {
-            'name': 'chromatite_pickaxe',
-            'img': chromatite_pickaxe,
-        },
-        {
-            'name': 'electronyte_lantern',
-            'img': electronyte_lantern,
-        },
-        {
-            'name': 'mithril_pickaxe',
-            'img': mithril_pickaxe,
-        },
-        {
-            'name': 'neutronium_pickaxe',
-            'img': neutronium_pickaxe,
+            name: 'cave_5',
+            img: cave_5_bg
         }
     ],
-    'skills': [
+    tools: [
         {
-            'name': 'more_efforts',
-            'img': muscle,
+            name: 'wood_pickaxe',
+            img: wood_pickaxe
         },
         {
-            'name': 'dynamite',
-            'img': dynamite,
+            name: 'copper_pickaxe',
+            img: copper_pickaxe
         },
         {
-            'name': 'lucky',
-            'img': clover,
+            name: 'iron_pickaxe',
+            img: iron_pickaxe
         },
         {
-            'name': 'magnet_explosion',
-            'img': magnet,
+            name: 'magnetite_pickaxe',
+            img: magnetite_pickaxe
         },
         {
-            'name': 'drill',
-            'img': drill,
+            name: 'titan_pickaxe',
+            img: titan_pickaxe
         },
+        {
+            name: 'silver_pot',
+            img: silver_pot
+        },
+        {
+            name: 'chromatite_pickaxe',
+            img: chromatite_pickaxe
+        },
+        {
+            name: 'electronyte_lantern',
+            img: electronyte_lantern
+        },
+        {
+            name: 'mithril_pickaxe',
+            img: mithril_pickaxe
+        },
+        {
+            name: 'neutronium_pickaxe',
+            img: neutronium_pickaxe
+        }
+    ],
+    skills: [
+        {
+            name: 'more_efforts',
+            img: muscle
+        },
+        {
+            name: 'dynamite',
+            img: dynamite
+        },
+        {
+            name: 'lucky',
+            img: clover
+        },
+        {
+            name: 'magnet_explosion',
+            img: magnet
+        },
+        {
+            name: 'drill',
+            img: drill
+        }
     ]
-}
+};
 
-export default img_data
+export default img_data;

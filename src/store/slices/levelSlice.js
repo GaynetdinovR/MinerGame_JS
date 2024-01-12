@@ -3,11 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export const levelSlice = createSlice({
     name: 'level',
     initialState: {
-        name: 'cave_4',
+        name: 'cave_5',
+        depth: 9
     },
     reducers: {
         changeLevel: (state, payload) => {
-            state.name = payload.payload 
+            state.name = payload.payload;
         }
     }
 });

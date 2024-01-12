@@ -1,4 +1,5 @@
 .inventory-modal
+
     &__content
         min-width: 1000px
         min-height: 500px
@@ -17,9 +18,11 @@
         margin-top: 20px
 
 .items-inventory
+
     &__item
         position: relative
         margin: 0 10px
+
         &-name
             text-align: center
 
@@ -32,11 +35,12 @@
             justify-content: center
             align-items: center
 
-            background: $blue-2
+            background: $blue_2
 
             @include font(16px, 700)
+            
         &-img
-            background: $light-grey
+            background: $light_grey
 
             border-radius: 10px
             padding: 5px
@@ -59,7 +63,7 @@
             margin-top: 10px
 
             border: none
-            background: $blue-2
+            background: $blue_2
 
             cursor: pointer
             transition: 200ms
@@ -70,6 +74,7 @@
                 filter: brightness(0.8)
 
         &.blocked
+
             &::after
                 content: ''
                 z-index: 2
@@ -83,6 +88,7 @@
 
                 border-radius: 10px
                 background: rgba($black, 0.5)
+
             & .padlock
                 z-index: 3
                 @include positionAbsoluteInCenter()            

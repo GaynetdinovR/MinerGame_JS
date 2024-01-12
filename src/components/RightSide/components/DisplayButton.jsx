@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({img, name, setModal}) => {
+const DisplayButton = ({ img, name, setModal }) => {
     return (
         <button onClick={() => setModal(true)} className={`right-side__button right-side__${name}`}>
             <img src={img} alt={name} />
@@ -8,4 +8,4 @@ const Button = ({img, name, setModal}) => {
     );
 };
 
-export default Button;
+export default DisplayButton;

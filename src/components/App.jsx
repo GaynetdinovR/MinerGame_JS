@@ -19,19 +19,19 @@ const App = () => {
         craftModal: setCraftModal,
         inventoryModal: setInventoryModal,
         storeModal: setStoreModal
-    } 
+    };
 
     return (
         <main>
-            <LeftSide/>
-            <Map/>
-            <RightSide set={setModal}/>
-            <InfoModal isOpen={isInfoModalOpen} setModal={setInfoModal}/>
-            <CraftModal isOpen={isCraftModalOpen} setModal={setCraftModal}/>
-            <InventoryModal isOpen={isInventoryModalOpen} setModal={setInventoryModal}/>
-            <StoreModal isOpen={isStoreModalOpen} setModal={setStoreModal}/>
+            <LeftSide />
+            <Map />
+            <RightSide set={setModal} />
+            <InfoModal isOpen={isInfoModalOpen} setModal={setInfoModal} />
+            <CraftModal isOpen={isCraftModalOpen} setModal={setCraftModal} />
+            <InventoryModal isOpen={isInventoryModalOpen} setModal={setInventoryModal} />
+            <StoreModal isOpen={isStoreModalOpen} setModal={setStoreModal} />
         </main>
     );
-}
+};
 
 export default App;

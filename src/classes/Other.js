@@ -1,5 +1,5 @@
-class Other{} 
+class Other {}
 
-const other = new Other()
+const other = new Other();
 
 export default other;

@@ -8,16 +8,24 @@ import SkillsTable from './components/SkillsTable.jsx';
 import LevelsTable from './components/LevelsTable.jsx';
 
 const InfoModal = ({ isOpen, setModal }) => {
-    const mergedData = data.getMergedData()
+    const mergedData = data.getMergedData();
 
     return (
-        <Modal isOpen={isOpen} setModal={setModal} className='info-modal'>
-            <h2 className='info-modal__title title'>Информация</h2>
-            <div className='info-modal__content'>
-                <BlocksTable blocks={mergedData.blocks} materials={mergedData.materials}/>
-                <LevelsTable levels={mergedData.levels} materials={mergedData.materials} blocks={mergedData.blocks}/>
-                <ToolsTable tools={mergedData.tools} materials={mergedData.materials}/>
-                <SkillsTable skills={mergedData.skills} materials={mergedData.materials} tools={mergedData.tools}/>
+        <Modal isOpen={isOpen} setModal={setModal} className="info-modal">
+            <h2 className="info-modal__title title">Информация</h2>
+            <div className="info-modal__content">
+                <BlocksTable blocks={mergedData.blocks} materials={mergedData.materials} />
+                <LevelsTable
+                    levels={mergedData.levels}
+                    materials={mergedData.materials}
+                    blocks={mergedData.blocks}
+                />
+                <ToolsTable tools={mergedData.tools} materials={mergedData.materials} />
+                <SkillsTable
+                    skills={mergedData.skills}
+                    materials={mergedData.materials}
+                    tools={mergedData.tools}
+                />
             </div>
         </Modal>
     );
