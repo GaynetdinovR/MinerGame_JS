@@ -4,6 +4,11 @@ import data from '../../../classes/Data.js';
 import { damage, possiblity } from '../../../assets/icons/group';
 
 const ToolsTable = ({ tools, materials }) => {
+    /**
+     * Фомартирует материалы крафтов
+     * @param {*} tool object
+     * @returns React-Element
+     */
     const formatCraftMaterials = (tool) => {
         let { craft_text, craft_count } = tool;
 
@@ -36,6 +41,11 @@ const ToolsTable = ({ tools, materials }) => {
         );
     };
 
+    /**
+     * Фомартирует особенности
+     * @param {*} tool object
+     * @returns React-Element
+     */
     const formatPossiblities = (tool) => {
         const result = (
             <>
@@ -47,6 +57,11 @@ const ToolsTable = ({ tools, materials }) => {
         return tool.possibilities_text ? result : '-';
     };
 
+    /**
+     * Фомартирует урон
+     * @param {*} tool object
+     * @returns React-Element
+     */
     const formatDamage = (tool) => {
         const result = (
             <>

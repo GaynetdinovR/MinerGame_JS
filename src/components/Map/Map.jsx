@@ -12,7 +12,11 @@ const Map = () => {
 
     const blocksToGenerate = new Array(100).fill(0);
 
-    const findBasement = () => {
+    /**
+     * Находит и возвращает картинку блока уровня
+     * @returns React-Img
+     */
+    const findBasementImg = () => {
         return data.find(blocks, basement).img[0];
     };
 
@@ -24,7 +28,7 @@ const Map = () => {
 
             <div className="map__blocks">
                 {blocksToGenerate.map((item, i) => (
-                    <Block key={i} name="rock" img={findBasement()} />
+                    <Block key={i} name="rock" img={findBasementImg()} />
                 ))}
             </div>
             <div className="map__line-wrap">

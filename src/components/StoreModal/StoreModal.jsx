@@ -10,6 +10,10 @@ const StoreModal = ({ isOpen, setModal }) => {
     const { name } = useSelector((state) => state.level);
     const { levels, materials, skills } = data.getMergedData();
 
+    /**
+     * Находит скиллы на покупку
+     * @returns array
+     */
     const findSkillsToBuy = () => {
         let result = [];
 
@@ -22,6 +26,10 @@ const StoreModal = ({ isOpen, setModal }) => {
         return result;
     };
 
+    /**
+     * Находит материалы на покупку
+     * @returns array
+     */
     const findResourcesToBuy = () => {
         let result = [];
 
@@ -34,6 +42,10 @@ const StoreModal = ({ isOpen, setModal }) => {
         return result;
     };
 
+    /**
+     * Находит материалы на продажу
+     * @returns array
+     */
     const findResourcesToSell = () => {
         return data.find(levels, name).new_materials;
     };

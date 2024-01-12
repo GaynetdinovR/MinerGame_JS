@@ -4,6 +4,11 @@ import data from '../../../classes/Data.js';
 import { depth } from '../../../assets/icons/group';
 
 const LevelsTable = ({ levels, materials, blocks }) => {
+    /**
+     * Форматирует материалы уровня
+     * @param {*} new_materials array
+     * @returns React-Element
+     */
     const formatMaterials = (new_materials) => {
         const result = [];
 

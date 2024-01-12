@@ -3,12 +3,17 @@ import text_data from '../static/data/text_data.js';
 import img_data from '../static/data/img_data.js';
 
 class Data {
+    //Объединенные данные
     #mergedData;
 
     constructor() {
         this.#mergedData = this.mergeObjects(game_data, this.mergeObjects(text_data, img_data));
     }
 
+    /**
+     * Геттер для объединенных данных
+     * @returns object
+     */
     getMergedData = () => {
         return this.#mergedData;
     };
@@ -17,7 +22,7 @@ class Data {
      * Возвращает объект вложенный в массиве
      * @param {*} array [{}, {}, ...]
      * @param {*} name string
-     * @returns {}
+     * @returns object
      */
     find = (array, name) => {
         for (let i = 0; i < array.length; i++) {
@@ -41,7 +46,7 @@ class Data {
      * Объединяет два объекта, по свойству name, во вложенном массиве объектов
      * @param {*} obj1 {}
      * @param {*} obj2 {}
-     * @returns {}
+     * @returns object
      */
     mergeObjects = (obj1, obj2) => {
         const res = {};

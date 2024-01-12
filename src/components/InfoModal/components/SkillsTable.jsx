@@ -4,6 +4,11 @@ import data from '../../../classes/Data.js';
 import { possiblity, text, time } from '../../../assets/icons/group';
 
 const SkillsTable = ({ skills, materials, tools }) => {
+    /**
+     * Форматирует материалы крафтов
+     * @param {*} skill object
+     * @returns React-Element
+     */
     const formatCraftMaterials = (skill) => {
         let { craft_text, craft_count } = skill;
 

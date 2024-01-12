@@ -4,6 +4,11 @@ import data from '../../../classes/Data.js';
 import { durability } from '../../../assets/icons/group.js';
 
 const BlocksTable = ({ blocks, materials }) => {
+    /**
+     * Форматирует данные материалов блока
+     * @param {*} block object
+     * @returns React-Elem
+     */
     const formatMaterialInfo = (block) => {
         if (!block.hasOwnProperty('material')) return '-';
 
