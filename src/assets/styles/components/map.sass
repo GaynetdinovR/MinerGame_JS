@@ -29,11 +29,34 @@
         cursor: pointer
         transition: 200ms
 
+        & img
+            @include img(92px, cover)
+    &__block.dark
+        filter: brightness(0)
+
+        &:hover
+            filter: brightness(0)
+
+    &__block.halfdark
+        filter: brightness(0.5)
+
+        &:hover
+            filter: brightness(0.5)
+            
+    &__block.light
+        filter: brightness(1)
+
         &:hover
             filter: brightness(0.8)
 
-        & img
-            @include img(92px, cover)
+    &__block.breaked
+        opacity: 0
+
+    &__block.breaked.dark,
+    &__block.breaked.light,
+    &__block.breaked.halfdark
+        opacity: 0
+        filter: none
 
     &__line-wrap
         position: absolute

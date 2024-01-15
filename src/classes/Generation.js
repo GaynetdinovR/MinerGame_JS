@@ -8,16 +8,39 @@ class Generation {
      * @param {*} level object
      * @returns array
      */
-    generateMap = (megredData, level) => {
-        const blockTypes = this.formatBlockTypes(megredData, level);
-
+    generateMap = (megredData) => {
+        const level = data.find(megredData.levels, 'cave_1');
         const map = [];
 
-        for (let i = 0; i < 100; i++) {
-            map.push(other.drop(blockTypes));
+        for (let y = 0; y < 10; y++) {
+            map.push(this.generateRow(megredData, level, y));
         }
 
         return map;
+    };
+
+    /**
+     * Функция генерации строки блоков
+     * @param {*} megredData object
+     * @param {*} level object
+     * @returns array
+     */
+    generateRow = (megredData, level, y) => {
+        const blockTypes = this.formatBlockTypes(megredData, level);
+
+        const row = [];
+
+        for (let x = 0; x < 10; x++) {
+            const light = x == 0 && y == 0 ? 2 : 0;
+
+            const block = { x: x, y: y, light: light, breaked: false };
+
+            const temp = { ...other.drop(blockTypes), ...block };
+
+            row.push(temp);
+        }
+
+        return row;
     };
 
     /**

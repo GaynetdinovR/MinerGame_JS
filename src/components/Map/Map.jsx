@@ -1,14 +1,13 @@
 import React from 'react';
 import data from '../../classes/Data.js';
 import { useSelector } from 'react-redux';
-
-import Block from './components/Block';
-import generation from '../../classes/Generation.js';
+import Block from './components/Block.jsx';
 
 const Map = () => {
-    const mergedData = data.getMergedData();
     const level = useSelector((state) => state.level);
+    const map = useSelector((state) => state.map);
 
+    const mergedData = data.getMergedData();
     const background = data.find(mergedData.levels, level.name);
 
     const getBlockInfo = (name) => {
@@ -27,7 +26,7 @@ const Map = () => {
         return imgs.length == 1 ? imgs[0] : imgs[levels[level.name]];
     };
 
-    const blocksToGenerate = generation.generateMap(mergedData, level);
+    const blocksToGenerate = map.blocks;
 
     return (
         <aside className="map">
@@ -36,9 +35,24 @@ const Map = () => {
             </div>
 
             <div className="map__blocks">
-                {blocksToGenerate.map((block, i) => {
-                    block = getBlockInfo(block.name);
-                    return <Block key={i} name="rock" img={findBlock(block.img)} />;
+                {blocksToGenerate.flat().map((block, i) => {
+                    let blockInfo = getBlockInfo(block.name);
+
+                    const coords = [i % 10, Math.floor(i / 10)];
+
+                    const temp = { ...block, ...blockInfo };
+
+                    return (
+                        <Block
+                            key={i}
+                            x={coords[0]}
+                            y={coords[1]}
+                            light={temp.light}
+                            breaked={temp.breaked}
+                            name={temp.name}
+                            img={findBlock(temp.img)}
+                        />
+                    );
                 })}
             </div>
             <div className="map__line-wrap">
