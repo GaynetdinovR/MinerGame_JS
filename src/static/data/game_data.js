@@ -75,7 +75,13 @@ const game_data = {
         {
             name: 'cave_1_chest',
             durability: 300,
-            chance: 0.005
+            chance: 0.005,
+            materials: [
+                { name: 'iron_ore', chance: 0.3, count: [5, 20] },
+                { name: 'copper_ore', chance: 0.7, count: [10, 30] },
+                { name: 'coal', chance: 0.8, count: [15, 40] },
+                { name: 'coins', chance: 1.5, count: [50, 200] }
+            ]
         },
         {
             name: 'magnetite_block',
@@ -94,7 +100,12 @@ const game_data = {
         {
             name: 'cave_2_chest',
             durability: 300,
-            chance: 0.005
+            chance: 0.005,
+            materials: [
+                { name: 'magnetite_ore', chance: 1, count: [10, 30] },
+                { name: 'sulfur', chance: 0.6, count: [5, 20] },
+                { name: 'coins', chance: 1.5, count: [75, 250] }
+            ]
         },
         {
             name: 'dark_stone',
@@ -118,7 +129,12 @@ const game_data = {
         {
             name: 'cave_3_chest',
             durability: 3000,
-            chance: 0.005
+            chance: 0.005,
+            materials: [
+                { name: 'titan_ore', chance: 1, count: [10, 30] },
+                { name: 'silver', chance: 0.5, count: [5, 20] },
+                { name: 'coins', chance: 1.5, count: [100, 300] }
+            ]
         },
         {
             name: 'magma_stone',
@@ -142,7 +158,12 @@ const game_data = {
         {
             name: 'cave_4_chest',
             durability: 5000,
-            chance: 0.005
+            chance: 0.005,
+            materials: [
+                { name: 'chromatite_ore', chance: 0.7, count: [15, 40] },
+                { name: 'electronyte', chance: 1, count: [10, 30] },
+                { name: 'coins', chance: 1.5, count: [125, 350] }
+            ]
         },
         {
             name: 'mithril_block',
@@ -161,7 +182,12 @@ const game_data = {
         {
             name: 'cave_5_chest',
             durability: 5000,
-            chance: 0.005
+            chance: 0.005,
+            materials: [
+                { name: 'mithril_ore', chance: 1, count: [15, 40] },
+                { name: 'neutronium_ore', chance: 0.7, count: [10, 30] },
+                { name: 'coins', chance: 1.5, count: [150, 500] }
+            ]
         }
     ],
     levels: [
