@@ -5,7 +5,6 @@ class Generation {
     /**
      * Начальная генерация карты на 100 блоков
      * @param {*} megredData object
-     * @param {*} level object
      * @returns array
      */
     generateMap = (megredData) => {
@@ -36,6 +35,11 @@ class Generation {
             const block = { x: x, y: y, light: light, breaked: false };
 
             const temp = { ...other.drop(blockTypes), ...block };
+
+            temp['durability_changed'] = data.find(
+                data.getMergedData().blocks,
+                temp.name
+            ).durability;
 
             row.push(temp);
         }
@@ -83,6 +87,7 @@ class Generation {
     formatBlockTypes = (megredData, level) => {
         const { levels, blocks } = megredData;
 
+        console.log(level);
         const result = [];
         const levelInfo = data.find(levels, level.name);
 

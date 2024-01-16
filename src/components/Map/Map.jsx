@@ -2,31 +2,18 @@ import React from 'react';
 import data from '../../classes/Data.js';
 import { useSelector } from 'react-redux';
 import Block from './components/Block.jsx';
+import map from '../../classes/Map.js';
+import inventory from '../../classes/Inventory.js';
 
 const Map = () => {
     const level = useSelector((state) => state.level);
-    const map = useSelector((state) => state.map);
+    const mapState = useSelector((state) => state.map);
+    const inventoryState = useSelector((state) => state.inventory);
 
-    const mergedData = data.getMergedData();
-    const background = data.find(mergedData.levels, level.name);
+    const { levels, tools } = data.getMergedData();
+    const background = data.find(levels, level.name);
 
-    const getBlockInfo = (name) => {
-        return data.find(mergedData.blocks, name);
-    };
-
-    const findBlock = (imgs) => {
-        const levels = {
-            cave_1: 0,
-            cave_2: 1,
-            cave_3: 0,
-            cave_4: 0,
-            cave_5: 1
-        };
-
-        return imgs.length == 1 ? imgs[0] : imgs[levels[level.name]];
-    };
-
-    const blocksToGenerate = map.blocks;
+    const blocksToGenerate = mapState.blocks;
 
     return (
         <aside className="map">
@@ -35,22 +22,28 @@ const Map = () => {
             </div>
 
             <div className="map__blocks">
-                {blocksToGenerate.flat().map((block, i) => {
-                    let blockInfo = getBlockInfo(block.name);
+                {blocksToGenerate.flat().map((mapBlock, i) => {
+                    let blockInfo = map.getBlockInfo(mapBlock.name);
 
-                    const coords = [i % 10, Math.floor(i / 10)];
+                    const block = {
+                        name: mapBlock.name,
+                        x: i % 10,
+                        y: Math.floor(i / 10),
+                        light: mapBlock.light,
+                        breaked: mapBlock.breaked,
+                        durability: blockInfo.durability
+                    };
 
-                    const temp = { ...block, ...blockInfo };
+                    const toolName = inventory.findEquipedTool(inventoryState.tools);
+                    const { name, damage } = data.find(tools, toolName);
+                    const tool = { name: name, damage: damage };
 
                     return (
                         <Block
                             key={i}
-                            x={coords[0]}
-                            y={coords[1]}
-                            light={temp.light}
-                            breaked={temp.breaked}
-                            name={temp.name}
-                            img={findBlock(temp.img)}
+                            block={block}
+                            tool={tool}
+                            img={map.findBlockImg(blockInfo.img, level.name)}
                         />
                     );
                 })}
