@@ -26,6 +26,7 @@ const Map = () => {
                     let blockInfo = map.getBlockInfo(mapBlock.name);
 
                     const block = {
+                        id: i,
                         name: mapBlock.name,
                         x: i % 10,
                         y: Math.floor(i / 10),
@@ -38,14 +39,7 @@ const Map = () => {
                     const { name, damage } = data.find(tools, toolName);
                     const tool = { name: name, damage: damage };
 
-                    return (
-                        <Block
-                            key={i}
-                            block={block}
-                            tool={tool}
-                            img={map.findBlockImg(blockInfo.img, level.name)}
-                        />
-                    );
+                    return <Block key={i} block={block} tool={tool} img={blockInfo.img} />;
                 })}
             </div>
             <div className="map__line-wrap">

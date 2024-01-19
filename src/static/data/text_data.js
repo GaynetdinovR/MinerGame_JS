@@ -47,7 +47,7 @@ const text_data = {
     ],
     blocks: [
         {
-            name: 'stone',
+            name: 'stone_1',
             text_name: 'Камень'
         },
         {
@@ -68,6 +68,10 @@ const text_data = {
         {
             name: 'cave_1_chest',
             text_name: 'Сундук'
+        },
+        {
+            name: 'stone_2',
+            text_name: 'Камень'
         },
         {
             name: 'magnetite_block',
@@ -102,7 +106,7 @@ const text_data = {
             text_name: 'Сундук'
         },
         {
-            name: 'magma_stone',
+            name: 'magma_stone_1',
             text_name: 'Магмовый камень'
         },
         {
@@ -118,6 +122,10 @@ const text_data = {
         {
             name: 'cave_4_chest',
             text_name: 'Сундук'
+        },
+        {
+            name: 'magma_stone_2',
+            text_name: 'Магмовый камень'
         },
         {
             name: 'mithril_block',

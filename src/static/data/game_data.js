@@ -47,7 +47,7 @@ const game_data = {
     ],
     blocks: [
         {
-            name: 'stone',
+            name: 'stone_1',
             chance: 1.5,
             durability: 30
         },
@@ -82,6 +82,11 @@ const game_data = {
                 { name: 'coal', chance: 0.8, count: [15, 40] },
                 { name: 'coins', chance: 1.5, count: [50, 200] }
             ]
+        },
+        {
+            name: 'stone_2',
+            chance: 1.5,
+            durability: 30
         },
         {
             name: 'magnetite_block',
@@ -137,7 +142,7 @@ const game_data = {
             ]
         },
         {
-            name: 'magma_stone',
+            name: 'magma_stone_1',
             chance: 1.5,
             durability: 500
         },
@@ -164,6 +169,11 @@ const game_data = {
                 { name: 'electronyte', chance: 1, count: [10, 30] },
                 { name: 'coins', chance: 1.5, count: [125, 350] }
             ]
+        },
+        {
+            name: 'magma_stone_2',
+            chance: 1.5,
+            durability: 500
         },
         {
             name: 'mithril_block',
@@ -198,7 +208,7 @@ const game_data = {
             new_skills: ['more_efforts'],
             new_tools: ['copper_pickaxe', 'iron_pickaxe'],
             blocks: ['coal_block', 'copper_block', 'iron_block', 'cave_1_chest'],
-            basement: 'stone'
+            basement: 'stone_1'
         },
         {
             name: 'cave_2',
@@ -207,7 +217,7 @@ const game_data = {
             new_skills: ['dynamite'],
             new_tools: ['magnetite_pickaxe'],
             blocks: ['magnetite_block', 'sulfur_block', 'cave_2_chest'],
-            basement: 'stone'
+            basement: 'stone_2'
         },
         {
             name: 'cave_3',
@@ -225,7 +235,7 @@ const game_data = {
             new_skills: ['lucky'],
             new_tools: ['chromatite_pickaxe', 'electronyte_lantern'],
             blocks: ['chromatite_block', 'electronyte_block', 'cave_4_chest'],
-            basement: 'magma_stone'
+            basement: 'magma_stone_1'
         },
         {
             name: 'cave_5',
@@ -234,7 +244,7 @@ const game_data = {
             new_skills: ['drill'],
             new_tools: ['mithril_pickaxe', 'neutronium_pickaxe'],
             blocks: ['mithril_block', 'neutronium_block', 'cave_5_chest'],
-            basement: 'magma_stone'
+            basement: 'magma_stone_2'
         }
     ],
     tools: [

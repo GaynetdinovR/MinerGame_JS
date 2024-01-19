@@ -7,7 +7,7 @@ export const mapSlice = createSlice({
     initialState: { blocks: generation.generateMap(data.getMergedData()) },
     reducers: {
         setMap: (state, payload) => {
-            return payload.payload;
+            state.blocks = payload.payload;
         },
         setBlock: (state, { payload }) => {
             return {

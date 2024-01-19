@@ -110,80 +110,88 @@ const img_data = {
     ],
     blocks: [
         {
-            name: 'stone',
-            img: [cave_1_block, cave_2_block]
+            name: 'stone_1',
+            img: cave_1_block
         },
         {
             name: 'copper_block',
-            img: [copper_block]
+            img: copper_block
         },
         {
             name: 'coal_block',
-            img: [coal_block]
+            img: coal_block
         },
         {
             name: 'iron_block',
-            img: [iron_block]
+            img: iron_block
         },
         {
             name: 'cave_1_chest',
-            img: [cave_1_chest]
+            img: cave_1_chest
+        },
+        {
+            name: 'stone_2',
+            img: cave_2_block
         },
         {
             name: 'magnetite_block',
-            img: [magnetite_block]
+            img: magnetite_block
         },
         {
             name: 'sulfur_block',
-            img: [sulfur_block]
+            img: sulfur_block
         },
         {
             name: 'cave_2_chest',
-            img: [cave_2_chest]
+            img: cave_2_chest
         },
         {
             name: 'dark_stone',
-            img: [cave_3_block]
+            img: cave_3_block
         },
         {
             name: 'titan_block',
-            img: [titan_block]
+            img: titan_block
         },
         {
             name: 'silver_block',
-            img: [silver_block]
+            img: silver_block
         },
         {
             name: 'cave_3_chest',
-            img: [cave_3_chest]
+            img: cave_3_chest
         },
         {
-            name: 'magma_stone',
-            img: [cave_4_block, cave_5_block]
+            name: 'magma_stone_1',
+            img: cave_4_block
         },
         {
             name: 'chromatite_block',
-            img: [chromatite_block]
+            img: chromatite_block
         },
         {
             name: 'electronyte_block',
-            img: [electronyte_block]
+            img: electronyte_block
         },
         {
             name: 'cave_4_chest',
-            img: [cave_4_chest]
+            img: cave_4_chest
+        },
+        {
+            name: 'magma_stone_2',
+            img: cave_5_block
         },
         {
             name: 'mithril_block',
-            img: [mithril_block]
+            img: mithril_block
         },
         {
             name: 'neutronium_block',
-            img: [neutronium_block]
+            img: neutronium_block
         },
         {
             name: 'cave_5_chest',
-            img: [cave_5_chest]
+            img: cave_5_chest
         }
     ],
     levels: [

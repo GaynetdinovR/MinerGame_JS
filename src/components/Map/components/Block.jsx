@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setBlock } from '../../../store/slices/mapSlice.js';
+
+import { setBlock, setMap } from '../../../store/slices/mapSlice.js';
+import { changeDepth } from '../../../store/slices/levelSlice.js';
+
 import light from '../../../classes/Light.js';
 import map from '../../../classes/Map.js';
+import moving from '../../../classes/Moving.js';
+import data from '../../../classes/Data.js';
 
 const Block = ({ block, img, tool }) => {
     const dispatch = useDispatch();
-    const [healthBarStyle, setHealthBarStyle] = useState({});
 
     const mapState = useSelector((state) => state.map);
+    const levelState = useSelector((state) => state.level);
 
     /**
      * Возвращает сломанный блок
@@ -43,46 +48,42 @@ const Block = ({ block, img, tool }) => {
         return block.breaked ? 'breaked' : '';
     };
 
-    /**
-     * Функция-обертка для ломания блока
-     */
-    const breakBlock = () => {
-        setBlocksFromArray(light.getUpdatedMapLight(mapState.blocks, getBreakedBlock()));
+    const setMovedMap = (newMap, breakedBlock) => {
+        dispatch(changeDepth());
+
+        newMap = moving.getMovedMap(mapState.blocks, data.getMergedData(), levelState.name);
+        breakedBlock = { ...breakedBlock, y: breakedBlock.y - 1 };
+
+        dispatch(setMap(newMap));
+
+        return [newMap, breakedBlock];
     };
 
     /**
-     * Устанавливает стили полоске прочности
-     * @param {*} percentage
+     * Ломает блок
+     * Свойство блока breaked ставит на true и обновляет освещение
      */
-    const setHealthBar = (percentage) => {
-        let color;
+    const breakBlock = () => {
+        let newMap = mapState.blocks;
+        let breakedBlock = getBreakedBlock();
 
-        if (percentage >= 75) color = '#17A400';
-        if (percentage >= 35 && percentage < 75) color = '#BB9D00';
-        if (percentage < 35) color = '#CC0000';
+        if (block.y >= 8) [newMap, breakedBlock] = setMovedMap(newMap, breakedBlock);
 
-        let styles = {};
-
-        styles.backgroundColor = color;
-        styles.width = `calc(${percentage}% - 10px)`;
-        styles.display = 'block';
-
-        setHealthBarStyle(styles);
+        setBlocksFromArray(light.getUpdatedMapLight(newMap, breakedBlock));
     };
 
     /**
      * Наносит урон блоку
+     * Свойство блока durability_changed уменьшает на урон взятого инструмента
      */
-    const beatBlock = () => {
-        const durability_changed = getBlockDurability();
+    const damageBlock = () => {
+        const durability = map.getBlockDurability(mapState.blocks, block.x, block.y);
 
         const temp = {
             x: block.x,
             y: block.y,
-            durability_changed: durability_changed - tool.damage
+            durability_changed: durability - tool.damage
         };
-
-        setHealthBar(getHealthBarWidth(durability_changed - tool.damage));
 
         dispatch(setBlock(temp));
     };
@@ -92,31 +93,41 @@ const Block = ({ block, img, tool }) => {
      */
     const checkBlockToBreak = () => {
         const { damage } = tool;
-        const durability_changed = getBlockDurability();
+        const durability = map.getBlockDurability(mapState.blocks, block.x, block.y);
 
-        if (durability_changed - damage <= 0) {
-            breakBlock();
-            return;
-        }
-
-        beatBlock();
+        if (durability - damage > 0) damageBlock();
+        if (durability - damage <= 0) breakBlock();
     };
 
     /**
-     * Возвращает ширину полоски здоровья
-     * @param durability_changed number
+     * Возвращает процент заполнения полоски здоровья
+     * @param {*} durability number
      * @returns number
      */
-    const getHealthBarWidth = (durability_changed) => {
-        return Math.round((durability_changed / block.durability) * 100);
+    const getHealthBarPercentage = (durability) => {
+        return Math.floor((durability / block.durability) * 100);
     };
 
     /**
-     * Возвращает прочность блока
-     * @returns number
+     * Возвращает стили полоски здоровья относительно его прочности
+     * @param {*} durability number
+     * @returns object
      */
-    const getBlockDurability = () => {
-        return map.getBlock(mapState.blocks, block.x, block.y).durability_changed;
+    const getHealthBarStyles = (durability) => {
+        const percentage = getHealthBarPercentage(durability);
+
+        const styles = {
+            backgroundColor: '#17A400',
+            width: 'calc(100% - 10px)'
+        };
+
+        if (percentage >= 75) styles.backgroundColor = '#17A400';
+        if (percentage >= 35 && percentage < 75) styles.backgroundColor = '#BB9D00';
+        if (percentage < 35) styles.backgroundColor = '#CC0000';
+
+        styles.width = `calc(${percentage}% - 10px)`;
+
+        return styles;
     };
 
     return (
@@ -125,7 +136,11 @@ const Block = ({ block, img, tool }) => {
             disabled={block.light == '2' ? false : true}
             className={`map__block map__${block.name} ${findLightClass()} ${findClassBreaked()}`}>
             <img src={img} alt={block.name} />
-            <div className="map__block-health-bar" style={healthBarStyle}></div>
+            <div
+                className="map__block-health-bar"
+                style={getHealthBarStyles(
+                    map.getBlockDurability(mapState.blocks, block.x, block.y)
+                )}></div>
         </button>
     );
 };

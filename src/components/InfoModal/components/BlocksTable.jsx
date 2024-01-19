@@ -38,9 +38,7 @@ const BlocksTable = ({ blocks, materials }) => {
                         <div className="blocks-table__cell">
                             <span>{block.text_name}</span>
                             <div>
-                                {block.img.map((img, i) => (
-                                    <img key={i} src={img} alt="block" />
-                                ))}
+                                <img key={i} src={block.img} alt="block" />
                             </div>
                         </div>
                         <div className="blocks-table__cell durability">

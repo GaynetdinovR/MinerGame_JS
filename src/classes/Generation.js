@@ -8,11 +8,12 @@ class Generation {
      * @returns array
      */
     generateMap = (megredData) => {
-        const level = data.find(megredData.levels, 'cave_1');
         const map = [];
 
         for (let y = 0; y < 10; y++) {
-            map.push(this.generateRow(megredData, level, y));
+            const isFirstRow = y == 0;
+
+            map.push(this.generateRow(megredData, 'cave_1', y, isFirstRow));
         }
 
         return map;
@@ -21,16 +22,21 @@ class Generation {
     /**
      * Функция генерации строки блоков
      * @param {*} megredData object
-     * @param {*} level object
+     * @param {*} levelName string
+     * @param {*} y number
+     * @param {*} isFirstRow bool
      * @returns array
      */
-    generateRow = (megredData, level, y) => {
+    generateRow = (megredData, levelName, y, isFirstRow = false) => {
+        const level = data.find(megredData.levels, levelName);
         const blockTypes = this.formatBlockTypes(megredData, level);
 
         const row = [];
 
         for (let x = 0; x < 10; x++) {
-            const light = x == 0 && y == 0 ? 2 : 0;
+            const isFirstBlock = x == 0 && y == 0;
+
+            const light = isFirstBlock && isFirstRow ? 2 : 0;
 
             const block = { x: x, y: y, light: light, breaked: false };
 
@@ -87,7 +93,6 @@ class Generation {
     formatBlockTypes = (megredData, level) => {
         const { levels, blocks } = megredData;
 
-        console.log(level);
         const result = [];
         const levelInfo = data.find(levels, level.name);
 

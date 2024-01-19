@@ -63,9 +63,7 @@ const LevelsTable = ({ levels, materials, blocks }) => {
                             </div>
                             <div className="levels-table__cell">
                                 {block.text_name}
-                                {block.img.map((img, i) => (
-                                    <img key={i} src={img} alt="block" />
-                                ))}
+                                <img key={i} src={block.img} alt="block" />
                             </div>
                             <div className="levels-table__cell">
                                 {formatMaterials(level.new_materials)}
