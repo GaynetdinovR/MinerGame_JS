@@ -48,26 +48,26 @@ const game_data = {
     blocks: [
         {
             name: 'stone_1',
-            chance: 1.5,
+            chance: 1,
             durability: 30
         },
         {
             name: 'copper_block',
-            chance: 0.25,
+            chance: 0.06,
             durability: 150,
             material: 'copper_ore',
             material_count: [3, 7]
         },
         {
             name: 'coal_block',
-            chance: 0.35,
+            chance: 0.1,
             durability: 120,
             material: 'coal',
             material_count: [1, 5]
         },
         {
             name: 'iron_block',
-            chance: 0.2,
+            chance: 0.04,
             durability: 500,
             material: 'iron_ore',
             material_count: [3, 7]
@@ -85,19 +85,19 @@ const game_data = {
         },
         {
             name: 'stone_2',
-            chance: 1.5,
+            chance: 1,
             durability: 30
         },
         {
             name: 'magnetite_block',
-            chance: 0.35,
+            chance: 0.14,
             durability: 900,
             material: 'magnetite_ore',
             material_count: [3, 7]
         },
         {
             name: 'sulfur_block',
-            chance: 0.2,
+            chance: 0.06,
             durability: 800,
             material: 'sulfur',
             material_count: [1, 5]
@@ -114,19 +114,19 @@ const game_data = {
         },
         {
             name: 'dark_stone',
-            chance: 1.5,
+            chance: 1,
             durability: 300
         },
         {
             name: 'titan_block',
-            chance: 0.3,
+            chance: 0.14,
             durability: 1500,
             material: 'titan_ore',
             material_count: [3, 7]
         },
         {
             name: 'silver_block',
-            chance: 0.2,
+            chance: 0.06,
             durability: 2500,
             material: 'silver',
             material_count: [1, 5]
@@ -143,19 +143,19 @@ const game_data = {
         },
         {
             name: 'magma_stone_1',
-            chance: 1.5,
+            chance: 1,
             durability: 500
         },
         {
             name: 'chromatite_block',
-            chance: 0.3,
+            chance: 0.12,
             durability: 4000,
             material: 'chromatite_ore',
             material_count: [3, 7]
         },
         {
             name: 'electronyte_block',
-            chance: 0.15,
+            chance: 0.05,
             durability: 6000,
             material: 'electronyte',
             material_count: [1, 5]
@@ -172,19 +172,19 @@ const game_data = {
         },
         {
             name: 'magma_stone_2',
-            chance: 1.5,
+            chance: 1,
             durability: 500
         },
         {
             name: 'mithril_block',
-            chance: 0.3,
+            chance: 0.12,
             durability: 7500,
             material: 'mithril_ore',
             material_count: [3, 7]
         },
         {
             name: 'neutronium_block',
-            chance: 0.15,
+            chance: 0.08,
             durability: 20000,
             material: 'neutronium_ore',
             material_count: [3, 7]
