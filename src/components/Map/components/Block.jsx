@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setBlock, setMap } from '../../../store/slices/mapSlice.js';
 import { changeDepth } from '../../../store/slices/levelSlice.js';
+import { addMaterial } from '../../../store/slices/inventorySlice.js';
 
 import light from '../../../classes/Light.js';
 import map from '../../../classes/Map.js';
 import moving from '../../../classes/Moving.js';
 import data from '../../../classes/Data.js';
 
-const Block = ({ block, img, tool }) => {
+const Block = ({ setMaterialAdded, block, img, tool }) => {
     const dispatch = useDispatch();
 
     const mapState = useSelector((state) => state.map);
@@ -48,6 +49,12 @@ const Block = ({ block, img, tool }) => {
         return block.breaked ? 'breaked' : '';
     };
 
+    /**
+     * Возвращает перемещенную карту
+     * @param {*} newMap array
+     * @param {*} breakedBlock object
+     * @returns [array, object]
+     */
     const setMovedMap = (newMap, breakedBlock) => {
         dispatch(changeDepth());
 
@@ -57,6 +64,18 @@ const Block = ({ block, img, tool }) => {
         dispatch(setMap(newMap));
 
         return [newMap, breakedBlock];
+    };
+
+    /**
+     * Анимация появления и исчезновения добавленного материала
+     * @param {*} material object
+     */
+    const addMaterialAnimation = (material) => {
+        setMaterialAdded(material);
+
+        setTimeout(() => {
+            setMaterialAdded({ count: 0, name: '-' });
+        }, 1000);
     };
 
     /**
@@ -70,6 +89,14 @@ const Block = ({ block, img, tool }) => {
         if (block.y >= 8) [newMap, breakedBlock] = setMovedMap(newMap, breakedBlock);
 
         setBlocksFromArray(light.getUpdatedMapLight(newMap, breakedBlock));
+
+        if (block.material != undefined && !block.breaked) {
+            const material = { name: block.material, count: block.material_count };
+
+            addMaterialAnimation(material);
+
+            dispatch(addMaterial(material));
+        }
     };
 
     /**

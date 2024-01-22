@@ -8,34 +8,43 @@ import { padlock } from '../../../assets/icons/group.js';
 const InventoryItem = ({ item, array, isBtn }) => {
     const dispatch = useDispatch();
 
-    const { has, name } = item;
-    const itemData = data.find(array, name);
+    const itemData = data.find(array, item.name);
 
-    const padlockImg = has ? '' : <img className="padlock" src={padlock} alt="padlock" />;
-    let equipButton;
-
-    if (isBtn) {
-        const btn_text = item.equiped ? 'Unequip' : 'Equip';
-
-        equipButton = (
+    const getBtn = () => {
+        return (
             <button
                 onClick={() => {
-                    dispatch(equipTool(name));
+                    dispatch(equipTool(item.name));
                 }}
                 className="items-inventory__item-btn">
-                {btn_text}
+                {item.equiped ? 'Unequip' : 'Equip'}
             </button>
         );
-    }
+    };
+
+    const getPadlock = () => {
+        return <img className="padlock" src={padlock} alt="padlock" />;
+    };
+
+    const getCount = () => {
+        return <div className="items-inventory__item-count">{item.count}</div>;
+    };
+
+    const getClassName = () => {
+        return item.has || item.has == undefined
+            ? 'items-inventory__item'
+            : 'items-inventory__item blocked';
+    };
 
     return (
-        <div className={has ? 'items-inventory__item' : 'items-inventory__item blocked'}>
+        <div className={getClassName()}>
             <div className="items-inventory__item-name">{itemData.text_name}</div>
             <div className="items-inventory__item-img">
-                <img src={itemData.img} alt="skill" />
+                <img src={itemData.img} alt={item.name} />
             </div>
-            {equipButton}
-            {padlockImg}
+            {item.count != undefined ? getCount() : ''}
+            {isBtn ? getBtn() : ''}
+            {!item.has && item.has != undefined ? getPadlock() : ''}
         </div>
     );
 };

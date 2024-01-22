@@ -13,11 +13,11 @@ class Map {
     };
 
     /**
-     * Возвращает информацию о блоке
+     * Возвращает данные блока
      * @param name string
      * @returns object
      */
-    getBlockInfo = (name) => {
+    getBlockData = (name) => {
         return data.find(data.getMergedData().blocks, name);
     };
 

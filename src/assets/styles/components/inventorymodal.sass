@@ -3,6 +3,8 @@
     &__content
         min-width: 1000px
         min-height: 500px
+        max-height: 600px
+        overflow-y: scroll
 
     &__subtitle
         margin-left: 10px
@@ -22,6 +24,20 @@
     &__item
         position: relative
         margin: 0 10px
+
+        &-count
+            display: flex
+            justify-content: center
+            align-items: center
+
+            min-width: 120px
+            padding: 3px 
+            border-radius: 10px
+            margin-top: 10px
+
+            background: $blue_2
+
+            @include font(20px, 700, $white)
 
         &-name
             text-align: center

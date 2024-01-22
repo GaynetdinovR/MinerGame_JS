@@ -8,13 +8,20 @@ import InventoryItem from './components/InventoryItem.jsx';
 const InventoryModal = ({ isOpen, setModal }) => {
     const toolsState = useSelector((state) => state.inventory.tools);
     const skillsState = useSelector((state) => state.inventory.skills);
+    const materialsState = useSelector((state) => state.inventory.materials);
 
-    const { skills, tools } = data.getMergedData();
+    const { skills, tools, materials } = data.getMergedData();
 
     return (
         <Modal isOpen={isOpen} setModal={setModal} className="inventory-modal">
             <h2 className="inventory-modal__title title">Инвентарь</h2>
             <div className="inventory-modal__content">
+                <h3 className="inventory-modal__subtitle">Материалы</h3>
+                <div className="inventory-modal__tools items-inventory">
+                    {materialsState.map((material, i) => (
+                        <InventoryItem key={i} item={material} array={materials} isBtn={false} />
+                    ))}
+                </div>
                 <h3 className="inventory-modal__subtitle">Инструменты</h3>
                 <div className="inventory-modal__tools items-inventory">
                     {toolsState.map((tool, i) => (

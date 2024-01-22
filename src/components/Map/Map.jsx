@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import Block from './components/Block.jsx';
 import map from '../../classes/Map.js';
 import inventory from '../../classes/Inventory.js';
+import other from '../../classes/Other.js';
 
-const Map = () => {
+const Map = ({ setMaterialAdded }) => {
     const level = useSelector((state) => state.level);
     const mapState = useSelector((state) => state.map);
     const inventoryState = useSelector((state) => state.inventory);
@@ -15,6 +16,48 @@ const Map = () => {
 
     const blocksToGenerate = mapState.blocks;
 
+    /**
+     * Возвращает используемый инструмент
+     * @returns object
+     */
+    const getEquipedToolInfo = () => {
+        const toolName = inventory.findEquipedTool(inventoryState.tools);
+        const { name, damage } = data.find(tools, toolName);
+
+        return { name: name, damage: damage };
+    };
+
+    /**
+     * Возвращает объединенную информацию о блоке
+     * @param {*} block object
+     * @param {*} i number
+     * @param {*} blockInfo object
+     * @returns
+     */
+    const getMergedBlockInfo = (block, i, blockData) => {
+        const { name, light, breaked } = block;
+
+        let info = {
+            name: name,
+            x: i % 10,
+            y: Math.floor(i / 10),
+            light: light,
+            breaked: breaked,
+            durability: blockData.durability
+        };
+
+        if (blockData.material != undefined) {
+            const addInfo = {
+                material: blockData.material,
+                material_count: other.randomInRange(blockData.material_count)
+            };
+
+            info = { ...info, ...addInfo };
+        }
+
+        return info;
+    };
+
     return (
         <aside className="map">
             <div className="map__bg">
@@ -23,23 +66,20 @@ const Map = () => {
 
             <div className="map__blocks">
                 {blocksToGenerate.flat().map((mapBlock, i) => {
-                    let blockInfo = map.getBlockInfo(mapBlock.name);
+                    const blockData = map.getBlockData(mapBlock.name);
 
-                    const block = {
-                        id: i,
-                        name: mapBlock.name,
-                        x: i % 10,
-                        y: Math.floor(i / 10),
-                        light: mapBlock.light,
-                        breaked: mapBlock.breaked,
-                        durability: blockInfo.durability
-                    };
+                    const block = getMergedBlockInfo(mapBlock, i, blockData);
+                    const tool = getEquipedToolInfo();
 
-                    const toolName = inventory.findEquipedTool(inventoryState.tools);
-                    const { name, damage } = data.find(tools, toolName);
-                    const tool = { name: name, damage: damage };
-
-                    return <Block key={i} block={block} tool={tool} img={blockInfo.img} />;
+                    return (
+                        <Block
+                            setMaterialAdded={setMaterialAdded}
+                            key={i}
+                            block={block}
+                            tool={tool}
+                            img={blockData.img}
+                        />
+                    );
                 })}
             </div>
             <div className="map__line-wrap">

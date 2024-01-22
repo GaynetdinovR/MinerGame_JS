@@ -27,6 +27,17 @@ class Other {
             current += item.chance;
         }
     };
+
+    /**
+     * Получает случайное число в диапазоне
+     * @param {*} range [number, number]
+     * @returns object
+     */
+    randomInRange = (range) => {
+        const [min, max] = range;
+
+        return Math.round(Math.random() * (max - min) + min);
+    };
 }
 
 const other = new Other();

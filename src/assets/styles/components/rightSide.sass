@@ -33,3 +33,24 @@
     &__level
         font-size: 30px
         font-weight: 700
+
+
+.material-added
+    position: absolute
+    right: 100px
+    top: 30px
+    z-index: 3
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    max-width: 100px
+
+    &__count
+        @include font(24px, 700)
+
+    &__img
+        margin-right: 3px
+        & img
+            @include img(48px, cover)

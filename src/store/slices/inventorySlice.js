@@ -4,9 +4,23 @@ import data from '../../classes/Data.js';
 export const levelSlice = createSlice({
     name: 'level',
     initialState: {
+        materials: [
+            {
+                name: 'coal',
+                count: 0
+            },
+            {
+                name: 'copper_ore',
+                count: 0
+            },
+            {
+                name: 'iron_ore',
+                count: 0
+            }
+        ],
         tools: [
             {
-                name: 'wood_pickaxe',
+                name: 'neutronium_pickaxe',
                 has: true,
                 equiped: true
             },
@@ -29,6 +43,23 @@ export const levelSlice = createSlice({
         ]
     },
     reducers: {
+        addMaterial: (state, payload) => {
+            const { name, count } = payload.payload;
+
+            const material = state.materials.filter((material) => material.name == name);
+
+            if (material) {
+                state.materials = state.materials.map((material) => {
+                    if (material.name == name)
+                        return { name: material.name, count: material.count + count };
+
+                    return material;
+                });
+                return;
+            }
+
+            state.materials.push({ name: name, count: count });
+        },
         addTool: (state, payload) => {
             state.tools.push(payload.payload);
         },
@@ -52,6 +83,6 @@ export const levelSlice = createSlice({
     }
 });
 
-export const { addTool, addSkill, equipTool, changeLevel } = levelSlice.actions;
+export const { addMaterial, equipTool, changeLevel } = levelSlice.actions;
 
 export default levelSlice.reducer;

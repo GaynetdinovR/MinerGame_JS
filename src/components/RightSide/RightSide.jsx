@@ -3,9 +3,10 @@ import data from '../../classes/Data.js';
 import { useSelector } from 'react-redux';
 
 import DisplayButton from './components/DisplayButton.jsx';
+import MaterialAdded from './components/MaterialAdded.jsx';
 import { backpack, craft, house, info } from '../../assets/icons/group';
 
-const RightSide = ({ set }) => {
+const RightSide = ({ materialAdded, set }) => {
     const { levels } = data.getMergedData();
     const { name, depth } = useSelector((state) => state.level);
 
@@ -18,6 +19,7 @@ const RightSide = ({ set }) => {
 
     return (
         <aside className="right-side">
+            {materialAdded.name != '-' ? <MaterialAdded material={materialAdded} /> : ''}
             <div className="right-side__buttons">
                 {buttons.map((btn, i) => (
                     <DisplayButton key={i} name={btn.name} img={btn.img} setModal={btn.setModal} />
