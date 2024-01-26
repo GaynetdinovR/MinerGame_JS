@@ -7,6 +7,7 @@ import CraftModal from './CraftModal/CraftModal.jsx';
 import InfoModal from './InfoModal/InfoModal.jsx';
 import StoreModal from './StoreModal/StoreModal.jsx';
 import InventoryModal from './InventoryModal/InventoryModal.jsx';
+import ItemPreview from './ItemPreview/ItemPreview.jsx';
 
 const App = () => {
     //modals
@@ -17,6 +18,14 @@ const App = () => {
 
     //data
     const [materialAdded, setMaterialAdded] = useState({ name: '-', count: 0 });
+    const [itemsAtPreview, setItemsAtPreview] = useState({
+        isOpen: false,
+        items: [
+            { name: 'copper_pickaxe', type: 'tool' },
+            { name: 'coal', type: 'material', count: 999 },
+            { name: 'more_efforts', type: 'skill' }
+        ]
+    });
 
     const setModal = {
         infoModal: setInfoModal,
@@ -31,10 +40,14 @@ const App = () => {
             <Map setMaterialAdded={setMaterialAdded} />
             <RightSide set={setModal} materialAdded={materialAdded} />
             <InfoModal isOpen={isInfoModalOpen} setModal={setInfoModal} />
-            <CraftModal isOpen={isCraftModalOpen} setModal={setCraftModal} />
+            <CraftModal
+                setPreview={setItemsAtPreview}
+                isOpen={isCraftModalOpen}
+                setModal={setCraftModal}
+            />
             <InventoryModal isOpen={isInventoryModalOpen} setModal={setInventoryModal} />
             <StoreModal isOpen={isStoreModalOpen} setModal={setStoreModal} />
-            {/* <ItemPreview item={itemAtPreview} /> */}
+            <ItemPreview items={itemsAtPreview} />
         </main>
     );
 };

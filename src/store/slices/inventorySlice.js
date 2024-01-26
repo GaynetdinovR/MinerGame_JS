@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import data from '../../classes/Data.js';
 
-export const levelSlice = createSlice({
-    name: 'level',
+export const inventorySlice = createSlice({
+    name: 'inventory',
     initialState: {
         materials: [
+            {
+                name: 'coins',
+                count: 0
+            },
             {
                 name: 'coal',
                 count: 0
@@ -20,7 +24,7 @@ export const levelSlice = createSlice({
         ],
         tools: [
             {
-                name: 'neutronium_pickaxe',
+                name: 'wood_pickaxe',
                 has: true,
                 equiped: true
             },
@@ -38,33 +42,45 @@ export const levelSlice = createSlice({
         skills: [
             {
                 name: 'more_efforts',
-                has: true
+                has: false
             }
         ]
     },
     reducers: {
+        unlockItem: (state, payload) => {
+            const name = payload.payload;
+
+            state.tools = state.tools.map((tool) => {
+                if (tool.name == name) return { ...tool, has: true };
+
+                return tool;
+            });
+
+            state.skills = state.skills.map((skill) => {
+                if (skill.name == name) return { ...skill, has: true };
+
+                return skill;
+            });
+        },
+        removeMaterials: (state, payload) => {
+            const { name, count } = payload.payload;
+
+            state.materials = state.materials.map((material) => {
+                if (material.name == name)
+                    return { name: material.name, count: material.count - count };
+
+                return material;
+            });
+        },
         addMaterial: (state, payload) => {
             const { name, count } = payload.payload;
 
-            const material = state.materials.filter((material) => material.name == name);
+            state.materials = state.materials.map((material) => {
+                if (material.name == name)
+                    return { name: material.name, count: material.count + count };
 
-            if (material) {
-                state.materials = state.materials.map((material) => {
-                    if (material.name == name)
-                        return { name: material.name, count: material.count + count };
-
-                    return material;
-                });
-                return;
-            }
-
-            state.materials.push({ name: name, count: count });
-        },
-        addTool: (state, payload) => {
-            state.tools.push(payload.payload);
-        },
-        addSkill: (state, payload) => {
-            state.skills.push(payload.payload);
+                return material;
+            });
         },
         equipTool: (state, payload) => {
             const elem = state.tools.filter((item) => item.name === payload.payload)[0];
@@ -73,16 +89,34 @@ export const levelSlice = createSlice({
             equipedElem.equiped = false;
             elem.equiped = true;
         },
-        changeLevel: (state, padlock) => {
+        changeLevel: (state, payload) => {
             const { levels } = data.getMergedData();
-            const level = data.find(levels, padlock.padlock);
+            const level = data.find(levels, payload.payload);
 
-            state.skills.push(...level.new_skills);
-            state.tools.push(...level.new_tools);
+            const getArray = (array, type) => {
+                const res = [];
+                const defaultData = {
+                    tool: { has: false, equiped: false },
+                    skill: { has: false },
+                    material: { count: 0 }
+                };
+
+                array.forEach((elem) => {
+                    const obj = Object.assign({ name: elem }, defaultData[type]);
+                    res.push(obj);
+                });
+
+                return res;
+            };
+
+            state.materials.push(...getArray(level.new_materials, 'material'));
+            state.skills.push(...getArray(level.new_skills, 'skill'));
+            state.tools.push(...getArray(level.new_tools, 'tool'));
         }
     }
 });
 
-export const { addMaterial, equipTool, changeLevel } = levelSlice.actions;
+export const { addMaterial, equipTool, changeLevel, unlockItem, removeMaterials } =
+    inventorySlice.actions;
 
-export default levelSlice.reducer;
+export default inventorySlice.reducer;

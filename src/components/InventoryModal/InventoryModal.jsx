@@ -17,7 +17,7 @@ const InventoryModal = ({ isOpen, setModal }) => {
             <h2 className="inventory-modal__title title">Инвентарь</h2>
             <div className="inventory-modal__content">
                 <h3 className="inventory-modal__subtitle">Материалы</h3>
-                <div className="inventory-modal__tools items-inventory">
+                <div className="inventory-modal__materials items-inventory">
                     {materialsState.map((material, i) => (
                         <InventoryItem key={i} item={material} array={materials} isBtn={false} />
                     ))}

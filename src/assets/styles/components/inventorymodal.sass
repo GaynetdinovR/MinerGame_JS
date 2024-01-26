@@ -1,8 +1,7 @@
 .inventory-modal
 
     &__content
-        min-width: 1000px
-        min-height: 500px
+        min-width: 1320px
         max-height: 600px
         overflow-y: scroll
 
@@ -11,10 +10,12 @@
         @include font($fz: 25px, $fw: 700)
 
     &__tools,
-    &__skills
+    &__skills,
+    &__materials
         display: flex
         justify-content: flex-start
         align-items: center
+        flex-wrap: wrap
 
     &__skills
         margin-top: 20px
@@ -23,7 +24,7 @@
 
     &__item
         position: relative
-        margin: 0 10px
+        margin: 5px 10px
 
         &-count
             display: flex

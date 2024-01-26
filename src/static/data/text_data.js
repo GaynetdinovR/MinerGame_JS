@@ -1,6 +1,10 @@
 const text_data = {
     materials: [
         {
+            name: 'coins',
+            text_name: 'Монеты'
+        },
+        {
             name: 'copper_ore',
             text_name: 'Медь'
         },

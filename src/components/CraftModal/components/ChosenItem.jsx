@@ -2,17 +2,80 @@ import React from 'react';
 import data from '../../../classes/Data';
 
 import { craft } from '../../../assets/icons/group';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeMaterials, unlockItem } from '../../../store/slices/inventorySlice';
+import preview from '../../../classes/Preview';
 
-const CraftItem = ({ tool, materials }) => {
+const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
+    const dispatch = useDispatch();
+    const inventory = useSelector((state) => state.inventory);
+
+    /**
+     * Возвращает true/false в зависимости от наличия всех необходимых для крафта ресурсов
+     * @returns bool
+     */
+    const isHasMaterialsToCraft = () => {
+        for (const material in item.craft_count) {
+            const inventoryMaterialCount = data.find(inventory.materials, material).count;
+            const craftMaterialCount = item.craft_count[material];
+
+            if (inventoryMaterialCount < craftMaterialCount) return false;
+        }
+
+        return true;
+    };
+
+    /**
+     * Возвращает следующий инструмент/скилл для крафта
+     * @returns object/bool
+     */
+    const getNextChosenItem = () => {
+        const items = [...inventory.tools, ...inventory.skills];
+        const { tools, skills } = data.getMergedData();
+
+        const item = items.filter((item) => !item.has)[1];
+
+        return item ? data.find([...tools, ...skills], item.name) : false;
+    };
+
+    /**
+     * Делает все необходимое для крафта
+     * 1.Проверка на наличие материалов
+     * 2.Удаление материалов
+     * 3.Разблокирование инструмента/скилла
+     * 4.Установка следующего выбранного крафта
+     * 5.Показание и закрытие окна с новый инструментом/скиллом
+     */
+    const craftItem = () => {
+        if (!isHasMaterialsToCraft()) return;
+
+        Object.entries(item.craft_count).forEach((elem) => {
+            dispatch(removeMaterials({ name: elem[0], count: elem[1] }));
+        });
+
+        dispatch(unlockItem(item.name));
+
+        setChosenItem(getNextChosenItem());
+
+        setPreview({
+            isOpen: true,
+            items: [{ name: item.name, type: item.buff_text ? 'skill' : 'tool' }]
+        });
+
+        setTimeout(() => {
+            setPreview({ isOpen: false, items: [] });
+        }, 1000);
+    };
+
     return (
         <div className="craft-modal__craft">
             <div className="craft-modal__chosen">
                 <div className="craft-modal__chosen-left-side">
                     <div className="craft-modal__chosen-img">
-                        <img src={tool.img} alt="tool" />
+                        <img src={item.img} alt="item" />
                     </div>
                     <div className="craft-modal__chosen-craft-materials">
-                        {Object.entries(tool.craft_count).map((item, i) => {
+                        {Object.entries(item.craft_count).map((item, i) => {
                             item[0] = data.find(materials, item[0]).img;
                             return (
                                 <div key={i} className="craft-modal__chosen-craft-material">
@@ -24,19 +87,18 @@ const CraftItem = ({ tool, materials }) => {
                     </div>
                 </div>
                 <div className="craft-modal__chosen-right-side">
-                    <h3 className="craft-modal__chosen-name">{tool.text_name}</h3>
-                    {tool.damage ? <span>Урон: {tool.damage}</span> : ''}
-                    {tool.possibilities_text ? <p>Особенности: {tool.possibilities_text}</p> : ''}
-                    {tool.description ? <p>Описание: {tool.description}</p> : ''}
-                    {tool.buff_text ? <p>Бафф: {tool.buff_text}</p> : ''}
+                    <h3 className="craft-modal__chosen-name">{item.text_name}</h3>
+                    {item.damage ? <span>Урон: {item.damage}</span> : ''}
+                    {item.possibilities_text ? <p>Особенности: {item.possibilities_text}</p> : ''}
+                    {item.description ? <p>Описание: {item.description}</p> : ''}
+                    {item.buff_text ? <p>Бафф: {item.buff_text}</p> : ''}
                 </div>
             </div>
-
-            <button className="craft-modal__craft-btn">
+            <button className="craft-modal__craft-btn" onClick={() => craftItem()}>
                 <img src={craft} alt="craft" />
             </button>
         </div>
     );
 };
 
-export default CraftItem;
+export default ChosenItem;

@@ -24,3 +24,55 @@ main
     background: $white
     border-radius: 10px
 
+.items-preview
+    &__wrap
+        position: absolute
+        z-index: 3
+
+        top: 0
+        left: 0
+
+        width: 100%
+        height: 100%
+
+        background: rgba($black, 0.5)
+
+        display: none
+        justify-content: flex-start
+        align-items: center
+        flex-direction: column
+
+    &__wrap.active
+        display: flex
+
+    &__title
+        @include font(36px, 700)
+        margin-top: 300px
+
+    &__content
+        display: flex
+        justify-content: center
+
+
+    &__item
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        margin: 20px
+
+        &-name
+            margin-bottom: 10px
+            text-align: center
+            @include font(18px, 700, $white, 1.4)
+        &-img
+            position: relative
+            & span
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+                @include font(22px, 700, $white, 1.4)
+
+            & img
+                @include img(128px, cover)

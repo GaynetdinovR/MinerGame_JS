@@ -38,6 +38,15 @@ class Other {
 
         return Math.round(Math.random() * (max - min) + min);
     };
+
+    /**
+     * Из объекта с одним элементом возвращает ключ
+     * @param {*} object object
+     * @returns string/number
+     */
+    key = (object) => {
+        return Object.keys(object)[0];
+    };
 }
 
 const other = new Other();

@@ -7,9 +7,6 @@ export const levelSlice = createSlice({
         depth: 9
     },
     reducers: {
-        changeLevel: (state, payload) => {
-            state.name = payload.payload;
-        },
         changeDepth: (state) => {
             state.depth += 1;
 
@@ -25,6 +22,6 @@ export const levelSlice = createSlice({
     }
 });
 
-export const { changeLevel, changeDepth } = levelSlice.actions;
+export const { changeDepth } = levelSlice.actions;
 
 export default levelSlice.reducer;

@@ -33,6 +33,7 @@
         max-height: 565px
         height: 565px
 
+    &__content.overflow
         overflow-y: scroll
 
     &__list
@@ -169,3 +170,15 @@
 
             &:hover
                 filter: brightness(0.8)
+
+    &__none-craft
+        display: flex
+        justify-content: center
+        align-items: center
+
+        text-align: center
+
+        width: 100%
+        height: 90%
+
+        @include font(28px, 700)
