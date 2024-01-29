@@ -95,6 +95,7 @@ export const inventorySlice = createSlice({
 
             const getArray = (array, type) => {
                 const res = [];
+
                 const defaultData = {
                     tool: { has: false, equiped: false },
                     skill: { has: false },
@@ -103,6 +104,7 @@ export const inventorySlice = createSlice({
 
                 array.forEach((elem) => {
                     const obj = Object.assign({ name: elem }, defaultData[type]);
+
                     res.push(obj);
                 });
 

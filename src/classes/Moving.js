@@ -2,41 +2,29 @@ import generation from './Generation.js';
 import data from './Data.js';
 
 class Moving {
-    getMovedToOneMap = (blocks) => {
+    /**
+     * Возвращает, перемещенную на один блок, карту
+     * @param {*} map [[]]
+     * @param {*} megredData {[]}
+     * @param {*} levelName string
+     * @returns [[]]
+     */
+    getMovedMap = (map, megredData, levelName) => {
         const mapCopy = [];
 
-        for (let i = 2; i < 11; i++) {
-            const newY = i - 1;
+        for (let newY = 1; newY < 10; newY++) {
+            const row = map[newY].map((block) => {
+                const durability = data.find(megredData.blocks, block.name).durability;
 
-            const row = blocks[newY].map((block) => {
-                return { ...block, y: newY - 1 };
+                return { ...block, y: newY - 1, durability_changed: durability };
             });
 
             mapCopy.push(row);
         }
 
-        return mapCopy;
-    };
-
-    getMovedMap = (blocks, megredData, levelName) => {
-        const newRow = generation.generateRow(megredData, levelName, 9);
-        let mapCopy = this.getMovedToOneMap(blocks);
-
-        mapCopy.push(newRow);
-
-        mapCopy = this.updateBlockDurabilities(mapCopy, megredData.blocks);
+        mapCopy.push(generation.generateRow(megredData, levelName, 9));
 
         return mapCopy;
-    };
-
-    updateBlockDurabilities = (mapCopy, blocks) => {
-        return mapCopy.map((row) => {
-            return row.map((block) => {
-                const durability = data.find(blocks, block.name).durability;
-
-                return { ...block, durability_changed: durability };
-            });
-        });
     };
 }
 

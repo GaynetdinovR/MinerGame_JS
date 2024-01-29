@@ -9,7 +9,7 @@ class Map {
      * @returns object
      */
     getBlock = (blocks, x, y) => {
-        return blocks.flat().filter((block) => block.x == x && block.y == y)[0];
+        return blocks[y][x];
     };
 
     /**
@@ -21,6 +21,13 @@ class Map {
         return data.find(data.getMergedData().blocks, name);
     };
 
+    /**
+     * Возвращает измененную прочность блока
+     * @param {*} blocks [[]]
+     * @param {*} x number
+     * @param {*} y number
+     * @returns number
+     */
     getBlockDurability = (blocks, x, y) => {
         return this.getBlock(blocks, x, y).durability_changed;
     };

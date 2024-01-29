@@ -14,7 +14,7 @@ const Map = ({ setMaterialAdded }) => {
     const { levels, tools } = data.getMergedData();
     const background = data.find(levels, level.name);
 
-    const blocksToGenerate = mapState.blocks;
+    const blocksToGenerate = mapState;
 
     /**
      * Возвращает используемый инструмент

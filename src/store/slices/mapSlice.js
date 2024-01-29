@@ -4,25 +4,26 @@ import data from '../../classes/Data.js';
 
 export const mapSlice = createSlice({
     name: 'map',
-    initialState: { blocks: generation.generateMap(data.getMergedData()) },
+    initialState: generation.generateMap(data.getMergedData()),
     reducers: {
-        setMap: (state, payload) => {
-            state.blocks = payload.payload;
+        setMap: (state, { payload }) => {
+            return payload;
         },
         setBlock: (state, { payload }) => {
-            return {
-                blocks: state.blocks.map((row, y) => {
-                    return row.map((block, x) => {
-                        if (x == payload.x && y == payload.y) return { ...block, ...payload };
+            const { x, y } = payload;
 
-                        return block;
-                    });
-                })
-            };
+            state[y][x] = { ...state[y][x], ...payload };
+        },
+        setBlocksFromArray: (state, { payload }) => {
+            for (const block of payload) {
+                const { x, y } = block;
+
+                state[y][x] = { ...state[y][x], ...block };
+            }
         }
     }
 });
 
-export const { setMap, setBlock } = mapSlice.actions;
+export const { setMap, setBlock, setBlocksFromArray } = mapSlice.actions;
 
 export default mapSlice.reducer;

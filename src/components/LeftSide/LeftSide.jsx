@@ -3,8 +3,11 @@ import data from '../../classes/Data.js';
 
 import SkillItem from './components/SkillItem.jsx';
 import { coins } from '../../assets/icons/group.js';
+import { useSelector } from 'react-redux';
 
 const LeftSide = () => {
+    const inventory = useSelector((state) => state.inventory.materials);
+
     const skills = [
         { name: 'drill', title: 'Press B to use' },
         { name: 'magnet_explosion', title: 'Press C to use' },
@@ -21,7 +24,9 @@ const LeftSide = () => {
                 <div className="left-side__coins-img">
                     <img src={coins} alt="coins" />
                 </div>
-                <span className="left-side__coins-count">0</span>
+                <span className="left-side__coins-count">
+                    {data.find(inventory, 'coins').count}
+                </span>
             </div>
 
             <div className="left-side__skills skills">

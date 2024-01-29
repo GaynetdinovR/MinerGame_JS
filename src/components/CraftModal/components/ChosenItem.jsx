@@ -4,7 +4,6 @@ import data from '../../../classes/Data';
 import { craft } from '../../../assets/icons/group';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeMaterials, unlockItem } from '../../../store/slices/inventorySlice';
-import preview from '../../../classes/Preview';
 
 const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
     const dispatch = useDispatch();
@@ -29,11 +28,11 @@ const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
      * Возвращает следующий инструмент/скилл для крафта
      * @returns object/bool
      */
-    const getNextChosenItem = () => {
+    const getNextChosenItem = (craftedItemName) => {
         const items = [...inventory.tools, ...inventory.skills];
         const { tools, skills } = data.getMergedData();
 
-        const item = items.filter((item) => !item.has)[1];
+        const item = items.filter((item) => item.name != craftedItemName && !item.has)[0];
 
         return item ? data.find([...tools, ...skills], item.name) : false;
     };
@@ -55,7 +54,7 @@ const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
 
         dispatch(unlockItem(item.name));
 
-        setChosenItem(getNextChosenItem());
+        setChosenItem(getNextChosenItem(item.name));
 
         setPreview({
             isOpen: true,
