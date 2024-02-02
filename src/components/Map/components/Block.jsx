@@ -2,174 +2,150 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setBlock, setMap, setBlocksFromArray } from '../../../store/slices/mapSlice.js';
-import { changeDepth } from '../../../store/slices/levelSlice.js';
+import { increaseDepth } from '../../../store/slices/levelSlice.js';
 import { addMaterial } from '../../../store/slices/inventorySlice.js';
 
-import light from '../../../classes/Light.js';
 import map from '../../../classes/Map.js';
 import moving from '../../../classes/Moving.js';
 import data from '../../../classes/Data.js';
+import block from '../../../classes/Block.js';
+import other from '../../../classes/Other.js';
+import inventory from '../../../classes/Inventory.js';
 
-const Block = ({ setMaterialAdded, block, img, tool }) => {
+const Block = ({ setMaterialAdded, blockInfo, img }) => {
     const dispatch = useDispatch();
 
     const mapState = useSelector((state) => state.map);
     const levelState = useSelector((state) => state.level);
+    const { tools } = useSelector((state) => state.inventory);
+
+    const tool = inventory.getEquipedTool(tools);
 
     /**
      * Возвращает сломанный блок
      * @returns object
      */
     const getBreakedBlock = () => {
-        return { x: block.x, y: block.y, breaked: true };
+        return { x: blockInfo.x, y: blockInfo.y, breaked: true };
     };
 
     /**
      * Возвращает класс согласно освещению блока
      */
     const getLightClass = () => {
-        return ['dark', 'halfdark', 'light'][block.light];
+        return ['dark', 'halfdark', 'light'][blockInfo.light];
     };
 
     /**
      * Возвращает класс сломанного блока(если сломан)
      */
     const getBreakedClass = () => {
-        if (block.breaked) return 'breaked';
+        if (blockInfo.breaked) return 'breaked';
     };
 
     /**
-     * Возвращает перемещенную карту
-     * @param {*} mapCopy array
-     * @param {*} breakedBlock object
-     * @returns [array, object]
+     * Анимация добавление материала
+     * @param {*} formattedMaterial
      */
-    const setMovedMap = (mapCopy, breakedBlock) => {
-        dispatch(changeDepth());
+    const setMaterialAddedAnimation = (formattedMaterial) => {
+        const nullMaterial = { count: 0, name: '-' };
 
-        mapCopy = moving.getMovedMap(mapState, data.getMergedData(), levelState.name);
-        breakedBlock = { ...breakedBlock, y: breakedBlock.y - 1 };
+        setMaterialAdded(formattedMaterial);
+
+        other.delay(1000).then(() => setMaterialAdded(nullMaterial));
+    };
+
+    /**
+     * Нужно ли переместить карту
+     * @param {*} y number
+     * @returns object
+     */
+    const checkToMoving = (y) => {
+        if (!block.isBlockOnMapSide(y)) return getBreakedBlock();
+
+        dispatch(increaseDepth());
+
+        const mapCopy = moving.getMovedMap(mapState, data.getMergedData(), levelState.name);
+        const breakedBlock = moving.getMovedBreakingBlock(getBreakedBlock());
 
         dispatch(setMap(mapCopy));
 
-        return [mapCopy, breakedBlock];
+        return breakedBlock;
     };
 
     /**
-     * Анимация появления и исчезновения добавленного материала
-     * @param {*} material object
+     * Нужно ли отдать материалы от блока
+     * @param {*} material string
+     * @param {*} material_count number
+     * @param {*} breaked bool
      */
-    const addMaterialAnimation = (material) => {
-        setMaterialAdded(material);
+    const checkToMaterialGive = (material, material_count, breaked) => {
+        if (!block.isBlockHasMaterial(material, breaked)) return;
 
-        setTimeout(() => {
-            setMaterialAdded({ count: 0, name: '-' });
-        }, 1000);
-    };
+        const formattedMaterial = { name: material, count: material_count };
 
-    const giveMaterialFromBlock = () => {
-        const material = { name: block.material, count: block.material_count };
+        setMaterialAddedAnimation(formattedMaterial);
 
-        addMaterialAnimation(material);
-
-        dispatch(addMaterial(material));
+        dispatch(addMaterial(formattedMaterial));
     };
 
     /**
      * Ломает блок
-     * Свойство блока breaked ставит на true и обновляет освещение
      */
     const breakBlock = () => {
-        const updateLight = (mapCopy, breakedBlock) => {
-            dispatch(setBlocksFromArray(light.getUpdatedMapLight(mapCopy, breakedBlock)));
-        };
+        const { material, material_count, breaked, y } = blockInfo;
 
-        const checkMaterial = () => {
-            if (block.material != undefined && !block.breaked) giveMaterialFromBlock();
-        };
+        const breakedBlock = checkToMoving(y);
 
-        if (block.y >= 8) {
-            const [mapCopy, breakedBlock] = setMovedMap(mapState, getBreakedBlock());
+        const changedBlocks = map.getUpdatedBlocksWithBreakedBlock(mapState, breakedBlock);
 
-            updateLight(mapCopy, breakedBlock);
-            checkMaterial();
+        dispatch(setBlocksFromArray(changedBlocks));
 
-            return;
-        }
-
-        updateLight(mapState, getBreakedBlock());
-        checkMaterial();
+        checkToMaterialGive(material, material_count, breaked);
     };
 
     /**
      * Наносит урон блоку
-     * Свойство блока durability_changed уменьшает на урон взятого инструмента
      */
     const damageBlock = () => {
-        const durability = map.getBlockDurability(mapState, block.x, block.y);
-
-        const temp = {
-            x: block.x,
-            y: block.y,
-            durability_changed: durability - tool.damage
-        };
-
-        dispatch(setBlock(temp));
-    };
-
-    /**
-     * Проверяет нанести урон блоку или сломать его
-     */
-    const checkBlockToBreak = () => {
+        const { x, y } = blockInfo;
         const { damage } = tool;
-        const durability = map.getBlockDurability(mapState, block.x, block.y);
 
-        if (durability - damage > 0) damageBlock();
-        if (durability - damage <= 0) breakBlock();
+        dispatch(setBlock(block.getDamagedBlock(mapState, x, y, damage)));
     };
 
     /**
-     * Возвращает процент заполнения полоски здоровья
-     * @param {*} durability number
-     * @returns number
+     * Проверяет какое нужно выполнить действие
      */
-    const getHealthBarPercentage = (durability) => {
-        return Math.floor((durability / block.durability) * 100);
+    const checkAction = () => {
+        const { damage } = tool;
+        const { x, y } = blockInfo;
+        const { durability_changed } = mapState[y][x];
+
+        const isDamage = block.isDamageBlock(durability_changed, damage);
+
+        if (isDamage) damageBlock();
+        if (!isDamage) breakBlock();
     };
 
     /**
-     * Возвращает стили полоски здоровья относительно его прочности
-     * @param {*} durability number
+     * Возвращает стили полоски здоровья
      * @returns object
      */
-    const getHealthBarStyles = (durability) => {
-        const percentage = getHealthBarPercentage(durability);
+    const getHealthBarStyles = () => {
+        const { durability, x, y } = blockInfo;
+        const { durability_changed } = mapState[y][x];
 
-        const styles = {
-            backgroundColor: '#17A400',
-            width: 'calc(100% - 10px)'
-        };
-
-        if (percentage >= 75) styles.backgroundColor = '#17A400';
-        if (percentage >= 35 && percentage < 75) styles.backgroundColor = '#BB9D00';
-        if (percentage < 35) styles.backgroundColor = '#CC0000';
-
-        styles.width = `calc(${percentage}% - 10px)`;
-
-        return styles;
+        return block.getHealthBarStyles(durability_changed, durability);
     };
 
     return (
         <button
-            onClick={() => checkBlockToBreak()}
-            disabled={block.light == '2' ? false : true}
-            className={`map__block map__${block.name} ${getLightClass()} ${getBreakedClass()}`}>
-            <img src={img} alt={block.name} />
-            <div
-                className="map__block-health-bar"
-                style={getHealthBarStyles(
-                    map.getBlockDurability(mapState, block.x, block.y)
-                )}></div>
+            onClick={() => checkAction()}
+            disabled={blockInfo.light == '2' ? false : true}
+            className={`map__block map__${blockInfo.name} ${getLightClass()} ${getBreakedClass()}`}>
+            <img src={img} alt={blockInfo.name} />
+            <div className="map__block-health-bar" style={getHealthBarStyles()}></div>
         </button>
     );
 };

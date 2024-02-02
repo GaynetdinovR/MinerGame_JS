@@ -6,7 +6,7 @@ import { coins } from '../../assets/icons/group.js';
 import { useSelector } from 'react-redux';
 
 const LeftSide = () => {
-    const inventory = useSelector((state) => state.inventory.materials);
+    const inventoryState = useSelector((state) => state.inventory.materials);
 
     const skills = [
         { name: 'drill', title: 'Press B to use' },
@@ -25,7 +25,7 @@ const LeftSide = () => {
                     <img src={coins} alt="coins" />
                 </div>
                 <span className="left-side__coins-count">
-                    {data.find(inventory, 'coins').count}
+                    {data.find(inventoryState, 'coins').count}
                 </span>
             </div>
 

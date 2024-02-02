@@ -5,36 +5,23 @@ import { craft } from '../../../assets/icons/group';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeMaterials, unlockItem } from '../../../store/slices/inventorySlice';
 
+import inventory from '../../../classes/Inventory.js';
+import other from '../../../classes/Other.js';
+
 const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
     const dispatch = useDispatch();
-    const inventory = useSelector((state) => state.inventory);
+    const inventoryState = useSelector((state) => state.inventory);
 
     /**
-     * Возвращает true/false в зависимости от наличия всех необходимых для крафта ресурсов
-     * @returns bool
+     * Анимация открытия нового инструмента/скилла
      */
-    const isHasMaterialsToCraft = () => {
-        for (const material in item.craft_count) {
-            const inventoryMaterialCount = data.find(inventory.materials, material).count;
-            const craftMaterialCount = item.craft_count[material];
+    const setPreviewAnimation = () => {
+        setPreview({
+            isOpen: true,
+            items: [{ name: item.name, type: item.buff_text ? 'skill' : 'tool' }]
+        });
 
-            if (inventoryMaterialCount < craftMaterialCount) return false;
-        }
-
-        return true;
-    };
-
-    /**
-     * Возвращает следующий инструмент/скилл для крафта
-     * @returns object/bool
-     */
-    const getNextChosenItem = (craftedItemName) => {
-        const items = [...inventory.tools, ...inventory.skills];
-        const { tools, skills } = data.getMergedData();
-
-        const item = items.filter((item) => item.name != craftedItemName && !item.has)[0];
-
-        return item ? data.find([...tools, ...skills], item.name) : false;
+        other.delay(1000).then(() => setPreview({ isOpen: false, items: [] }));
     };
 
     /**
@@ -46,24 +33,17 @@ const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
      * 5.Показание и закрытие окна с новый инструментом/скиллом
      */
     const craftItem = () => {
-        if (!isHasMaterialsToCraft()) return;
+        const { name, craft_count } = item;
 
-        Object.entries(item.craft_count).forEach((elem) => {
-            dispatch(removeMaterials({ name: elem[0], count: elem[1] }));
-        });
+        if (!inventory.hasMaterials(inventory, craft_count)) return;
 
-        dispatch(unlockItem(item.name));
+        dispatch(removeMaterials(Object.entries(craft_count)));
 
-        setChosenItem(getNextChosenItem(item.name));
+        dispatch(unlockItem(name));
 
-        setPreview({
-            isOpen: true,
-            items: [{ name: item.name, type: item.buff_text ? 'skill' : 'tool' }]
-        });
+        setChosenItem(inventory.getNextItemToCraft(name, inventoryState));
 
-        setTimeout(() => {
-            setPreview({ isOpen: false, items: [] });
-        }, 1000);
+        setPreviewAnimation();
     };
 
     return (

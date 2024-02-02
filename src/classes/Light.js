@@ -1,5 +1,3 @@
-import map from './Map.js';
-
 class Light {
     /**
      * Возвращает освещение блока
@@ -8,7 +6,7 @@ class Light {
      * @returns number (0, 1, 2)
      */
     getLigth = (blocks, { x, y }) => {
-        return map.getBlock(blocks, x, y).light;
+        return blocks[y][x].light;
     };
 
     /**
@@ -24,15 +22,13 @@ class Light {
     };
 
     /**
-     * Возвращает карту, освещенную согласно сломанному блоку
+     * Возвращает массив измененных блоков, согласно сломанному блоку
      * @param {*} blocks [[]]
      * @param {*} breakedBlock {x, y, breaked}
-     * @returns [[]]
+     * @returns []
      */
-    getUpdatedMapLight = (blocks, breakedBlock) => {
+    getUpdatedBlocksByBreakedBlock = (blocks, breakedBlock) => {
         const mapCopy = [];
-
-        mapCopy.push(breakedBlock);
 
         for (const block of blocks.flat()) {
             const { x, y } = block;

@@ -8,7 +8,7 @@ import { backpack, craft, house, info } from '../../assets/icons/group';
 
 const RightSide = ({ materialAdded, set }) => {
     const { levels } = data.getMergedData();
-    const { name, depth } = useSelector((state) => state.level);
+    const levelState = useSelector((state) => state.level);
 
     const buttons = [
         { name: 'backpack', img: backpack, setModal: set.inventoryModal },
@@ -27,7 +27,7 @@ const RightSide = ({ materialAdded, set }) => {
             </div>
 
             <span className="right-side__level">
-                {data.find(levels, name).text_name}: {depth}м
+                {data.find(levels, levelState.name).text_name}: {levelState.depth}м
             </span>
         </aside>
     );

@@ -1,35 +1,18 @@
-import data from './Data.js';
+import light from './Light.js';
 
 class Map {
     /**
-     * Возвращает блок
-     * @param {*} blocks [[]]
-     * @param {*} x number
-     * @param {*} y number
-     * @returns object
+     * Возвращает массив измененных блоков, согласно сломанному блоку
+     * @param {*} mapState [[]]
+     * @param {*} breakedBlock {x, y, breaked}
+     * @returns []
      */
-    getBlock = (blocks, x, y) => {
-        return blocks[y][x];
-    };
+    getUpdatedBlocksWithBreakedBlock = (mapState, breakedBlock) => {
+        const mapCopy = light.getUpdatedBlocksByBreakedBlock(mapState, breakedBlock);
 
-    /**
-     * Возвращает данные блока
-     * @param name string
-     * @returns object
-     */
-    getBlockData = (name) => {
-        return data.find(data.getMergedData().blocks, name);
-    };
+        mapCopy.push(breakedBlock);
 
-    /**
-     * Возвращает измененную прочность блока
-     * @param {*} blocks [[]]
-     * @param {*} x number
-     * @param {*} y number
-     * @returns number
-     */
-    getBlockDurability = (blocks, x, y) => {
-        return this.getBlock(blocks, x, y).durability_changed;
+        return mapCopy;
     };
 }
 

@@ -47,6 +47,13 @@ class Other {
     key = (object) => {
         return Object.keys(object)[0];
     };
+
+    /**
+     * Исскуствунная задержка
+     */
+    delay = (ms) => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    };
 }
 
 const other = new Other();

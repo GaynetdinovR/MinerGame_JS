@@ -8,14 +8,14 @@ import ChosenItem from './components/ChosenItem.jsx';
 import NoneCraft from './components/NoneCraft.jsx';
 
 const CraftModal = ({ setPreview, isOpen, setModal }) => {
-    const inventory = useSelector((state) => state.inventory);
+    const inventoryState = useSelector((state) => state.inventory);
 
     /**
      * Возвращает инструменты, которые не скрафчены
      * @returns array
      */
     const getTools = () => {
-        return inventory.tools.filter((tool) => !tool.has).map((tool) => tool.name);
+        return inventoryState.tools.filter((tool) => !tool.has).map((tool) => tool.name);
     };
 
     /**
@@ -23,7 +23,7 @@ const CraftModal = ({ setPreview, isOpen, setModal }) => {
      * @returns array
      */
     const getSkills = () => {
-        return inventory.skills.filter((skill) => !skill.has).map((skill) => skill.name);
+        return inventoryState.skills.filter((skill) => !skill.has).map((skill) => skill.name);
     };
 
     const { tools, skills, materials } = data.getMergedData();

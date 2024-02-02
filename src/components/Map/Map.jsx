@@ -2,60 +2,51 @@ import React from 'react';
 import data from '../../classes/Data.js';
 import { useSelector } from 'react-redux';
 import Block from './components/Block.jsx';
-import map from '../../classes/Map.js';
-import inventory from '../../classes/Inventory.js';
 import other from '../../classes/Other.js';
+import block from '../../classes/Block.js';
 
 const Map = ({ setMaterialAdded }) => {
-    const level = useSelector((state) => state.level);
+    const levelState = useSelector((state) => state.level);
     const mapState = useSelector((state) => state.map);
-    const inventoryState = useSelector((state) => state.inventory);
 
-    const { levels, tools } = data.getMergedData();
-    const background = data.find(levels, level.name);
+    const { levels } = data.getMergedData();
+    const background = data.find(levels, levelState.name);
 
-    const blocksToGenerate = mapState;
+    const hasMaterial = (material) => {
+        return material != undefined;
+    };
 
-    /**
-     * Возвращает используемый инструмент
-     * @returns object
-     */
-    const getEquipedToolInfo = () => {
-        const toolName = inventory.findEquipedTool(inventoryState.tools);
-        const { name, damage } = data.find(tools, toolName);
-
-        return { name: name, damage: damage };
+    const getFormattedMaterial = ([material, material_count]) => {
+        return {
+            material: material,
+            material_count: other.randomInRange(material_count)
+        };
     };
 
     /**
      * Возвращает объединенную информацию о блоке
-     * @param {*} block object
+     * @param {*} mapBlock object
      * @param {*} i number
-     * @param {*} blockInfo object
-     * @returns
+     * @returns object
      */
-    const getMergedBlockInfo = (block, i, blockData) => {
-        const { name, light, breaked } = block;
+    const getMergedBlockInfo = (mapBlock, i) => {
+        const { name, light, breaked } = mapBlock;
+        const [x, y] = [i % 10, Math.floor(i / 10)];
+        const { material, durability, material_count } = block.getBlockData(name);
 
-        let info = {
+        const blockInfo = {
             name: name,
-            x: i % 10,
-            y: Math.floor(i / 10),
+            x: x,
+            y: y,
             light: light,
             breaked: breaked,
-            durability: blockData.durability
+            durability: durability
         };
 
-        if (blockData.material != undefined) {
-            const addInfo = {
-                material: blockData.material,
-                material_count: other.randomInRange(blockData.material_count)
-            };
+        if (hasMaterial(material))
+            Object.assign(blockInfo, getFormattedMaterial([material, material_count]));
 
-            info = { ...info, ...addInfo };
-        }
-
-        return info;
+        return blockInfo;
     };
 
     return (
@@ -65,26 +56,23 @@ const Map = ({ setMaterialAdded }) => {
             </div>
 
             <div className="map__blocks">
-                {blocksToGenerate.flat().map((mapBlock, i) => {
-                    const blockData = map.getBlockData(mapBlock.name);
-
-                    const block = getMergedBlockInfo(mapBlock, i, blockData);
-                    const tool = getEquipedToolInfo();
+                {mapState.flat().map((mapBlock, i) => {
+                    const { img } = block.getBlockData(mapBlock.name);
+                    const blockInfo = getMergedBlockInfo(mapBlock, i);
 
                     return (
                         <Block
-                            setMaterialAdded={setMaterialAdded}
                             key={i}
-                            block={block}
-                            tool={tool}
-                            img={blockData.img}
+                            setMaterialAdded={setMaterialAdded}
+                            blockInfo={blockInfo}
+                            img={img}
                         />
                     );
                 })}
             </div>
             <div className="map__line-wrap">
                 <div className="map__line"></div>
-                <span className="map__depth">{level.depth}м</span>
+                <span className="map__depth">{levelState.depth}м</span>
             </div>
         </aside>
     );
