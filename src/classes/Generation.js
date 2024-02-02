@@ -13,7 +13,7 @@ class Generation {
         for (let y = 0; y < 10; y++) {
             const isFirstRow = y == 0;
 
-            map.push(this.generateRow(megredData, 'cave_4', y, isFirstRow));
+            map.push(this.generateRow(megredData, 'cave_1', y, isFirstRow));
         }
 
         return map;

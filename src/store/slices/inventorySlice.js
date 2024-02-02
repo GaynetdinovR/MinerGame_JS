@@ -7,7 +7,7 @@ export const inventorySlice = createSlice({
         materials: [
             {
                 name: 'coins',
-                count: 999
+                count: 0
             },
             {
                 name: 'coal',
@@ -81,6 +81,15 @@ export const inventorySlice = createSlice({
                 return material;
             });
         },
+        addMaterials: (state, { payload }) => {
+            for (let i = 0; i < payload.length; i++) {
+                for (let k = 0; k < state.materials.length; k++) {
+                    if (payload[i].name == state.materials[k].name) {
+                        state.materials[k].count += payload[i].count;
+                    }
+                }
+            }
+        },
         addMaterial: (state, { payload }) => {
             const { name, count } = payload;
 
@@ -127,7 +136,14 @@ export const inventorySlice = createSlice({
     }
 });
 
-export const { addMaterial, equipTool, changeLevel, unlockItem, removeMaterials, removeMaterial } =
-    inventorySlice.actions;
+export const {
+    addMaterial,
+    addMaterials,
+    equipTool,
+    changeLevel,
+    unlockItem,
+    removeMaterials,
+    removeMaterial
+} = inventorySlice.actions;
 
 export default inventorySlice.reducer;

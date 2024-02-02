@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { setBlock, setMap, setBlocksFromArray } from '../../../store/slices/mapSlice.js';
 import { increaseDepth } from '../../../store/slices/levelSlice.js';
-import { addMaterial } from '../../../store/slices/inventorySlice.js';
+import { addMaterial, addMaterials } from '../../../store/slices/inventorySlice.js';
 
 import map from '../../../classes/Map.js';
 import moving from '../../../classes/Moving.js';
@@ -12,7 +12,7 @@ import block from '../../../classes/Block.js';
 import other from '../../../classes/Other.js';
 import inventory from '../../../classes/Inventory.js';
 
-const Block = ({ setMaterialAdded, blockInfo, img }) => {
+const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
     const dispatch = useDispatch();
 
     const mapState = useSelector((state) => state.map);
@@ -45,7 +45,7 @@ const Block = ({ setMaterialAdded, blockInfo, img }) => {
 
     /**
      * Анимация добавление материала
-     * @param {*} formattedMaterial
+     * @param {*} formattedMaterial object
      */
     const setMaterialAddedAnimation = (formattedMaterial) => {
         const nullMaterial = { count: 0, name: '-' };
@@ -53,6 +53,21 @@ const Block = ({ setMaterialAdded, blockInfo, img }) => {
         setMaterialAdded(formattedMaterial);
 
         other.delay(1000).then(() => setMaterialAdded(nullMaterial));
+    };
+
+    /**
+     * Анимация добавление материалов из сундука
+     * @param {*} materials array
+     */
+    const setMaterialsFromChestAnimation = (materials) => {
+        setItemsAtPreview({
+            isOpen: true,
+            items: materials.map((item) => {
+                return { ...item, type: 'material' };
+            })
+        });
+
+        other.delay(1000).then(() => setItemsAtPreview({ isOpen: false, items: [] }));
     };
 
     /**
@@ -74,7 +89,7 @@ const Block = ({ setMaterialAdded, blockInfo, img }) => {
     };
 
     /**
-     * Нужно ли отдать материалы от блока
+     * Передача материала от блока
      * @param {*} material string
      * @param {*} material_count number
      * @param {*} breaked bool
@@ -90,10 +105,22 @@ const Block = ({ setMaterialAdded, blockInfo, img }) => {
     };
 
     /**
+     * Передача материалов от сундука
+     * @param materials array
+     */
+    const checkToChestMaterialGive = (materials) => {
+        if (!block.isBlockChest(materials)) return;
+
+        setMaterialsFromChestAnimation(materials);
+
+        dispatch(addMaterials(materials));
+    };
+
+    /**
      * Ломает блок
      */
     const breakBlock = () => {
-        const { material, material_count, breaked, y } = blockInfo;
+        const { material, material_count, materials, breaked, y } = blockInfo;
 
         const breakedBlock = checkToMoving(y);
 
@@ -102,6 +129,8 @@ const Block = ({ setMaterialAdded, blockInfo, img }) => {
         dispatch(setBlocksFromArray(changedBlocks));
 
         checkToMaterialGive(material, material_count, breaked);
+
+        checkToChestMaterialGive(materials);
     };
 
     /**

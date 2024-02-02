@@ -37,7 +37,7 @@ const App = () => {
     return (
         <main>
             <LeftSide />
-            <Map setMaterialAdded={setMaterialAdded} />
+            <Map setMaterialAdded={setMaterialAdded} setItemsAtPreview={setItemsAtPreview} />
             <RightSide set={setModal} materialAdded={materialAdded} />
             <InfoModal isOpen={isInfoModalOpen} setModal={setInfoModal} />
             <CraftModal

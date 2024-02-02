@@ -1,4 +1,5 @@
 import data from './Data.js';
+import other from './Other.js';
 
 class Block {
     /**
@@ -9,6 +10,15 @@ class Block {
      */
     isDamageBlock = (durability, damage) => {
         return durability - damage > 0;
+    };
+
+    /**
+     * Является ли блок сундуком
+     * @param {*} materials array
+     * @returns bool
+     */
+    isBlockChest = (materials) => {
+        return materials != undefined;
     };
 
     /**
@@ -84,6 +94,38 @@ class Block {
         styles.width = `calc(${percentage}% - 10px)`;
 
         return styles;
+    };
+
+    /**
+     * Возвращает материалы сундука в удобном формате
+     * @param {*} materialsData array
+     * @returns array
+     */
+    getFormattedChestMaterials = (materialsData) => {
+        const getUniqArray = (array) => {
+            array = array.map((obj) => JSON.stringify(obj));
+
+            return Array.from(new Set(array)).map((obj) => JSON.parse(obj));
+        };
+
+        const items = [];
+
+        for (let i = 0; i < 3; i++) {
+            items.push(other.drop(materialsData));
+        }
+
+        const materials = [];
+
+        for (const item of getUniqArray(items)) {
+            const material = {
+                name: item.name,
+                count: other.randomInRange(item.count)
+            };
+
+            materials.push(material);
+        }
+
+        return { materials: materials };
     };
 }
 

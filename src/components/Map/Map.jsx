@@ -5,7 +5,7 @@ import Block from './components/Block.jsx';
 import other from '../../classes/Other.js';
 import block from '../../classes/Block.js';
 
-const Map = ({ setMaterialAdded }) => {
+const Map = ({ setMaterialAdded, setItemsAtPreview }) => {
     const levelState = useSelector((state) => state.level);
     const mapState = useSelector((state) => state.map);
 
@@ -14,6 +14,10 @@ const Map = ({ setMaterialAdded }) => {
 
     const hasMaterial = (material) => {
         return material != undefined;
+    };
+
+    const isChest = (name) => {
+        return name.includes('chest');
     };
 
     const getFormattedMaterial = ([material, material_count]) => {
@@ -32,7 +36,7 @@ const Map = ({ setMaterialAdded }) => {
     const getMergedBlockInfo = (mapBlock, i) => {
         const { name, light, breaked } = mapBlock;
         const [x, y] = [i % 10, Math.floor(i / 10)];
-        const { material, durability, material_count } = block.getBlockData(name);
+        const { material, durability, material_count, materials } = block.getBlockData(name);
 
         const blockInfo = {
             name: name,
@@ -42,6 +46,8 @@ const Map = ({ setMaterialAdded }) => {
             breaked: breaked,
             durability: durability
         };
+
+        if (isChest(name)) Object.assign(blockInfo, block.getFormattedChestMaterials(materials));
 
         if (hasMaterial(material))
             Object.assign(blockInfo, getFormattedMaterial([material, material_count]));
@@ -64,6 +70,7 @@ const Map = ({ setMaterialAdded }) => {
                         <Block
                             key={i}
                             setMaterialAdded={setMaterialAdded}
+                            setItemsAtPreview={setItemsAtPreview}
                             blockInfo={blockInfo}
                             img={img}
                         />

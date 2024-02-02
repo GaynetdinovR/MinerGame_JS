@@ -35,7 +35,7 @@ const ChosenItem = ({ setChosenItem, setPreview, item, materials }) => {
     const craftItem = () => {
         const { name, craft_count } = item;
 
-        if (!inventory.hasMaterials(inventory, craft_count)) return;
+        if (!inventory.hasMaterials(inventoryState, craft_count)) return;
 
         dispatch(removeMaterials(Object.entries(craft_count)));
 
