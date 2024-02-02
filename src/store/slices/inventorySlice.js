@@ -7,7 +7,7 @@ export const inventorySlice = createSlice({
         materials: [
             {
                 name: 'coins',
-                count: 0
+                count: 999
             },
             {
                 name: 'coal',
@@ -47,8 +47,8 @@ export const inventorySlice = createSlice({
         ]
     },
     reducers: {
-        unlockItem: (state, payload) => {
-            const name = payload.payload;
+        unlockItem: (state, { payload }) => {
+            const name = payload;
 
             state.tools = state.tools.map((tool) => {
                 if (tool.name == name) return { ...tool, has: true };
@@ -62,8 +62,17 @@ export const inventorySlice = createSlice({
                 return skill;
             });
         },
-        removeMaterials: (state, payload) => {
-            const { name, count } = payload.payload;
+        removeMaterials: (state, { payload }) => {
+            for (let i = 0; i < payload.length; i++) {
+                for (let k = 0; k < state.materials.length; k++) {
+                    if (payload[i][0] == state.materials[k].name) {
+                        state.materials[k].count -= payload[i][1];
+                    }
+                }
+            }
+        },
+        removeMaterial: (state, { payload }) => {
+            const { name, count } = payload;
 
             state.materials = state.materials.map((material) => {
                 if (material.name == name)
@@ -72,8 +81,8 @@ export const inventorySlice = createSlice({
                 return material;
             });
         },
-        addMaterial: (state, payload) => {
-            const { name, count } = payload.payload;
+        addMaterial: (state, { payload }) => {
+            const { name, count } = payload;
 
             state.materials = state.materials.map((material) => {
                 if (material.name == name)
@@ -82,16 +91,16 @@ export const inventorySlice = createSlice({
                 return material;
             });
         },
-        equipTool: (state, payload) => {
-            const elem = state.tools.filter((item) => item.name === payload.payload)[0];
+        equipTool: (state, { payload }) => {
+            const elem = state.tools.filter((item) => item.name === payload)[0];
             const equipedElem = state.tools.filter((item) => item.equiped === true)[0];
 
             equipedElem.equiped = false;
             elem.equiped = true;
         },
-        changeLevel: (state, payload) => {
+        changeLevel: (state, { payload }) => {
             const { levels } = data.getMergedData();
-            const level = data.find(levels, payload.payload);
+            const level = data.find(levels, payload);
 
             const getArray = (array, type) => {
                 const res = [];
@@ -118,7 +127,7 @@ export const inventorySlice = createSlice({
     }
 });
 
-export const { addMaterial, equipTool, changeLevel, unlockItem, removeMaterials } =
+export const { addMaterial, equipTool, changeLevel, unlockItem, removeMaterials, removeMaterial } =
     inventorySlice.actions;
 
 export default inventorySlice.reducer;

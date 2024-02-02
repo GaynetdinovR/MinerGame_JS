@@ -301,36 +301,31 @@ const game_data = {
             name: 'more_efforts',
             craft_count: { coal: 50, coins: 100 },
             buff: 'pass',
-            cooldown: 100,
-            price: 150
+            cooldown: 100
         },
         {
             name: 'dynamite',
             craft_count: { sulfur: 80, coal: 100, coins: 50 },
             buff: 'pass',
-            cooldown: 150,
-            price: 250
+            cooldown: 150
         },
         {
             name: 'magnet_explosion',
             craft_count: { magnetite_ore: 100, silver: 100, coins: 150 },
             buff: 'pass',
-            cooldown: 300,
-            price: 400
+            cooldown: 300
         },
         {
             name: 'lucky',
             craft_count: { silver_pot: 1 },
             buff: 'pass',
-            cooldown: 150,
-            price: 600
+            cooldown: 150
         },
         {
             name: 'drill',
             craft_count: { neutronium_ore: 80, mithril_ore: 150 },
             buff: 'pass',
-            cooldown: 300,
-            price: 750
+            cooldown: 300
         }
     ]
 };
