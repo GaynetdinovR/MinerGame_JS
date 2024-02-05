@@ -2,8 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setBlock, setMap, setBlocksFromArray } from '../../../store/slices/mapSlice.js';
-import { increaseDepth } from '../../../store/slices/levelSlice.js';
-import { addMaterial, addMaterials } from '../../../store/slices/inventorySlice.js';
+import { increaseDepth, setLevel } from '../../../store/slices/levelSlice.js';
+import {
+    addMaterial,
+    addMaterials,
+    changeInventoryLevel
+} from '../../../store/slices/inventorySlice.js';
 
 import map from '../../../classes/Map.js';
 import moving from '../../../classes/Moving.js';
@@ -11,6 +15,7 @@ import data from '../../../classes/Data.js';
 import block from '../../../classes/Block.js';
 import other from '../../../classes/Other.js';
 import inventory from '../../../classes/Inventory.js';
+import level from '../../../classes/Level.js';
 
 const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
     const dispatch = useDispatch();
@@ -19,7 +24,18 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
     const levelState = useSelector((state) => state.level);
     const { tools } = useSelector((state) => state.inventory);
 
-    const tool = inventory.getEquipedTool(tools);
+    /**
+     * Возвращает данные о выбранном инструменте
+     * @returns object
+     */
+    const getTool = () => {
+        const { name, damage } = data.find(
+            data.getMergedData().tools,
+            inventory.getEquipedTool(tools)
+        );
+
+        return { damage: damage, name: name };
+    };
 
     /**
      * Возвращает сломанный блок
@@ -71,6 +87,18 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
     };
 
     /**
+     * Нужно ли изменить уровень глубины
+     */
+    const checkToLevelChange = () => {
+        const levelName = level.checkToLevelChange(levelState.depth);
+
+        if (levelName) {
+            dispatch(changeInventoryLevel(levelName));
+            dispatch(setLevel(levelName));
+        }
+    };
+
+    /**
      * Нужно ли переместить карту
      * @param {*} y number
      * @returns object
@@ -79,6 +107,8 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
         if (!block.isBlockOnMapSide(y)) return getBreakedBlock();
 
         dispatch(increaseDepth());
+
+        checkToLevelChange();
 
         const mapCopy = moving.getMovedMap(mapState, data.getMergedData(), levelState.name);
         const breakedBlock = moving.getMovedBreakingBlock(getBreakedBlock());
@@ -138,7 +168,7 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
      */
     const damageBlock = () => {
         const { x, y } = blockInfo;
-        const { damage } = tool;
+        const { damage } = getTool();
 
         dispatch(setBlock(block.getDamagedBlock(mapState, x, y, damage)));
     };
@@ -147,7 +177,7 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
      * Проверяет какое нужно выполнить действие
      */
     const checkAction = () => {
-        const { damage } = tool;
+        const { damage } = getTool();
         const { x, y } = blockInfo;
         const { durability_changed } = mapState[y][x];
 

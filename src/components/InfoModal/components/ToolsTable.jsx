@@ -5,6 +5,21 @@ import { damage, possiblity } from '../../../assets/icons/group';
 
 const ToolsTable = ({ tools, materials }) => {
     /**
+     * Вовзвращает изображения материалов для крафта
+     * @param {*} craft_count object
+     * @returns array
+     */
+    const getMaterialImgs = (craft_count) => {
+        const material_imgs = [];
+
+        for (const material in craft_count) {
+            material_imgs.push(data.find(materials, material).img);
+        }
+
+        return material_imgs;
+    };
+
+    /**
      * Фомартирует материалы крафтов
      * @param {*} tool object
      * @returns React-Element
@@ -15,11 +30,7 @@ const ToolsTable = ({ tools, materials }) => {
         if (!craft_text) return '-';
 
         const result = [];
-        const materials_img = [];
-
-        for (const material in craft_count) {
-            materials_img.push(data.find(materials, material).img);
-        }
+        const materials_img = getMaterialImgs(craft_count);
 
         craft_text = craft_text.split(' и ');
 

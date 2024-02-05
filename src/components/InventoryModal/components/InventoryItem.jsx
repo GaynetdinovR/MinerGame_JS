@@ -10,6 +10,10 @@ const InventoryItem = ({ item, array, isBtn }) => {
 
     const itemData = data.find(array, item.name);
 
+    /**
+     * Возвращает элемент кнопки
+     * @returns react-elem
+     */
     const getBtn = () => {
         return (
             <button
@@ -22,14 +26,26 @@ const InventoryItem = ({ item, array, isBtn }) => {
         );
     };
 
+    /**
+     * Возвращает замок
+     * @returns react-elem
+     */
     const getPadlock = () => {
         return <img className="padlock" src={padlock} alt="padlock" />;
     };
 
+    /**
+     * Возвращает надпись количества
+     * @returns react-elem
+     */
     const getCount = () => {
         return <div className="items-inventory__item-count">{item.count}</div>;
     };
 
+    /**
+     * Возвращает название класса
+     * @returns string
+     */
     const getClassName = () => {
         return item.has || item.has == undefined
             ? 'items-inventory__item'

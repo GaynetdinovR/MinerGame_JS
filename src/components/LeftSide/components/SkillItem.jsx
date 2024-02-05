@@ -1,9 +1,30 @@
 import React from 'react';
 
-const SkillItem = (skill) => {
+import { padlock } from '../../../assets/icons/group.js';
+
+const SkillItem = ({ title, img, name, has }) => {
+    /**
+     * Возвращает замок
+     * @returns react-elem
+     */
+    const getPadlock = () => {
+        return <img className="padlock" src={padlock} alt="padlock" />;
+    };
+
+    /**
+     * Возвращает название класса
+     * @returns string
+     */
+    const getClassName = () => {
+        return has || has == undefined
+            ? `skills__skill skills__${name}`
+            : `skills__skill skills__${name} blocked`;
+    };
+
     return (
-        <button title={skill.title} className={`skills__skill skills__${skill.name}`}>
-            <img src={skill.img} alt={skill.name} />
+        <button title={title} className={getClassName()}>
+            <img className="skill" src={img} alt={name} />
+            {!has && has != undefined ? getPadlock() : ''}
         </button>
     );
 };

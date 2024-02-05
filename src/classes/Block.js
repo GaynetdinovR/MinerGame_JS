@@ -50,6 +50,19 @@ class Block {
     };
 
     /**
+     * Возвращает форматированный объект материала
+     * @param {*} material string
+     * @param {*} material_count number
+     * @returns object
+     */
+    getFormattedMaterial = (material, material_count) => {
+        return {
+            material: material,
+            material_count: other.randomInRange(material_count)
+        };
+    };
+
+    /**
      * Возвращает блок, с нанесенным ему уроном
      * @param {*} mapState [[]]
      * @param {*} x number
@@ -58,7 +71,7 @@ class Block {
      * @returns
      */
     getDamagedBlock = (mapState, x, y, damage) => {
-        const blockInfo = mapState[y][x];
+        const blockInfo = { ...mapState[y][x] };
 
         blockInfo.durability_changed -= damage;
 

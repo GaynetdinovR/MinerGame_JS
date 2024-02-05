@@ -107,21 +107,15 @@ export const inventorySlice = createSlice({
             equipedElem.equiped = false;
             elem.equiped = true;
         },
-        changeLevel: (state, { payload }) => {
+        changeInventoryLevel: (state, { payload }) => {
             const { levels } = data.getMergedData();
             const level = data.find(levels, payload);
 
-            const getArray = (array, type) => {
+            const getArray = (array, defaultData) => {
                 const res = [];
 
-                const defaultData = {
-                    tool: { has: false, equiped: false },
-                    skill: { has: false },
-                    material: { count: 0 }
-                };
-
                 array.forEach((elem) => {
-                    const obj = Object.assign({ name: elem }, defaultData[type]);
+                    const obj = Object.assign({ name: elem }, defaultData);
 
                     res.push(obj);
                 });
@@ -129,9 +123,9 @@ export const inventorySlice = createSlice({
                 return res;
             };
 
-            state.materials.push(...getArray(level.new_materials, 'material'));
-            state.skills.push(...getArray(level.new_skills, 'skill'));
-            state.tools.push(...getArray(level.new_tools, 'tool'));
+            state.materials.push(...getArray(level.new_materials, { count: 0 }));
+            state.skills.push(...getArray(level.new_skills, { has: false }));
+            state.tools.push(...getArray(level.new_tools, { has: false, equiped: false }));
         }
     }
 });
@@ -140,7 +134,7 @@ export const {
     addMaterial,
     addMaterials,
     equipTool,
-    changeLevel,
+    changeInventoryLevel,
     unlockItem,
     removeMaterials,
     removeMaterial

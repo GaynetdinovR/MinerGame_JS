@@ -2,7 +2,6 @@ import React from 'react';
 import data from '../../classes/Data.js';
 import { useSelector } from 'react-redux';
 import Block from './components/Block.jsx';
-import other from '../../classes/Other.js';
 import block from '../../classes/Block.js';
 
 const Map = ({ setMaterialAdded, setItemsAtPreview }) => {
@@ -11,21 +10,6 @@ const Map = ({ setMaterialAdded, setItemsAtPreview }) => {
 
     const { levels } = data.getMergedData();
     const background = data.find(levels, levelState.name);
-
-    const hasMaterial = (material) => {
-        return material != undefined;
-    };
-
-    const isChest = (name) => {
-        return name.includes('chest');
-    };
-
-    const getFormattedMaterial = ([material, material_count]) => {
-        return {
-            material: material,
-            material_count: other.randomInRange(material_count)
-        };
-    };
 
     /**
      * Возвращает объединенную информацию о блоке
@@ -47,10 +31,11 @@ const Map = ({ setMaterialAdded, setItemsAtPreview }) => {
             durability: durability
         };
 
-        if (isChest(name)) Object.assign(blockInfo, block.getFormattedChestMaterials(materials));
+        if (block.isBlockChest(materials))
+            Object.assign(blockInfo, block.getFormattedChestMaterials(materials));
 
-        if (hasMaterial(material))
-            Object.assign(blockInfo, getFormattedMaterial([material, material_count]));
+        if (block.isBlockHasMaterial(material))
+            Object.assign(blockInfo, block.getFormattedMaterial(material, material_count));
 
         return blockInfo;
     };

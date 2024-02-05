@@ -6,15 +6,15 @@ import { coins } from '../../assets/icons/group.js';
 import { useSelector } from 'react-redux';
 
 const LeftSide = () => {
-    const inventoryState = useSelector((state) => state.inventory.materials);
+    const inventoryState = useSelector((state) => state.inventory);
 
-    const skills = [
-        { name: 'drill', title: 'Press B to use' },
-        { name: 'magnet_explosion', title: 'Press C to use' },
-        { name: 'lucky', title: 'Press V to use' },
-        { name: 'more_efforts', title: 'Press Z to use' },
-        { name: 'dynamite', title: 'Press X to use' }
-    ];
+    const skills = {
+        drill: 'Press B to use',
+        magnet_explosion: 'Press C to use',
+        lucky: 'Press V to use',
+        more_efforts: 'Press Z to use',
+        dynamite: 'Press X to use'
+    };
 
     const skillsImg = data.getMergedData().skills;
 
@@ -25,15 +25,16 @@ const LeftSide = () => {
                     <img src={coins} alt="coins" />
                 </div>
                 <span className="left-side__coins-count">
-                    {data.find(inventoryState, 'coins').count}
+                    {data.find(inventoryState.materials, 'coins').count}
                 </span>
             </div>
 
             <div className="left-side__skills skills">
-                {skills.map((skill, i) => (
+                {inventoryState.skills.map((skill, i) => (
                     <SkillItem
                         key={i}
-                        title={skill.title}
+                        has={skill.has}
+                        title={skills[skill.name]}
                         name={skill.name}
                         img={data.find(skillsImg, skill.name).img}
                     />

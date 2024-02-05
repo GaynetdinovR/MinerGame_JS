@@ -11,6 +11,9 @@ const ItemToBuy = ({ item, isInput }) => {
     const dispatch = useDispatch();
     const [inputCount, setInputCount] = useState(0);
 
+    /**
+     * Валидирует значение input'а
+     */
     const setInputCountValidate = (value) => {
         setInputCount(value.replace(/[+\-.]/g, ''));
     };
@@ -26,6 +29,10 @@ const ItemToBuy = ({ item, isInput }) => {
         />
     );
 
+    /**
+     * Проверка условий для покупки
+     * @returns bool
+     */
     const checkBuyConditions = () => {
         if (!inputCount) return;
 

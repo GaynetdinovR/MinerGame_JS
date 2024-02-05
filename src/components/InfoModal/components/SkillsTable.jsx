@@ -5,6 +5,34 @@ import { possiblity, text, time } from '../../../assets/icons/group';
 
 const SkillsTable = ({ skills, materials, tools }) => {
     /**
+     * Возвращает изображения материалов для крафта
+     * @param {*} craft_count object
+     * @returns array
+     */
+    const getMaterialImgs = (craft_count) => {
+        const material_imgs = [];
+
+        for (const material in craft_count) {
+            if (material === 'silver_pot') {
+                material_imgs.push(data.find(tools, material).img);
+                continue;
+            }
+            material_imgs.push(data.find(materials, material).img);
+        }
+
+        return material_imgs;
+    };
+
+    const getCraftText = (craft_text) => {
+        const temp = craft_text.split(' и ');
+        craft_text = [...temp[0].split(', ')];
+
+        if (temp[1]) craft_text.push(temp[1]);
+
+        return craft_text;
+    };
+
+    /**
      * Форматирует материалы крафтов
      * @param {*} skill object
      * @returns React-Element
@@ -13,26 +41,15 @@ const SkillsTable = ({ skills, materials, tools }) => {
         let { craft_text, craft_count } = skill;
 
         const result = [];
-        const materials_img = [];
 
-        for (const material in craft_count) {
-            if (material === 'silver_pot') {
-                materials_img.push(data.find(tools, material).img);
-                continue;
-            }
-            materials_img.push(data.find(materials, material).img);
-        }
+        const material_imgs = getMaterialImgs(craft_count);
+        craft_text = getCraftText(craft_text);
 
-        const temp = craft_text.split(' и ');
-        craft_text = [...temp[0].split(', ')];
-
-        if (temp[1]) craft_text.push(temp[1]);
-
-        for (let i = 0; i < materials_img.length; i++) {
+        for (let i = 0; i < material_imgs.length; i++) {
             result.push(
                 <div>
                     <span>{craft_text[i]}</span>
-                    <img src={materials_img[i]} alt="block" />
+                    <img src={material_imgs[i]} alt="block" />
                 </div>
             );
         }

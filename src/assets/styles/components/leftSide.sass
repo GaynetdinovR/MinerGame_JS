@@ -33,6 +33,8 @@
 .skills
 
     &__skill
+        position: relative
+
         border: 3px solid $white
 
         border-radius: 25px
@@ -47,8 +49,33 @@
         &:hover
             filter: brightness(0.8)
 
-        & img
+        & img.skill
             @include img(90px, cover)
+
+    &__skill.blocked
+        &:hover
+            filter: brightness(1)
+            cursor: default
+
+        &::after
+            content: ''
+            z-index: 2
+            position: absolute
+            left: -5px
+            top: -5px
+            padding: 5px
+
+            width: 100%
+            height: 100%
+
+            border-radius: 30px
+            background: rgba($black, 0.5)
+
+        & .padlock
+            z-index: 3
+            @include positionAbsoluteInCenter()            
+            @include img(64px, cover)
+
     &__drill
         background: $turquoise
         grid-row: 1

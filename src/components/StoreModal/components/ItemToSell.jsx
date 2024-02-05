@@ -11,6 +11,9 @@ const ItemToSell = ({ item }) => {
     const dispatch = useDispatch();
     const [inputCount, setInputCount] = useState(0);
 
+    /**
+     * Валидирует значение input'а
+     */
     const setInputCountValidate = (value) => {
         setInputCount(value.replace(/[+\-.]/g, ''));
     };
