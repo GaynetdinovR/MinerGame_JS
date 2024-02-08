@@ -6,7 +6,7 @@ const game_data = {
         },
         {
             name: 'coal',
-            price_to_10: 1
+            price_to_10: 2
         },
         {
             name: 'iron_ore',
@@ -14,35 +14,35 @@ const game_data = {
         },
         {
             name: 'magnetite_ore',
-            price_to_10: 5
+            price_to_10: 4
         },
         {
             name: 'sulfur',
-            price_to_10: 8
+            price_to_10: 14
         },
         {
             name: 'titan_ore',
-            price_to_10: 10
+            price_to_10: 6
         },
         {
             name: 'silver',
-            price_to_10: 15
+            price_to_10: 21
         },
         {
             name: 'chromatite_ore',
-            price_to_10: 15
+            price_to_10: 4
         },
         {
             name: 'electronyte',
-            price_to_10: 20
+            price_to_10: 12
         },
         {
             name: 'mithril_ore',
-            price_to_10: 18
+            price_to_10: 5
         },
         {
             name: 'neutronium_ore',
-            price_to_10: 35
+            price_to_10: 10
         }
     ],
     blocks: [
@@ -68,7 +68,7 @@ const game_data = {
         {
             name: 'iron_block',
             chance: 0.04,
-            durability: 500,
+            durability: 170,
             material: 'iron_ore',
             material_count: [3, 7]
         },
@@ -91,20 +91,20 @@ const game_data = {
         {
             name: 'magnetite_block',
             chance: 0.14,
-            durability: 900,
+            durability: 250,
             material: 'magnetite_ore',
             material_count: [3, 7]
         },
         {
             name: 'sulfur_block',
             chance: 0.06,
-            durability: 800,
+            durability: 310,
             material: 'sulfur',
             material_count: [1, 5]
         },
         {
             name: 'cave_2_chest',
-            durability: 300,
+            durability: 600,
             chance: 0.005,
             materials: [
                 { name: 'magnetite_ore', chance: 1, count: [10, 30] },
@@ -115,19 +115,19 @@ const game_data = {
         {
             name: 'dark_stone',
             chance: 1,
-            durability: 300
+            durability: 250
         },
         {
             name: 'titan_block',
             chance: 0.14,
-            durability: 1500,
+            durability: 600,
             material: 'titan_ore',
             material_count: [3, 7]
         },
         {
             name: 'silver_block',
             chance: 0.06,
-            durability: 2500,
+            durability: 750,
             material: 'silver',
             material_count: [1, 5]
         },
@@ -144,19 +144,19 @@ const game_data = {
         {
             name: 'magma_stone_1',
             chance: 1,
-            durability: 500
+            durability: 400
         },
         {
             name: 'chromatite_block',
             chance: 0.12,
-            durability: 4000,
+            durability: 1200,
             material: 'chromatite_ore',
             material_count: [3, 7]
         },
         {
             name: 'electronyte_block',
             chance: 0.05,
-            durability: 6000,
+            durability: 1500,
             material: 'electronyte',
             material_count: [1, 5]
         },
@@ -173,25 +173,25 @@ const game_data = {
         {
             name: 'magma_stone_2',
             chance: 1,
-            durability: 500
+            durability: 400
         },
         {
             name: 'mithril_block',
             chance: 0.12,
-            durability: 7500,
+            durability: 2000,
             material: 'mithril_ore',
             material_count: [3, 7]
         },
         {
             name: 'neutronium_block',
             chance: 0.08,
-            durability: 20000,
+            durability: 2300,
             material: 'neutronium_ore',
             material_count: [3, 7]
         },
         {
             name: 'cave_5_chest',
-            durability: 5000,
+            durability: 6500,
             chance: 0.005,
             materials: [
                 { name: 'mithril_ore', chance: 1, count: [15, 40] },
@@ -203,7 +203,7 @@ const game_data = {
     levels: [
         {
             name: 'cave_1',
-            depth: [0, 199],
+            depth: [0, 499],
             new_materials: ['iron_ore', 'copper_ore', 'coal'],
             new_skills: ['more_efforts'],
             new_tools: ['copper_pickaxe', 'iron_pickaxe'],
@@ -212,7 +212,7 @@ const game_data = {
         },
         {
             name: 'cave_2',
-            depth: [200, 599],
+            depth: [500, 899],
             new_materials: ['magnetite_ore', 'sulfur'],
             new_skills: ['dynamite'],
             new_tools: ['magnetite_pickaxe'],
@@ -221,7 +221,7 @@ const game_data = {
         },
         {
             name: 'cave_3',
-            depth: [600, 999],
+            depth: [900, 1299],
             new_materials: ['titan_ore', 'silver'],
             new_skills: ['magnet_explosion'],
             new_tools: ['titan_pickaxe', 'silver_pot'],
@@ -230,7 +230,7 @@ const game_data = {
         },
         {
             name: 'cave_4',
-            depth: [1000, 1799],
+            depth: [1300, 1999],
             new_materials: ['chromatite_ore', 'electronyte'],
             new_skills: ['lucky'],
             new_tools: ['chromatite_pickaxe', 'electronyte_lantern'],
@@ -239,7 +239,7 @@ const game_data = {
         },
         {
             name: 'cave_5',
-            depth: [1800, 2999],
+            depth: [2000, 2500],
             new_materials: ['mithril_ore', 'neutronium_ore'],
             new_skills: ['drill'],
             new_tools: ['mithril_pickaxe', 'neutronium_pickaxe'],
@@ -250,68 +250,68 @@ const game_data = {
     tools: [
         {
             name: 'wood_pickaxe',
-            damage: 10
+            damage: 20
         },
         {
             name: 'copper_pickaxe',
-            damage: 25,
-            craft_count: { copper_ore: 150 }
+            damage: 35,
+            craft_count: { copper_ore: 500 }
         },
         {
             name: 'iron_pickaxe',
             damage: 45,
-            craft_count: { iron_ore: 200 }
+            craft_count: { iron_ore: 350 }
         },
         {
             name: 'magnetite_pickaxe',
             damage: 60,
-            craft_count: { magnetite_ore: 200 }
+            craft_count: { magnetite_ore: 600 }
         },
         {
             name: 'titan_pickaxe',
             damage: 150,
-            craft_count: { titan_ore: 250 }
+            craft_count: { titan_ore: 600 }
         },
         {
             name: 'silver_pot',
-            craft_count: { silver: 150, coins: 200 }
+            craft_count: { silver: 110, coins: 350 }
         },
         {
             name: 'chromatite_pickaxe',
             damage: 300,
-            craft_count: { chromatite_ore: 200 }
+            craft_count: { chromatite_ore: 900 }
         },
         {
             name: 'electronyte_lantern',
-            craft_count: { electronyte: 250, magnetite_ore: 150 }
+            craft_count: { electronyte: 250, magnetite_ore: 100 }
         },
         {
             name: 'mithril_pickaxe',
             damage: 1000,
-            craft_count: { mithril_ore: 300 }
+            craft_count: { mithril_ore: 400 }
         },
         {
             name: 'neutronium_pickaxe',
             damage: 800,
-            craft_count: { neutronium_ore: 200 }
+            craft_count: { neutronium_ore: 300 }
         }
     ],
     skills: [
         {
             name: 'more_efforts',
-            craft_count: { coal: 50, coins: 100 },
+            craft_count: { coal: 300, coins: 500 },
             buff: 'pass',
             cooldown: 100
         },
         {
             name: 'dynamite',
-            craft_count: { sulfur: 80, coal: 100, coins: 50 },
+            craft_count: { sulfur: 120, coal: 150, coins: 700 },
             buff: 'pass',
             cooldown: 150
         },
         {
             name: 'magnet_explosion',
-            craft_count: { magnetite_ore: 100, silver: 100, coins: 150 },
+            craft_count: { magnetite_ore: 300, silver: 100, coins: 750 },
             buff: 'pass',
             cooldown: 300
         },
@@ -323,7 +323,7 @@ const game_data = {
         },
         {
             name: 'drill',
-            craft_count: { neutronium_ore: 80, mithril_ore: 150 },
+            craft_count: { neutronium_ore: 300, mithril_ore: 400 },
             buff: 'pass',
             cooldown: 300
         }

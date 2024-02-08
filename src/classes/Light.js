@@ -58,3 +58,5 @@ class Light {
 const light = new Light();
 
 export default light;
+
+//! Bug: когда ломаешь блок у границы x+1, y+1 блоку с light:2 ставиться light:1, хотя не должен

@@ -7,10 +7,10 @@ class Level {
      */
     checkToLevelChange = (depth) => {
         const changesOn = {
-            200: 'cave_2',
-            600: 'cave_3',
-            1000: 'cave_4',
-            1700: 'cave_5'
+            500: 'cave_2',
+            900: 'cave_3',
+            1300: 'cave_4',
+            2000: 'cave_5'
         };
 
         if (Object.keys(changesOn).includes(String(depth))) return changesOn[depth];

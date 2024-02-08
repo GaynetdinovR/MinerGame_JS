@@ -4,7 +4,7 @@ export const levelSlice = createSlice({
     name: 'level',
     initialState: {
         name: 'cave_1',
-        depth: 9
+        depth: 19
     },
     reducers: {
         increaseDepth: (state) => {
