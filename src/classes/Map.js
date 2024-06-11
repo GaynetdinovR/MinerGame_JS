@@ -14,6 +14,20 @@ class Map {
 
         return mapCopy;
     };
+
+    /**
+     * Возвращает массив измененных блоков, согласно сломанному блоку
+     * @param {*} mapState [[]]
+     * @param {*} breakedBlock {x, y, breaked}
+     * @returns []
+     */
+    getUpdatedBlocksWithBreakedBlocks = (mapState, breakedBlocks, range) => {
+        const mapCopy = light.getUpdatedBlocksByBreakedBlocks(mapState, breakedBlocks, range);
+
+        mapCopy.push(...breakedBlocks);
+
+        return mapCopy;
+    };
 }
 
 const map = new Map();

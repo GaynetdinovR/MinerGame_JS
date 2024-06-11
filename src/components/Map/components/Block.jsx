@@ -22,6 +22,7 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
 
     const mapState = useSelector((state) => state.map);
     const levelState = useSelector((state) => state.level);
+    const skillsState = useSelector((state) => state.skills);
     const { tools } = useSelector((state) => state.inventory);
 
     /**
@@ -29,10 +30,12 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
      * @returns object
      */
     const getTool = () => {
-        const { name, damage } = data.find(
+        let { name, damage } = data.find(
             data.getMergedData().tools,
             inventory.getEquipedTool(tools)
         );
+
+        if (skillsState.isMoreEfforts) damage *= 2;
 
         return { damage: damage, name: name };
     };
@@ -98,24 +101,27 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
         }
     };
 
+    const checkBreakedBlock = (y) => {
+        if (!block.isBlockOnMapSide(y)) return getBreakedBlock();
+
+        return moving.getMovedBreakingBlock(getBreakedBlock());
+    };
+
     /**
      * Нужно ли переместить карту
      * @param {*} y number
      * @returns object
      */
     const checkToMoving = (y) => {
-        if (!block.isBlockOnMapSide(y)) return getBreakedBlock();
+        if (!block.isBlockOnMapSide(y)) return;
 
         dispatch(increaseDepth());
 
         checkToLevelChange();
 
         const mapCopy = moving.getMovedMap(mapState, data.getMergedData(), levelState.name);
-        const breakedBlock = moving.getMovedBreakingBlock(getBreakedBlock());
 
         dispatch(setMap(mapCopy));
-
-        return breakedBlock;
     };
 
     /**
@@ -129,6 +135,8 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
 
         const formattedMaterial = { name: material, count: material_count };
 
+        if (skillsState.isLucky) formattedMaterial.count *= 4;
+
         setMaterialAddedAnimation(formattedMaterial);
 
         dispatch(addMaterial(formattedMaterial));
@@ -141,9 +149,92 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
     const checkToChestMaterialGive = (materials) => {
         if (!block.isBlockChest(materials)) return;
 
+        if (skillsState.isLucky) {
+            for (const material of materials) {
+                material.count *= 4;
+            }
+        }
+
         setMaterialsFromChestAnimation(materials);
 
         dispatch(addMaterials(materials));
+    };
+
+    const check3x3Blocks = (x, y) => {
+        if (x == 0 && y == 0) return 'top_left';
+        if (x == 9 && y == 0) return 'top_right';
+        if (x == 0 && y == 8) return 'bottom_left';
+        if (x == 9 && y == 8) return 'bottom_right';
+        if (x > 0 && x < 9 && y == 0) return 'top';
+        if (x > 0 && x < 9 && (y == 8 || y == 7)) return 'bottom';
+        if (y > 0 && y < 8 && x == 9) return 'right';
+        if (y > 0 && y < 8 && x == 0) return 'left';
+        if (y > 0 && y < 7 && x > 0 && x < 9) return 'center';
+    };
+
+    const get3x3BreakRange = (position, x, y) => {
+        const breakRange = {
+            center: { x: [x - 1, x + 1], y: [y - 1, y + 1] },
+            left: { x: [x, x + 1], y: [y - 1, y + 1] },
+            right: { x: [x - 1, x], y: [y - 1, y + 1] },
+            top: { x: [x - 1, x + 1], y: [y, y + 1] },
+            top_left: { x: [x, x + 1], y: [y, y + 1] },
+            top_right: { x: [x - 1, x], y: [y, y + 1] },
+            bottom: { x: [x - 1, x + 1], y: [y - 1, y + 1] },
+            bottom_right: { x: [x - 1, x], y: [y - 1, y + 1] },
+            bottom_left: { x: [x, x + 1], y: [y - 1, y + 1] }
+        };
+
+        return breakRange[position];
+    };
+
+    const getBreakedBlocksFromRange = (range) => {
+        const breakedBlocks = [];
+
+        for (let y = range.y[0]; y <= range.y[1]; y++) {
+            for (let x = range.x[0]; x <= range.x[1]; x++) {
+                breakedBlocks.push({ x: x, y: y, breaked: true });
+            }
+        }
+
+        return breakedBlocks;
+    };
+
+    const checkToMoving3x3 = (position) => {
+        if (!block.is3x3OnMapSide(position)) return;
+
+        dispatch(increaseDepth());
+
+        checkToLevelChange();
+
+        const mapCopy = moving.getMovedMap(mapState, data.getMergedData(), levelState.name);
+
+        dispatch(setMap(mapCopy));
+    };
+
+    const checkBreakedBlocks = (position, x, y) => {
+        if (!block.is3x3OnMapSide(position))
+            return getBreakedBlocksFromRange(get3x3BreakRange(position, x, y));
+
+        return moving.getMovedBreakingBlocks(
+            getBreakedBlocksFromRange(get3x3BreakRange(position, x, y))
+        );
+    };
+
+    const break3x3Blocks = () => {
+        const { x, y } = blockInfo;
+        const breakingPosition = check3x3Blocks(x, y);
+        const breakingRange = get3x3BreakRange(breakingPosition, x, y);
+
+        const breakedBlocks = getBreakedBlocksFromRange(get3x3BreakRange(breakingPosition, x, y));
+
+        const changedBlocks = map.getUpdatedBlocksWithBreakedBlocks(
+            mapState,
+            breakedBlocks,
+            breakingRange
+        );
+
+        dispatch(setBlocksFromArray(changedBlocks));
     };
 
     /**
@@ -152,9 +243,11 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
     const breakBlock = () => {
         const { material, material_count, materials, breaked, y } = blockInfo;
 
-        const breakedBlock = checkToMoving(y);
+        const breakedBlock = checkBreakedBlock(y);
 
         const changedBlocks = map.getUpdatedBlocksWithBreakedBlock(mapState, breakedBlock);
+
+        checkToMoving(y);
 
         dispatch(setBlocksFromArray(changedBlocks));
 
@@ -182,6 +275,8 @@ const Block = ({ setItemsAtPreview, setMaterialAdded, blockInfo, img }) => {
         const { durability_changed } = mapState[y][x];
 
         const isDamage = block.isDamageBlock(durability_changed, damage);
+
+        // break3x3Blocks();
 
         if (isDamage) damageBlock();
         if (!isDamage) breakBlock();

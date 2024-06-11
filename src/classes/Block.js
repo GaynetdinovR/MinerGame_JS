@@ -2,6 +2,21 @@ import data from './Data.js';
 import other from './Other.js';
 
 class Block {
+    isBlockNextToAnotherBlock = (blocks, x, y) => {
+        if (y > 0 && !blocks[y - 1][x].breaked) return true;
+        if (y < 9 && !blocks[y + 1][x].breaked) return true;
+        if (x > 0 && !blocks[y][x - 1].breaked) return true;
+        if (x < 9 && !blocks[y][x + 1].breaked) return true;
+
+        return false;
+    };
+
+    isBlockCanChanged = (blocks, { x, y }) => {
+        if (!blocks[y][x]) return false;
+
+        return !blocks[y][x].breaked && blocks[y][x].light != 2;
+    };
+
     /**
      * Нанести урон блоку или сломать его
      * @param {*} durability number
@@ -27,7 +42,15 @@ class Block {
      * @returns bool
      */
     isBlockOnMapSide = (y) => {
-        return y >= 8;
+        return y == 8;
+    };
+
+    isBlockOnBreakedBlocksSide = (range, x, y) => {
+        return x == range.x[0] || y == range.y[0] || x == range.x[1] || y == range.y[1];
+    };
+
+    is3x3OnMapSide = (position) => {
+        return position == 'bottom' || position == 'bottom_right' || position == 'bottom_left';
     };
 
     /**

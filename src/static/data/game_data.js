@@ -301,7 +301,8 @@ const game_data = {
             name: 'more_efforts',
             craft_count: { coal: 300, coins: 500 },
             buff: 'pass',
-            cooldown: 100
+            cooldown: 100,
+            action: 30
         },
         {
             name: 'dynamite',
@@ -319,7 +320,8 @@ const game_data = {
             name: 'lucky',
             craft_count: { silver_pot: 1 },
             buff: 'pass',
-            cooldown: 150
+            cooldown: 150,
+            action: 15
         },
         {
             name: 'drill',

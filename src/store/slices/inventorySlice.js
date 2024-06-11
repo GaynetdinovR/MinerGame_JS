@@ -42,7 +42,11 @@ export const inventorySlice = createSlice({
         skills: [
             {
                 name: 'more_efforts',
-                has: false
+                has: true
+            },
+            {
+                name: 'lucky',
+                has: true
             }
         ]
     },

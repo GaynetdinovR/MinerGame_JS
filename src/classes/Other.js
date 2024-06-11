@@ -45,6 +45,25 @@ class Other {
     delay = (ms) => {
         return new Promise((resolve) => setTimeout(resolve, ms));
     };
+
+    /**
+     * Устанавливает интервал
+     * @param {*} ms number
+     * @param {*} fn function
+     * @returns intervalId
+     */
+    interval = (ms, fn) => {
+        return setInterval(fn, ms);
+    };
+
+    /**
+     * Переводит секунды в миллисекунды
+     * @param {*} sec number
+     * @returns number
+     */
+    toms = (sec) => {
+        return sec * 1000;
+    };
 }
 
 const other = new Other();

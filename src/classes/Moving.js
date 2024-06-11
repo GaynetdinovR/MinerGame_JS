@@ -11,6 +11,16 @@ class Moving {
         return { ...breakedBlock, y: breakedBlock.y - 1 };
     };
 
+    getMovedBreakingBlocks = (breakedBlocks) => {
+        const res = [];
+
+        for (const breakedBlock of breakedBlocks) {
+            res.push(this.getMovedBreakingBlock(breakedBlock));
+        }
+
+        return res;
+    };
+
     /**
      * Возвращает, перемещенную на один блок, карту
      * @param {*} map [[]]

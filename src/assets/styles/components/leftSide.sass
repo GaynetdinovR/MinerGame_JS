@@ -10,10 +10,16 @@
     justify-content: space-between
     flex-direction: column
 
+    &__top
+        display: flex
+        justify-content: center
+        align-items: center
+
     &__coins
         display: inline-flex
         justify-content: center
         align-items: center
+        margin-right: 30px
 
         &-img
             & img
@@ -23,6 +29,16 @@
             margin-left: 10px
 
             @include font($fz: 25px)
+
+    &__x2damage
+        margin-right: 20px
+
+    &__x2damage,
+    &__x4luck
+        &.none
+            display: none
+        & img
+            @include img(96px, cover)
 
     &__skills
         display: inline-grid
@@ -51,6 +67,24 @@
 
         & img.skill
             @include img(90px, cover)
+
+        &-time
+            position: absolute
+            top: 0
+            left: 0
+
+            border-radius: 25px
+
+            height: 100%
+            width: 100%
+
+            --value: 0%
+            background: conic-gradient(rgba($black, 0.5) var(--value), transparent 0)
+
+    &__skill:disabled
+        &:hover
+            filter: brightness(1)
+            cursor: default
 
     &__skill.blocked
         &:hover

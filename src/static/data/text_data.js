@@ -229,7 +229,7 @@ const text_data = {
         {
             name: 'more_efforts',
             text_name: 'Больше усилий!',
-            description: 'Увеличивает вашу выносливость в 2 раза',
+            description: 'Увеличивает вашу силу в 2 раза',
             craft_text: '50 угля и 100 монет',
             buff_text: 'x2 урон на 30 секунд'
         },

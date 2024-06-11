@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .pie-chart {
+                width: 150px;
+                height: 150px;
+                --value: 30%;
+                background: conic-gradient(green var(--value), transparent 0);
+            }
+            label,
+            span {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="pie-chart"></div>
+        <label>
+            <span>Значение (%)</span>
+            <input type="number" min="0" max="100" value="30" />
+        </label>
+    </body>
+    <script>
+        document.querySelector('input').addEventListener('input', function () {
+            var chart = document.querySelector('.pie-chart');
+            chart.style.setProperty('--value', this.value + '%');
+        });
+    </script>
+</html>
